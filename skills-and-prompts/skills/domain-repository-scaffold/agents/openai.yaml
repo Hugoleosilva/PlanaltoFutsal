@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold de Repositorio de Dominio"
+  short_description: "Criar contrato de repositorio e fake in-memory em src/core/domain/<agregado>"
+  default_prompt: "Use $domain-repository-scaffold para criar o contrato de repositorio (porta de dominio) de um agregado em src/core/domain/<agregado>, reaproveitando CrudRepository de src/core/domain/repositories, e gerar tambem uma fake in-memory para testes de casos de uso."

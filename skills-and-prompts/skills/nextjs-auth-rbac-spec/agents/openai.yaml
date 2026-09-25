@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec de Autenticacao e RBAC (Next.js)"
+  short_description: "Orquestrar a base de autenticacao NextAuth.js e RBAC (ADMIN/ATLETA/USER) do Planalto Futsal"
+  default_prompt: "Use $nextjs-auth-rbac-spec para orquestrar a criacao da base de autenticacao e RBAC do Planalto Futsal: agregado Usuario, casos de uso, provider de criptografia, configuracao do NextAuth.js com Credentials Provider e middleware de protecao de rotas por role (ADMIN, ATLETA, USER)."

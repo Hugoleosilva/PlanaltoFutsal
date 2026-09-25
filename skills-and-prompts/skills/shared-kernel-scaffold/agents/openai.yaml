@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold do Kernel Compartilhado"
+  short_description: "Materializar Entity, UseCase, hierarquia de erros e motor de validacao em src/core, src/infrastructure/errors e src/shared/validation"
+  default_prompt: "Use $shared-kernel-scaffold para materializar deterministicamente o kernel compartilhado do app Next.js (entidade base, contrato de caso de uso, hierarquia de erros de dominio e motor de validacao com regras reutilizaveis) a partir da copia canonica embutida na skill, distribuindo os arquivos entre src/core, src/infrastructure/errors e src/shared/validation."

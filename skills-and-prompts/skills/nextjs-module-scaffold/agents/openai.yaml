@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold de Modulo Next.js"
+  short_description: "Criar Route Handler, Server Action e pagina App Router para um modulo de dominio"
+  default_prompt: "Use $nextjs-module-scaffold para criar a superficie Next.js (Route Handler, Server Action e pagina App Router) de um modulo de dominio, conectando aos casos de uso ja existentes em src/core/use-cases/<modulo>."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold de Agregado de Dominio"
+  short_description: "Criar entidade, contrato de repositorio e casos de uso base de um agregado em src/core"
+  default_prompt: "Use $domain-aggregate-scaffold para criar deterministicamente a estrutura base de um agregado de dominio (entidade, contrato de repositorio e casos de uso CRUD ou exemplo) em src/core/domain e src/core/use-cases."

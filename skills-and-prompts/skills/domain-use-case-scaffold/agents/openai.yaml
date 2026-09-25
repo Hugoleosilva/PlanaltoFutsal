@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold de Caso de Uso"
+  short_description: "Criar caso de uso CRUD ou custom com testes e cobertura de 100% em src/core/use-cases"
+  default_prompt: "Use $domain-use-case-scaffold para criar ou atualizar um caso de uso dentro de src/core/use-cases/<agregado>, com contratos In/Out, dependencias por construtor, testes com fakes concretas e cobertura de 100%."

@@ -1,0 +1,74 @@
+{
+  "updatedAt": "2026-09-25",
+  "screens": [
+    {
+      "name": "Painel da Diretoria",
+      "role": "ADMIN",
+      "route": "/admin",
+      "status": "placeholder",
+      "features": [
+        "Financeiro (receitas/despesas, relatórios)",
+        "CRUD de atletas + upload de foto/documentos",
+        "Gestão de campeonatos + vínculo de atletas (accordion)",
+        "Moderação de fotos enviadas pelo público"
+      ]
+    },
+    {
+      "name": "Painel do Atleta",
+      "role": "ATLETA",
+      "route": "/atleta",
+      "status": "placeholder",
+      "features": [
+        "Perfil (foto, idade, nome, apelido, bio, posição, estilo de jogo)",
+        "Galeria de fotos (principal + até 4)",
+        "Campeonatos em disputa",
+        "Confirmação de presença em jogos"
+      ]
+    },
+    {
+      "name": "Portal Público / Torcedor",
+      "role": "GUEST | USER",
+      "route": "/",
+      "status": "placeholder (landing estática apenas)",
+      "features": [
+        "História do clube, elenco por categoria, agenda de jogos",
+        "Galeria de fotos aprovadas",
+        "Envio de fotos pelo torcedor (max 5, PENDENTE_APROVACAO)",
+        "Apoio financeiro via Pix (QR code)",
+        "Carona solidária",
+        "Web rádio / enquetes",
+        "Patrocinadores / loja virtual com link WhatsApp",
+        "Mural de avisos / notícias",
+        "Votação de craque do jogo"
+      ]
+    }
+  ],
+  "auth": {
+    "provider": "Auth.js v5 (next-auth@5 beta), Credentials provider",
+    "session": "JWT, claims: id, role",
+    "middleware": "src/middleware.ts — /admin/* exige ADMIN, /atleta/* exige ADMIN|ATLETA",
+    "loginPage": "/login",
+    "deniedPage": "/acesso-negado"
+  },
+  "implementedUseCases": [
+    "AprovarFotoUseCase (ADMIN, audita FOTO_APROVADA)",
+    "RejeitarFotoUseCase (ADMIN, audita FOTO_REJEITADA)",
+    "EnviarFotosTorcedorUseCase (público, max 5 por lote)",
+    "CadastrarAtletaUseCase (ADMIN, audita ATLETA_CRIADO)",
+    "DesativarAtletaUseCase (ADMIN, audita ATLETA_DESATIVADO)",
+    "RegistrarMovimentacaoFinanceiraUseCase (ADMIN, audita MOVIMENTACAO_FINANCEIRA_CRIADA)",
+    "ExcluirMovimentacaoFinanceiraUseCase (ADMIN, audita MOVIMENTACAO_FINANCEIRA_EXCLUIDA)"
+  ],
+  "pendingUseCases": [
+    "Campeonato: criar/editar/encerrar, vincular atleta",
+    "Jogo: agendar/registrar resultado/cancelar",
+    "EventoJogo: registrar gol/assistência/cartão (súmula)",
+    "ConfirmacaoPresenca: confirmar/marcar ausente",
+    "VotoCraque: votar",
+    "CaronaSolidaria: cadastrar/ocupar vaga",
+    "Enquete: criar/votar/encerrar",
+    "Comunicado: publicar/fixar",
+    "Mensalidade: gerar/marcar paga",
+    "Patrocinador/Produto: CRUD"
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nova Regra de Validacao Compartilhada"
+  short_description: "Criar regra reutilizavel em src/shared/validation/rules com testes completos"
+  default_prompt: "Use $shared-validation-rule para criar uma nova regra reutilizavel de validacao em src/shared/validation/rules, seguindo o padrao do projeto (ValidationRule, rule.utils, exports e testes com cobertura de 100%)."

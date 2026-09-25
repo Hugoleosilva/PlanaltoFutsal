@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementacao de Provider Tecnico"
+  short_description: "Implementar em src/infrastructure um provider tecnico definido no dominio, sem container de DI"
+  default_prompt: "Use $infrastructure-provider-scaffold para implementar em src/infrastructure/<categoria> a classe concreta de um provider tecnico definido em src/core/domain/<agregado>/*.provider.ts (criptografia, JWT, e-mail, uuid, etc.), sem NestJS e sem container de DI."

@@ -1,0 +1,138 @@
+{
+  "updatedAt": "2026-09-25",
+  "entities": [
+    {
+      "name": "User",
+      "path": "src/core/domain/user/user.entity.ts",
+      "schema": "src/infrastructure/database/schemas/user.schema.ts",
+      "repository": { "contract": "user.repository.ts", "mongo": "user.repository.mongo.ts" },
+      "fields": ["name", "email", "passwordHash", "role", "status", "atletaId", "termsAcceptedAt", "imageConsentAcceptedAt"],
+      "roles": ["ADMIN", "ATLETA", "USER"]
+    },
+    {
+      "name": "Atleta",
+      "path": "src/core/domain/atleta/atleta.entity.ts",
+      "schema": "src/infrastructure/database/schemas/atleta.schema.ts",
+      "repository": { "contract": "atleta.repository.ts", "mongo": "atleta.repository.mongo.ts" },
+      "fields": ["userId", "nomeCompleto", "apelido", "dataNascimento", "fotoPrincipalUrl", "galeriaFotosUrls(max 4)", "bio", "posicao", "estiloDeJogo", "preferencias", "documentos", "status"]
+    },
+    {
+      "name": "Campeonato",
+      "path": "src/core/domain/campeonato/campeonato.entity.ts",
+      "schema": "src/infrastructure/database/schemas/campeonato.schema.ts",
+      "repository": { "contract": "campeonato.repository.ts", "mongo": null },
+      "fields": ["nome", "dataInicio", "diasDeJogo", "horarios", "taxaInscricao", "taxaArbitragem", "status"]
+    },
+    {
+      "name": "InscricaoCampeonato",
+      "path": "src/core/domain/campeonato/inscricao-campeonato.entity.ts",
+      "schema": "src/infrastructure/database/schemas/campeonato.schema.ts",
+      "repository": { "contract": "campeonato.repository.ts (InscricaoCampeonatoRepository)", "mongo": null },
+      "fields": ["campeonatoId", "atletaId", "categoria"],
+      "note": "vínculo atleta↔campeonato, exibido em accordion no painel admin"
+    },
+    {
+      "name": "MovimentacaoFinanceira",
+      "path": "src/core/domain/financeiro/movimentacao-financeira.entity.ts",
+      "schema": "src/infrastructure/database/schemas/financeiro.schema.ts",
+      "repository": { "contract": "movimentacao-financeira.repository.ts", "mongo": "movimentacao-financeira.repository.mongo.ts" },
+      "fields": ["tipo(RECEITA|DESPESA)", "descricao", "valor", "data", "categoria", "campeonatoId", "registradoPorUserId"],
+      "audited": true
+    },
+    {
+      "name": "Mensalidade",
+      "path": "src/core/domain/financeiro/mensalidade.entity.ts",
+      "schema": "src/infrastructure/database/schemas/financeiro.schema.ts",
+      "repository": null,
+      "fields": ["atletaId", "referencia", "valor", "status", "pagoEm"]
+    },
+    {
+      "name": "Foto",
+      "path": "src/core/domain/foto/foto.entity.ts",
+      "schema": "src/infrastructure/database/schemas/foto.schema.ts",
+      "repository": { "contract": "foto.repository.ts", "mongo": "foto.repository.mongo.ts" },
+      "fields": ["url", "descricao", "categoria(ANTIGA|ATUAL)", "status(PENDENTE_APROVACAO|APROVADA|REJEITADA)", "enviadoPorNome", "enviadoPorContato", "atletaId", "loteEnvioId", "moderadoPorUserId", "moderadoEm"],
+      "audited": true,
+      "businessRule": "max 5 fotos por lote de envio (EnviarFotosTorcedorUseCase)"
+    },
+    {
+      "name": "Jogo",
+      "path": "src/core/domain/jogo/jogo.entity.ts",
+      "schema": "src/infrastructure/database/schemas/jogo.schema.ts",
+      "repository": null,
+      "fields": ["adversario", "dataHora", "local", "campeonatoId", "status", "placarPlanalto", "placarAdversario"]
+    },
+    {
+      "name": "EventoJogo",
+      "path": "src/core/domain/jogo/evento-jogo.entity.ts",
+      "schema": "src/infrastructure/database/schemas/jogo.schema.ts",
+      "repository": null,
+      "fields": ["jogoId", "atletaId", "tipo(GOL|ASSISTENCIA|CARTAO_AMARELO|CARTAO_VERMELHO)", "minuto"],
+      "note": "súmula digital — artilharia, assistências, cartões"
+    },
+    {
+      "name": "ConfirmacaoPresenca",
+      "path": "src/core/domain/jogo/confirmacao-presenca.entity.ts",
+      "schema": "src/infrastructure/database/schemas/jogo.schema.ts",
+      "repository": null,
+      "fields": ["jogoId", "atletaId", "status(CONFIRMADO|AUSENTE|PENDENTE)", "respondidoEm"]
+    },
+    {
+      "name": "VotoCraque",
+      "path": "src/core/domain/jogo/voto-craque.entity.ts",
+      "schema": "src/infrastructure/database/schemas/jogo.schema.ts",
+      "repository": null,
+      "fields": ["jogoId", "atletaId", "identificadorVotante"],
+      "note": "votação pública de craque do jogo, 1 voto por identificadorVotante por jogo"
+    },
+    {
+      "name": "CaronaSolidaria",
+      "path": "src/core/domain/carona/carona-solidaria.entity.ts",
+      "schema": "src/infrastructure/database/schemas/carona.schema.ts",
+      "repository": null,
+      "fields": ["jogoId", "motoristaNome", "contato", "horarioSaida", "local", "vagasDisponiveis", "criadoPorUserId"]
+    },
+    {
+      "name": "Enquete",
+      "path": "src/core/domain/engajamento/enquete.entity.ts",
+      "schema": "src/infrastructure/database/schemas/engajamento.schema.ts",
+      "repository": null,
+      "fields": ["pergunta", "opcoes[]", "status(ATIVA|ENCERRADA)", "criadoPorUserId"]
+    },
+    {
+      "name": "Comunicado",
+      "path": "src/core/domain/engajamento/comunicado.entity.ts",
+      "schema": "src/infrastructure/database/schemas/engajamento.schema.ts",
+      "repository": null,
+      "fields": ["titulo", "corpo", "tipo(AVISO|NOTICIA)", "fixado", "autorUserId", "publicadoEm"]
+    },
+    {
+      "name": "Patrocinador",
+      "path": "src/core/domain/patrocinio/patrocinador.entity.ts",
+      "schema": "src/infrastructure/database/schemas/patrocinio-loja.schema.ts",
+      "repository": null,
+      "fields": ["nome", "logoUrl", "depoimento", "link", "ativo"]
+    },
+    {
+      "name": "Produto",
+      "path": "src/core/domain/loja/produto.entity.ts",
+      "schema": "src/infrastructure/database/schemas/patrocinio-loja.schema.ts",
+      "repository": null,
+      "fields": ["nome", "descricao", "preco", "imagemUrl", "linkWhatsapp", "ativo"]
+    },
+    {
+      "name": "ConsentimentoLgpd",
+      "path": "src/core/domain/lgpd/consentimento-lgpd.entity.ts",
+      "schema": "src/infrastructure/database/schemas/lgpd.schema.ts",
+      "repository": null,
+      "fields": ["userId", "versaoTermos", "termosAceitosEm", "consentimentoImagemAceitoEm", "responsavelNome", "responsavelDocumento"]
+    },
+    {
+      "name": "AuditLog",
+      "path": "src/core/domain/audit/audit-log.entity.ts",
+      "schema": "src/infrastructure/database/schemas/audit-log.schema.ts",
+      "repository": { "contract": "audit-log.repository.ts", "mongo": "audit-log.repository.mongo.ts" },
+      "fields": ["action", "actorUserId", "entityType", "entityId", "metadata"]
+    }
+  ]
+}

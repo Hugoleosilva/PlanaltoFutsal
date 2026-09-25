@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold de Entidade de Dominio"
+  short_description: "Criar entidade de dominio com validacao lazy e testes com cobertura de 100% em src/core/domain"
+  default_prompt: "Use $domain-entity-scaffold para criar ou completar uma entidade de dominio dentro de src/core/domain/<aggregate>, com estado tipado, heranca de Entity, validacao explicita via Validator e testes unitarios com cobertura de 100%."
