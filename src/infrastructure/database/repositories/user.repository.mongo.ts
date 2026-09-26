@@ -8,10 +8,12 @@ function toEntity(doc: UserDocument): User {
     id: doc.id as string,
     name: doc.name,
     email: doc.email,
+    whatsapp: doc.whatsapp,
     passwordHash: doc.passwordHash,
     role: doc.role,
     status: doc.status,
     atletaId: doc.atletaId ? doc.atletaId.toString() : null,
+    emailVerificadoEm: doc.emailVerificadoEm ?? null,
     termsAcceptedAt: doc.termsAcceptedAt ?? null,
     imageConsentAcceptedAt: doc.imageConsentAcceptedAt ?? null,
     createdAt: doc.createdAt,
@@ -39,10 +41,12 @@ export class MongoUserRepository implements UserRepository {
     const created = await UserModel.create({
       name: user.name,
       email: user.email,
+      whatsapp: user.whatsapp,
       passwordHash: user.passwordHash,
       role: user.role,
       status: user.status,
       atletaId: user.atletaId ?? null,
+      emailVerificadoEm: user.emailVerificadoEm ?? null,
       termsAcceptedAt: user.hasAcceptedTerms ? new Date() : null,
       imageConsentAcceptedAt: user.hasAcceptedImageConsent ? new Date() : null,
     });
@@ -56,10 +60,12 @@ export class MongoUserRepository implements UserRepository {
       {
         name: user.name,
         email: user.email,
+        whatsapp: user.whatsapp,
         passwordHash: user.passwordHash,
         role: user.role,
         status: user.status,
         atletaId: user.atletaId ?? null,
+        emailVerificadoEm: user.emailVerificadoEm ?? null,
       },
       { new: true },
     );

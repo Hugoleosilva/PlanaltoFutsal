@@ -1,12 +1,23 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import { LoginForm } from "./login-form";
 
 export default function LoginPage(): React.ReactElement {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-planalto-black px-6">
-      <Suspense fallback={null}>
-        <LoginForm />
-      </Suspense>
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+      <Image
+        src="/images/marca/capa-planalto-futsal.jpg"
+        alt="Fundo Planalto Futsal"
+        fill
+        priority
+        className="object-cover opacity-30"
+      />
+
+      <div className="relative z-10 w-full max-w-md">
+        <Suspense fallback={null}>
+          <LoginForm />
+        </Suspense>
+      </div>
     </main>
   );
 }

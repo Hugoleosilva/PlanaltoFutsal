@@ -1,74 +1,79 @@
 {
-  "updatedAt": "2026-09-25",
+  "updatedAt": "2026-09-26",
   "screens": [
     {
       "name": "Painel da Diretoria",
       "role": "ADMIN",
       "route": "/admin",
-      "status": "placeholder",
+      "status": "MVP funcional",
+      "pages": ["/admin", "/admin/financeiro", "/admin/elenco", "/admin/campeonatos", "/admin/jogos", "/admin/moderacao", "/admin/conteudo"],
       "features": [
-        "Financeiro (receitas/despesas, relatórios)",
-        "CRUD de atletas + upload de foto/documentos",
+        "Financeiro (receitas/despesas, saldo)",
+        "CRUD de atletas + criar acesso + promover usuário existente para atleta",
         "Gestão de campeonatos + vínculo de atletas (accordion)",
-        "Moderação de fotos enviadas pelo público"
+        "Agenda de jogos (agendar/cancelar)",
+        "Moderação de fotos enviadas pelo público",
+        "Conteúdo do site: mural, enquete, patrocinador, produto"
       ]
     },
     {
       "name": "Painel do Atleta",
       "role": "ATLETA",
       "route": "/atleta",
-      "status": "placeholder",
+      "status": "MVP funcional",
       "features": [
-        "Perfil (foto, idade, nome, apelido, bio, posição, estilo de jogo)",
-        "Galeria de fotos (principal + até 4)",
-        "Campeonatos em disputa",
-        "Confirmação de presença em jogos"
+        "Perfil próprio (apelido, bio, posição, estilo, preferências)",
+        "Foto principal + galeria de fotos (máx. 4, upload direto)",
+        "Campeonatos em disputa"
       ]
     },
     {
       "name": "Portal Público / Torcedor",
       "role": "GUEST | USER",
       "route": "/",
-      "status": "placeholder (landing estática apenas)",
+      "status": "MVP funcional",
       "features": [
-        "História do clube, elenco por categoria, agenda de jogos",
-        "Galeria de fotos aprovadas",
+        "Hero, história, elenco + campeonatos ativos, agenda de jogos",
+        "Mural de avisos, galeria de fotos aprovadas",
         "Envio de fotos pelo torcedor (max 5, PENDENTE_APROVACAO)",
-        "Apoio financeiro via Pix (QR code)",
-        "Carona solidária",
-        "Web rádio / enquetes",
-        "Patrocinadores / loja virtual com link WhatsApp",
-        "Mural de avisos / notícias",
-        "Votação de craque do jogo"
+        "Apoio financeiro via Pix (QR code + copia-e-cola gerados localmente)",
+        "Carona solidária (listar + oferecer)",
+        "Enquete (votar) + espaço de web rádio (placeholder)",
+        "Patrocinadores / loja virtual com link WhatsApp"
       ]
     }
   ],
   "auth": {
     "provider": "Auth.js v5 (next-auth@5 beta), Credentials provider",
     "session": "JWT, claims: id, role",
-    "middleware": "src/middleware.ts — /admin/* exige ADMIN, /atleta/* exige ADMIN|ATLETA",
+    "middleware": "src/middleware.ts (via auth.edge.ts) — /admin/* exige ADMIN, /atleta/* exige ADMIN|ATLETA",
     "loginPage": "/login",
-    "deniedPage": "/acesso-negado"
+    "cadastroPage": "/cadastro (self-registration, status PENDENTE_VERIFICACAO)",
+    "verificacaoEmail": "/api/auth/verificar?token= — confirma e-mail e auto-promove para ATLETA se achar Atleta com contato correspondente sem login vinculado",
+    "deniedPage": "/acesso-negado",
+    "emailProvider": "Resend (RESEND_API_KEY), fallback console se não configurada"
   },
   "implementedUseCases": [
-    "AprovarFotoUseCase (ADMIN, audita FOTO_APROVADA)",
-    "RejeitarFotoUseCase (ADMIN, audita FOTO_REJEITADA)",
+    "AprovarFotoUseCase / RejeitarFotoUseCase (ADMIN, audita)",
     "EnviarFotosTorcedorUseCase (público, max 5 por lote)",
-    "CadastrarAtletaUseCase (ADMIN, audita ATLETA_CRIADO)",
-    "DesativarAtletaUseCase (ADMIN, audita ATLETA_DESATIVADO)",
-    "RegistrarMovimentacaoFinanceiraUseCase (ADMIN, audita MOVIMENTACAO_FINANCEIRA_CRIADA)",
-    "ExcluirMovimentacaoFinanceiraUseCase (ADMIN, audita MOVIMENTACAO_FINANCEIRA_EXCLUIDA)"
+    "CadastrarAtletaUseCase / EditarAtletaUseCase / DesativarAtletaUseCase (ADMIN, audita)",
+    "CriarAcessoAtletaUseCase (ADMIN emite credenciais diretas)",
+    "AtualizarPerfilAtletaUseCase / AdicionarFotoGaleriaUseCase / RemoverFotoGaleriaUseCase (self-service ATLETA)",
+    "RegistrarUsuarioUseCase / VerificarEmailUseCase (cadastro público + auto-match para ATLETA)",
+    "PromoverUsuarioParaAtletaUseCase (ADMIN vincula USER existente a atleta)",
+    "RegistrarMovimentacaoFinanceiraUseCase / ExcluirMovimentacaoFinanceiraUseCase (ADMIN, audita)",
+    "CriarCampeonatoUseCase / VincularAtletaCampeonatoUseCase",
+    "CadastrarJogoUseCase / CancelarJogoUseCase",
+    "OferecerCaronaUseCase (público)",
+    "CriarEnqueteUseCase / EncerrarEnqueteUseCase / VotarEnqueteUseCase (público vota)",
+    "PublicarComunicadoUseCase",
+    "CadastrarPatrocinadorUseCase / CadastrarProdutoUseCase"
   ],
   "pendingUseCases": [
-    "Campeonato: criar/editar/encerrar, vincular atleta",
-    "Jogo: agendar/registrar resultado/cancelar",
-    "EventoJogo: registrar gol/assistência/cartão (súmula)",
-    "ConfirmacaoPresenca: confirmar/marcar ausente",
-    "VotoCraque: votar",
-    "CaronaSolidaria: cadastrar/ocupar vaga",
-    "Enquete: criar/votar/encerrar",
-    "Comunicado: publicar/fixar",
-    "Mensalidade: gerar/marcar paga",
-    "Patrocinador/Produto: CRUD"
+    "EventoJogo: registrar gol/assistência/cartão (súmula digital)",
+    "ConfirmacaoPresenca: confirmar/marcar ausente para próximo jogo",
+    "VotoCraque: votação de craque do jogo (schema já tem identificadorVotante único)",
+    "Mensalidade: gerar cobrança / marcar paga",
+    "ConsentimentoLgpd: NÃO plugado no /cadastro ainda — falta o checkbox de termos + consentimento de imagem"
   ]
 }

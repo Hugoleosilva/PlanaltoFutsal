@@ -1,41 +1,37 @@
-import Image from "next/image";
-import Link from "next/link";
+import { PublicNav } from "./_components/public-nav";
+import { HeroSection } from "./_components/hero-section";
+import { HistoriaSection } from "./_components/historia-section";
+import { ElencoSection } from "./_components/elenco-section";
+import { AgendaSection } from "./_components/agenda-section";
+import { GaleriaSection } from "./_components/galeria-section";
+import { EnviarFotoSection } from "./_components/enviar-foto-section";
+import { CaronaSection } from "./_components/carona-section";
+import { EngajamentoSection } from "./_components/engajamento-section";
+import { MuralSection } from "./_components/mural-section";
+import { PixSection } from "./_components/pix-section";
+import { PatrocinadoresSection } from "./_components/patrocinadores-section";
+import { LojaSection } from "./_components/loja-section";
+import { PublicFooter } from "./_components/public-footer";
 
 export default function HomePage(): React.ReactElement {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-      <Image
-        src="/images/marca/capa-planalto-futsal.jpg"
-        alt=""
-        fill
-        priority
-        className="object-cover opacity-30"
-      />
-
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        <Image
-          src="/images/marca/escudo-planalto-futsal.png"
-          alt="Escudo do Planalto Futsal"
-          width={160}
-          height={160}
-          priority
-        />
-
-        <h1 className="font-heading text-4xl font-bold uppercase tracking-wide text-planalto-white sm:text-5xl">
-          Planalto Futsal
-        </h1>
-        <p className="max-w-xl text-planalto-gray">
-          Equipe de futebol e futsal de várzea do Jardim Planalto, Sancho — Zona Oeste do Recife-PE.
-          União, garra, respeito e fé.
-        </p>
-
-        <Link
-          href="/login"
-          className="rounded-md bg-planalto-red px-6 py-3 font-semibold text-white transition hover:bg-planalto-red-dark"
-        >
-          Entrar
-        </Link>
-      </div>
-    </main>
+    <>
+      <PublicNav />
+      <main>
+        <HeroSection />
+        <HistoriaSection />
+        <ElencoSection />
+        <AgendaSection />
+        <MuralSection />
+        <GaleriaSection />
+        <EnviarFotoSection />
+        <CaronaSection />
+        <EngajamentoSection />
+        <PixSection />
+        <PatrocinadoresSection />
+        <LojaSection />
+      </main>
+      <PublicFooter />
+    </>
   );
 }

@@ -41,6 +41,12 @@ export class MongoMovimentacaoFinanceiraRepository implements MovimentacaoFinanc
     return docs.map(toEntity);
   }
 
+  async findRecentes(limite: number): Promise<MovimentacaoFinanceira[]> {
+    await connectToDatabase();
+    const docs = await MovimentacaoFinanceiraModel.find().sort({ data: -1 }).limit(limite);
+    return docs.map(toEntity);
+  }
+
   async create(movimentacao: MovimentacaoFinanceira): Promise<MovimentacaoFinanceira> {
     await connectToDatabase();
     const created = await MovimentacaoFinanceiraModel.create({

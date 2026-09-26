@@ -38,6 +38,10 @@ export class Enquete extends Entity<EnqueteState> {
     return this.props.status;
   }
 
+  get criadoPorUserId(): string {
+    return this.props.criadoPorUserId;
+  }
+
   votar(opcaoId: string): Enquete {
     if (this.props.status === "ENCERRADA") {
       throw new Error("Esta enquete já foi encerrada.");

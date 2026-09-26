@@ -19,6 +19,8 @@ export interface AtletaDocument extends Document {
   preferencias?: string;
   documentos: DocumentoAtletaSubdocument[];
   status: "ATIVO" | "INATIVO";
+  contatoEmail?: string;
+  contatoWhatsapp?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -46,9 +48,14 @@ const AtletaSchema = new Schema<AtletaDocument>(
     preferencias: { type: String },
     documentos: { type: [DocumentoAtletaSchema], default: [] },
     status: { type: String, enum: ["ATIVO", "INATIVO"], required: true, default: "ATIVO" },
+    contatoEmail: { type: String, lowercase: true, trim: true },
+    contatoWhatsapp: { type: String, trim: true },
   },
   { timestamps: true },
 );
+
+AtletaSchema.index({ contatoEmail: 1 });
+AtletaSchema.index({ contatoWhatsapp: 1 });
 
 export const AtletaModel: Model<AtletaDocument> =
   models.Atleta ?? model<AtletaDocument>("Atleta", AtletaSchema);

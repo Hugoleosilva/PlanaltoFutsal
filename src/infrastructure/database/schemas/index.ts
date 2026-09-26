@@ -9,3 +9,5 @@ export * from "./jogo.schema";
 export * from "./lgpd.schema";
 export * from "./patrocinio-loja.schema";
 export * from "./user.schema";
+export * from "./verificacao-email.schema";
+export * from "./arquivo.schema";

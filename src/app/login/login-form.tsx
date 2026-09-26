@@ -1,13 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
 
 export function LoginForm(): React.ReactElement {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") ?? "/";
+  const verificacao = searchParams.get("verificacao");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,43 +48,52 @@ export function LoginForm(): React.ReactElement {
     >
       <h1 className="font-heading text-2xl font-bold text-planalto-white">Entrar</h1>
 
+      {verificacao === "ok" ? (
+        <p className="rounded-md bg-emerald-900/40 px-3 py-2 text-sm text-emerald-300">
+          E-mail confirmado! Já pode entrar.
+        </p>
+      ) : null}
+
+      {verificacao === "invalida" ? (
+        <p className="rounded-md bg-red-900/40 px-3 py-2 text-sm text-planalto-red">
+          Link de verificação inválido ou expirado.
+        </p>
+      ) : null}
+
       <div className="space-y-1">
-        <label htmlFor="email" className="text-sm text-planalto-gray">
-          E-mail
-        </label>
-        <input
+        <Label htmlFor="email">E-mail</Label>
+        <Input
           id="email"
           type="email"
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="w-full rounded-md border border-white/10 bg-transparent px-3 py-2 text-planalto-white outline-none focus:border-planalto-red"
         />
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="password" className="text-sm text-planalto-gray">
-          Senha
-        </label>
-        <input
+        <Label htmlFor="password">Senha</Label>
+        <Input
           id="password"
           type="password"
           required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          className="w-full rounded-md border border-white/10 bg-transparent px-3 py-2 text-planalto-white outline-none focus:border-planalto-red"
         />
       </div>
 
       {error ? <p className="text-sm text-planalto-red">{error}</p> : null}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md bg-planalto-red px-4 py-2 font-semibold text-white transition hover:bg-planalto-red-dark disabled:opacity-60"
-      >
+      <Button type="submit" disabled={isSubmitting} className="w-full">
         {isSubmitting ? "Entrando..." : "Entrar"}
-      </button>
+      </Button>
+
+      <p className="text-center text-sm text-planalto-gray">
+        Ainda não tem conta?{" "}
+        <Link href="/cadastro" className="text-planalto-red underline">
+          Cadastre-se
+        </Link>
+      </p>
     </form>
   );
 }

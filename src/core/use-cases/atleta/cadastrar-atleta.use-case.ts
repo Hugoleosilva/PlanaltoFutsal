@@ -15,6 +15,8 @@ export interface CadastrarAtletaIn {
   bio?: string;
   estiloDeJogo?: string;
   preferencias?: string;
+  contatoEmail?: string;
+  contatoWhatsapp?: string;
 }
 
 export interface CadastrarAtletaOut {
@@ -41,6 +43,8 @@ export class CadastrarAtletaUseCase implements UseCase<CadastrarAtletaIn, Cadast
       bio: input.bio,
       estiloDeJogo: input.estiloDeJogo,
       preferencias: input.preferencias,
+      contatoEmail: input.contatoEmail,
+      contatoWhatsapp: input.contatoWhatsapp,
       status: "ATIVO",
     });
 

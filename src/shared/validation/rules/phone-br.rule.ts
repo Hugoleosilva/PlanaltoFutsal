@@ -1,7 +1,7 @@
 import { ValidationRule } from "../validation-rule.interface";
 import { isEmptyValue } from "../rule.utils";
 
-const PHONE_BR_REGEX = /^\+?55?\s?\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/;
+const PHONE_BR_REGEX = /^\+?(55)?\s?\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/;
 
 export class PhoneBrRule implements ValidationRule<string> {
   validate(value: string): string | null {

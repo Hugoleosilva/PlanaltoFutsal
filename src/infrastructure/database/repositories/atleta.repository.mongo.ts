@@ -18,6 +18,8 @@ function toEntity(doc: AtletaDocument): Atleta {
     preferencias: doc.preferencias,
     documentos: doc.documentos,
     status: doc.status,
+    contatoEmail: doc.contatoEmail,
+    contatoWhatsapp: doc.contatoWhatsapp,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };
@@ -32,10 +34,35 @@ export class MongoAtletaRepository implements AtletaRepository {
     return doc ? toEntity(doc) : null;
   }
 
+  async findByUserId(userId: string): Promise<Atleta | null> {
+    await connectToDatabase();
+    const doc = await AtletaModel.findOne({ userId });
+    return doc ? toEntity(doc) : null;
+  }
+
   async findAllAtivos(): Promise<Atleta[]> {
     await connectToDatabase();
     const docs = await AtletaModel.find({ status: "ATIVO" }).sort({ nomeCompleto: 1 });
     return docs.map(toEntity);
+  }
+
+  async findAllSemAcesso(): Promise<Atleta[]> {
+    await connectToDatabase();
+    const docs = await AtletaModel.find({ status: "ATIVO", userId: null }).sort({ nomeCompleto: 1 });
+    return docs.map(toEntity);
+  }
+
+  async findByContatoNaoVinculado(email?: string, whatsapp?: string): Promise<Atleta | null> {
+    if (!email && !whatsapp) return null;
+
+    await connectToDatabase();
+
+    const condicoesContato = [];
+    if (email) condicoesContato.push({ contatoEmail: email.toLowerCase() });
+    if (whatsapp) condicoesContato.push({ contatoWhatsapp: whatsapp });
+
+    const doc = await AtletaModel.findOne({ userId: null, $or: condicoesContato });
+    return doc ? toEntity(doc) : null;
   }
 
   async create(atleta: Atleta): Promise<Atleta> {
@@ -53,6 +80,8 @@ export class MongoAtletaRepository implements AtletaRepository {
       preferencias: atleta.preferencias,
       documentos: [...atleta.documentos],
       status: atleta.status,
+      contatoEmail: atleta.contatoEmail,
+      contatoWhatsapp: atleta.contatoWhatsapp,
     });
     return toEntity(created);
   }
@@ -62,6 +91,7 @@ export class MongoAtletaRepository implements AtletaRepository {
     const updated = await AtletaModel.findByIdAndUpdate(
       atleta.id,
       {
+        userId: atleta.userId ?? null,
         nomeCompleto: atleta.nomeCompleto,
         apelido: atleta.apelido,
         dataNascimento: atleta.dataNascimento,
@@ -73,6 +103,8 @@ export class MongoAtletaRepository implements AtletaRepository {
         preferencias: atleta.preferencias,
         documentos: [...atleta.documentos],
         status: atleta.status,
+        contatoEmail: atleta.contatoEmail,
+        contatoWhatsapp: atleta.contatoWhatsapp,
       },
       { new: true },
     );

@@ -1,10 +1,12 @@
 import { Entity, EntityState } from "../entity";
 import {
+  EmailRule,
   InRule,
   MaxItemsRule,
   MaxLengthRule,
   MinLengthRule,
   PastDateRule,
+  PhoneBrRule,
   RequiredRule,
   Validator,
 } from "@/shared/validation";
@@ -31,6 +33,14 @@ export interface AtletaState extends EntityState {
   preferencias?: string;
   documentos: DocumentoAtleta[];
   status: AtletaStatus;
+  /**
+   * Contato usado pela diretoria ao lançar o atleta no elenco antes dele
+   * ter login (o "BID"). Quando um usuário se auto-cadastra com o mesmo
+   * e-mail ou WhatsApp, a verificação de e-mail promove a conta para
+   * ATLETA e vincula automaticamente a este registro.
+   */
+  contatoEmail?: string;
+  contatoWhatsapp?: string;
 }
 
 const MAX_GALERIA_FOTOS = 4;
@@ -105,6 +115,14 @@ export class Atleta extends Entity<AtletaState> {
     return this.props.status;
   }
 
+  get contatoEmail(): string | undefined {
+    return this.props.contatoEmail;
+  }
+
+  get contatoWhatsapp(): string | undefined {
+    return this.props.contatoWhatsapp;
+  }
+
   get isMenorDeIdade(): boolean {
     return this.idade < 18;
   }
@@ -147,6 +165,8 @@ export class Atleta extends Entity<AtletaState> {
         value: this.props.status,
         rules: [new RequiredRule(), new InRule(["ATIVO", "INATIVO"] as const)],
       },
+      { code: "contatoEmail", value: this.props.contatoEmail, rules: [new EmailRule()] },
+      { code: "contatoWhatsapp", value: this.props.contatoWhatsapp, rules: [new PhoneBrRule()] },
     ]);
   }
 }

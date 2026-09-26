@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/infrastructure/security/auth";
+import { AtletaTopbar } from "./_components/atleta-topbar";
 
 export default async function AtletaLayout({
   children,
@@ -12,5 +13,10 @@ export default async function AtletaLayout({
     redirect("/acesso-negado");
   }
 
-  return <div className="min-h-screen bg-planalto-black">{children}</div>;
+  return (
+    <div className="min-h-screen bg-planalto-black">
+      <AtletaTopbar />
+      {children}
+    </div>
+  );
 }

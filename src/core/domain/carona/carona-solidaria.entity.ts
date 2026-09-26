@@ -41,6 +41,10 @@ export class CaronaSolidaria extends Entity<CaronaSolidariaState> {
     return this.props.local;
   }
 
+  get criadoPorUserId(): string | null | undefined {
+    return this.props.criadoPorUserId;
+  }
+
   get vagasDisponiveis(): number {
     return this.props.vagasDisponiveis;
   }
