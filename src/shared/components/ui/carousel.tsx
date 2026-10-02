@@ -9,7 +9,20 @@ export function Carousel({ children }: { children: ReactNode }): React.ReactElem
   function scroll(direction: "left" | "right"): void {
     const track = trackRef.current;
     if (!track) return;
+
+    const maxScroll = track.scrollWidth - track.clientWidth;
     const amount = track.clientWidth * 0.8;
+
+    if (direction === "right" && track.scrollLeft >= maxScroll - 2) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (direction === "left" && track.scrollLeft <= 2) {
+      track.scrollTo({ left: maxScroll, behavior: "smooth" });
+      return;
+    }
+
     track.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
   }
 

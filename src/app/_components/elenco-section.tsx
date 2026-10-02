@@ -38,15 +38,17 @@ function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="font-heading font-bold text-planalto-white">{atleta.apelido}</p>
-        <div className="mt-1 flex flex-wrap gap-1.5">
-          <Badge className="shrink-0 whitespace-nowrap">{atleta.idade} anos</Badge>
-          {atleta.posicao ? (
-            <Badge tone="neutral" className="w-[132px] shrink-0 justify-center whitespace-nowrap">
+        <div className="flex items-baseline gap-1.5">
+          <p className="truncate font-heading font-bold text-planalto-white">{atleta.apelido}</p>
+          <span className="shrink-0 text-xs text-planalto-gray">· {atleta.idade} anos</span>
+        </div>
+        {atleta.posicao ? (
+          <div className="mt-2 flex justify-center">
+            <Badge tone="neutral" className="whitespace-nowrap">
               {POSICAO_ATLETA_LABEL[atleta.posicao]}
             </Badge>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         {atleta.bio ? <p className="mt-2 line-clamp-3 text-sm text-planalto-gray">{atleta.bio}</p> : null}
       </div>
     </Card>

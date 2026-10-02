@@ -5,7 +5,7 @@ export async function DiretoriaSection(): Promise<React.ReactElement> {
   const membros = await new MongoMembroDiretoriaRepository().findAllAtivos();
 
   return (
-    <section className="mx-auto max-w-5xl px-6 pb-16 pt-0">
+    <section className="mx-auto max-w-5xl px-6 pb-6 pt-0">
       <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">Diretoria</h2>
       <p className="mx-auto mt-2 text-center text-planalto-gray">
         Saiba quem toca o Planalto Futsal fora das quatro linhas — conheça um pouco de quem faz esse

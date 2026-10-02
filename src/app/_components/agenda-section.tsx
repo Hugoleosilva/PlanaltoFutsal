@@ -26,23 +26,28 @@ export async function AgendaSection(): Promise<React.ReactElement> {
       ) : (
         <div className="mt-6 space-y-3">
           {jogos.map((jogo) => (
-            <Card key={jogo.id} className="flex flex-col gap-2">
-              <div className="flex items-center gap-3">
-                <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
-                <div>
-                  <p className="font-semibold text-planalto-white">
-                    {tituloConfronto(jogo.adversario, jogo.mandante)}
-                  </p>
-                  <p className="text-sm text-planalto-gray">
-                    {jogo.local}
-                    {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
-                  </p>
+            <Card key={jogo.id}>
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
+                  <div>
+                    <p className="font-semibold text-planalto-white">
+                      {tituloConfronto(jogo.adversario, jogo.mandante)}
+                    </p>
+                    <p className="text-sm text-planalto-gray">
+                      {jogo.local}
+                      {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
+                    </p>
+                  </div>
                 </div>
+                <p className="shrink-0 text-right text-sm text-planalto-red">
+                  {formatDataHora(jogo.dataHora)}
+                </p>
               </div>
-              <p className="text-sm text-planalto-red">{formatDataHora(jogo.dataHora)}</p>
+
               <Link
                 href="/carona"
-                className="flex items-center gap-1.5 text-xs font-semibold text-planalto-gray hover:text-planalto-white"
+                className="mt-3 flex items-center justify-center gap-1.5 border-t border-white/10 pt-3 text-xs font-semibold text-planalto-gray hover:text-planalto-white"
               >
                 <Car size={14} />
                 Pode ajudar com uma carona? Clique aqui

@@ -51,7 +51,7 @@ export function MembroDiretoriaCard({
           </button>
 
           {aberto ? (
-            <p className="max-h-40 flex-1 overflow-y-auto border-t border-white/10 p-3 text-xs text-planalto-gray">
+            <p className="max-h-28 flex-1 overflow-y-auto border-t border-white/10 p-3 text-xs text-planalto-gray">
               {bio}
             </p>
           ) : null}
