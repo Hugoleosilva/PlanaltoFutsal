@@ -30,21 +30,21 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
   }
 
   return (
-    <QuadraBackdrop>
+    <QuadraBackdrop semRolagem>
       <PublicNav />
-      <main className="flex-1 px-6 py-4">
-        <div className="mx-auto max-w-5xl">
+      <main className="flex min-h-0 flex-1 flex-col justify-center overflow-hidden px-6 py-3">
+        <div className="mx-auto w-full max-w-5xl">
           <div className="text-center">
-            <h1 className="font-heading text-3xl font-bold text-planalto-white">
+            <h1 className="font-heading text-2xl font-bold text-planalto-white">
               Apoie o Planalto Futsal
             </h1>
-            <p className="mx-auto mt-2 max-w-xl text-planalto-gray">
+            <p className="mx-auto mt-1 max-w-xl text-sm text-planalto-gray">
               Toda doação ajuda com uniformes, arbitragem e taxas de inscrição em campeonatos — faça um
               Pix avulso ou vire sócio Planalto Meu Amor!
             </p>
           </div>
 
-          <div className="mt-4 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+          <div className="mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2">
             <PixSection />
             <SocioCta
               logado={Boolean(session?.user)}

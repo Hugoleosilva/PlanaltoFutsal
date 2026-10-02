@@ -22,6 +22,29 @@ function paginar<T>(itens: T[], tamanho: number): T[][] {
   return paginas;
 }
 
+function completarLinha<T>(pagina: T[]): (T | null)[] {
+  const resto = pagina.length % 3;
+  const faltam = resto === 0 ? 0 : 3 - resto;
+  return [...pagina, ...Array<null>(faltam).fill(null)];
+}
+
+function AtletaCardVazio(): React.ReactElement {
+  return (
+    <Card className="flex gap-3 p-4 opacity-40">
+      <div className="h-20 w-20 shrink-0 rounded-lg bg-white/10" />
+      <div className="min-w-0 flex-1">
+        <div className="flex items-baseline gap-1.5">
+          <p className="font-heading font-bold text-planalto-white">Nome</p>
+          <span className="shrink-0 text-xs text-planalto-gray">· 00 anos</span>
+        </div>
+        <div className="mt-1.5 flex justify-center">
+          <Badge tone="neutral">Posição</Badge>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
   return (
     <Card className="flex gap-3 p-4">
@@ -130,9 +153,13 @@ export async function ElencoSection({
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                      {pagina.map((atleta) => (
-                        <AtletaCard key={atleta.id} atleta={atleta} />
-                      ))}
+                      {completarLinha(pagina).map((atleta, posicao) =>
+                        atleta ? (
+                          <AtletaCard key={atleta.id} atleta={atleta} />
+                        ) : (
+                          <AtletaCardVazio key={`vazio-${posicao}`} />
+                        ),
+                      )}
                     </div>
                   </div>
                 ))}

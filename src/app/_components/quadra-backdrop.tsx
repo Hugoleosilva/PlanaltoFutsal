@@ -1,8 +1,20 @@
 import Image from "next/image";
+import { cn } from "@/shared/utils/cn";
 
-export function QuadraBackdrop({ children }: { children: React.ReactNode }): React.ReactElement {
+export function QuadraBackdrop({
+  children,
+  semRolagem = false,
+}: {
+  children: React.ReactNode;
+  semRolagem?: boolean;
+}): React.ReactElement {
   return (
-    <div className="relative flex min-h-screen flex-1 flex-col">
+    <div
+      className={cn(
+        "relative flex flex-1 flex-col",
+        semRolagem ? "h-screen overflow-hidden" : "min-h-screen",
+      )}
+    >
       <div className="fixed inset-0 -z-10">
         <Image
           src="/images/marca/fundo-tela-novo-planalto.jpg"

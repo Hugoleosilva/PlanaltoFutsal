@@ -16,22 +16,22 @@ export async function CaronaSection(): Promise<React.ReactElement> {
   const jogoPorId = new Map(jogos.map((jogo) => [jogo.id, jogo]));
 
   return (
-    <section id="carona" className="mx-auto max-w-5xl px-6 py-6">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+    <section id="carona" className="mx-auto w-full max-w-5xl px-6 py-3">
+      <h2 className="text-center font-heading text-2xl font-bold text-planalto-white">
         Carona Solidária
       </h2>
-      <p className="mt-2 text-center text-planalto-gray">
+      <p className="mt-1 text-center text-sm text-planalto-gray">
         Ofereça ou encontre uma carona para o próximo jogo.
       </p>
 
-      <div className="mt-6 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2">
         <div className="h-full">
           {jogos.length > 0 ? (
             <CaronaForm jogos={jogos.map((jogo) => ({ id: jogo.id, adversario: jogo.adversario }))} />
           ) : null}
         </div>
 
-        <Card className="flex h-full flex-col">
+        <Card className="flex h-full flex-col p-5">
           {caronas.length > 0 ? (
             <div className="space-y-3">
               {caronas.map((carona) => {

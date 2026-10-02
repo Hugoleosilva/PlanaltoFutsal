@@ -27,10 +27,10 @@ export function CaronaForm({
   }
 
   return (
-    <Card className="h-full">
+    <Card className="h-full p-5">
       <h3 className="font-heading text-lg font-bold text-planalto-white">Oferecer carona</h3>
 
-      <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <form action={formAction} className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="space-y-1 sm:col-span-2">
           <Label htmlFor="jogoId">Jogo</Label>
           <Select id="jogoId" name="jogoId" required>
