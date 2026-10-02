@@ -18,10 +18,24 @@ const LINKS = [
   { href: "/loja", label: "Loja" },
 ];
 
-const DASHBOARD_POR_ROLE: Record<string, { href: string; label: string }> = {
-  ADMIN: { href: "/admin", label: "Painel da Diretoria" },
-  ATLETA: { href: "/atleta", label: "Meu Perfil" },
-};
+interface DashboardLink {
+  href: string;
+  label: string;
+}
+
+function montarDashboards(user: { role: string; atletaId: string | null }): DashboardLink[] {
+  const dashboards: DashboardLink[] = [];
+
+  if (user.role === "ADMIN") {
+    dashboards.push({ href: "/admin", label: "Painel da Diretoria" });
+  }
+
+  if (user.atletaId) {
+    dashboards.push({ href: "/atleta", label: "Meu Perfil" });
+  }
+
+  return dashboards;
+}
 
 export function PublicNav(): React.ReactElement {
   const { data: session, status } = useSession();
@@ -62,16 +76,21 @@ export function PublicNav(): React.ReactElement {
           {status === "authenticated" && session.user ? (
             <>
               {(() => {
-                const dashboard = DASHBOARD_POR_ROLE[session.user.role];
-                return dashboard ? (
-                  <Link
-                    href={dashboard.href}
-                    className="text-sm text-planalto-gray hover:text-planalto-white"
-                  >
-                    {dashboard.label}
-                  </Link>
+                const dashboards = montarDashboards(session.user);
+                return dashboards.length > 0 ? (
+                  dashboards.map((dashboard) => (
+                    <Link
+                      key={dashboard.href}
+                      href={dashboard.href}
+                      className="whitespace-nowrap text-sm text-planalto-gray hover:text-planalto-white"
+                    >
+                      {dashboard.label}
+                    </Link>
+                  ))
                 ) : (
-                  <span className="text-sm text-planalto-gray">Olá, {session.user.name}</span>
+                  <span className="whitespace-nowrap text-sm text-planalto-gray">
+                    Olá, {session.user.name}
+                  </span>
                 );
               })()}
               <button

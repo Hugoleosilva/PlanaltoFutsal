@@ -49,7 +49,7 @@ export class PromoverUsuarioParaAtletaUseCase
       throw new AppError("Este atleta já possui um acesso vinculado.", "ATLETA_JA_TEM_ACESSO", 409);
     }
 
-    const userPromovido = user.promoverParaAtleta(atleta.id);
+    const userPromovido = user.role === "ADMIN" ? user.vincularAtleta(atleta.id) : user.promoverParaAtleta(atleta.id);
     const atletaVinculado = atleta.clone({ userId: user.id });
 
     const userSalvo = await this.userRepository.update(userPromovido);

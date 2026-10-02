@@ -131,6 +131,16 @@ export class User extends Entity<UserState> {
     return this.clone({ role: "ATLETA", atletaId });
   }
 
+  /**
+   * Vincula um atleta sem mexer no role — usado quando quem está sendo
+   * vinculado já é ADMIN (ex: diretor que também joga). Promover esse
+   * usuário normalmente rebaixaria o role dele pra ATLETA, derrubando o
+   * acesso de diretoria.
+   */
+  vincularAtleta(atletaId: string): User {
+    return this.clone({ atletaId });
+  }
+
   tornarSocio(plano: {
     tipo: TipoPlanoSocio;
     valor: number;

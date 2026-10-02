@@ -8,6 +8,7 @@ declare module "next-auth" {
       role: Role;
       name: string;
       email: string;
+      atletaId: string | null;
     };
   }
 }
@@ -16,6 +17,7 @@ declare module "@auth/core/jwt" {
   interface JWT {
     id: string;
     role: Role;
+    atletaId: string | null;
   }
 }
 
@@ -37,12 +39,14 @@ export const authConfig: NextAuthConfig = {
       if (user) {
         token.id = user.id as string;
         token.role = (user as { role: Role }).role;
+        token.atletaId = (user as { atletaId: string | null }).atletaId;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
+      session.user.atletaId = token.atletaId;
       return session;
     },
   },
