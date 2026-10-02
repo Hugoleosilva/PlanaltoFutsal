@@ -9,6 +9,7 @@ export function Providers({ children }: { children: React.ReactNode }): React.Re
     <SessionProvider>
       <RadioPlayerProvider>
         {children}
+        <div className="h-14" aria-hidden="true" />
         <RadioMiniBar />
       </RadioPlayerProvider>
     </SessionProvider>

@@ -44,7 +44,6 @@ export async function cadastrarJogoAction(
 
     revalidatePath("/admin/jogos");
     revalidatePath("/agenda");
-    revalidatePath("/jogos");
 
     return { error: null };
   } catch (error) {
@@ -84,7 +83,6 @@ export async function editarJogoAction(
 
     revalidatePath("/admin/jogos");
     revalidatePath("/agenda");
-    revalidatePath("/jogos");
 
     return { error: null };
   } catch (error) {
@@ -110,7 +108,6 @@ export async function cancelarJogoAction(
 
     revalidatePath("/admin/jogos");
     revalidatePath("/agenda");
-    revalidatePath("/jogos");
 
     return { error: null };
   } catch (error) {
@@ -136,7 +133,6 @@ export async function excluirJogoAction(
 
     revalidatePath("/admin/jogos");
     revalidatePath("/agenda");
-    revalidatePath("/jogos");
 
     return { error: null };
   } catch (error) {
@@ -167,7 +163,6 @@ export async function registrarResultadoAction(
 
     revalidatePath("/admin/jogos");
     revalidatePath("/agenda");
-    revalidatePath("/jogos");
 
     return { error: null };
   } catch (error) {

@@ -22,7 +22,7 @@ export function CadastroForm(): React.ReactElement {
           Enviamos um link de confirmação para o seu e-mail. Clique nele para ativar sua conta.
         </p>
         <Link href="/inicio" className="inline-block text-sm text-planalto-red underline">
-          ← Voltar ao início
+          Voltar ao início
         </Link>
       </div>
     );
@@ -69,7 +69,7 @@ export function CadastroForm(): React.ReactElement {
 
       <div className="flex items-center justify-between text-sm text-planalto-gray">
         <Link href="/inicio" className="hover:text-planalto-white">
-          ← Voltar ao início
+          Voltar ao início
         </Link>
         <Link href="/login" className="text-planalto-red underline">
           Entrar

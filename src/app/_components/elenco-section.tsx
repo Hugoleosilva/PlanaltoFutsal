@@ -7,8 +7,51 @@ import {
 } from "@/infrastructure/database/repositories/campeonato.repository.mongo";
 import { Badge } from "@/shared/components/ui/badge";
 import { Card } from "@/shared/components/ui/card";
+import { Carousel } from "@/shared/components/ui/carousel";
 import { cn } from "@/shared/utils/cn";
 import { POSICAO_ATLETA_LABEL } from "@/shared/constants/posicoes-atleta";
+import type { Atleta } from "@/core/domain/atleta/atleta.entity";
+
+const TAMANHO_PAGINA = 9;
+
+function paginar<T>(itens: T[], tamanho: number): T[][] {
+  const paginas: T[][] = [];
+  for (let i = 0; i < itens.length; i += tamanho) {
+    paginas.push(itens.slice(i, i + tamanho));
+  }
+  return paginas;
+}
+
+function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
+  return (
+    <Card className="flex gap-4">
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-white/10">
+        {atleta.fotoPrincipalUrl ? (
+          <Image
+            src={atleta.fotoPrincipalUrl}
+            alt=""
+            fill
+            className="object-cover object-top"
+            unoptimized
+          />
+        ) : null}
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <p className="font-heading font-bold text-planalto-white">{atleta.apelido}</p>
+        <div className="mt-1 flex gap-1.5">
+          <Badge className="shrink-0 whitespace-nowrap">{atleta.idade} anos</Badge>
+          {atleta.posicao ? (
+            <Badge tone="neutral" className="min-w-[104px] shrink-0 justify-center whitespace-nowrap">
+              {POSICAO_ATLETA_LABEL[atleta.posicao]}
+            </Badge>
+          ) : null}
+        </div>
+        {atleta.bio ? <p className="mt-2 line-clamp-3 text-sm text-planalto-gray">{atleta.bio}</p> : null}
+      </div>
+    </Card>
+  );
+}
 
 export async function ElencoSection({
   campeonatoFiltro,
@@ -76,38 +119,36 @@ export async function ElencoSection({
       ) : atletas.length === 0 ? (
         <p className="mt-8 text-center text-sm text-planalto-gray">Elenco em atualização.</p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {atletas.map((atleta) => (
-            <Card key={atleta.id} className="flex gap-4">
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-white/10">
-                {atleta.fotoPrincipalUrl ? (
-                  <Image
-                    src={atleta.fotoPrincipalUrl}
-                    alt=""
-                    fill
-                    className="object-cover object-top"
-                    unoptimized
-                  />
-                ) : null}
+        (() => {
+          const primeiraPagina = atletas.slice(0, TAMANHO_PAGINA);
+          const demaisPaginas = paginar(atletas.slice(TAMANHO_PAGINA), TAMANHO_PAGINA);
+
+          return (
+            <>
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {primeiraPagina.map((atleta) => (
+                  <AtletaCard key={atleta.id} atleta={atleta} />
+                ))}
               </div>
 
-              <div className="min-w-0 flex-1">
-                <p className="font-heading font-bold text-planalto-white">{atleta.apelido}</p>
-                <div className="mt-1 flex gap-1.5">
-                  <Badge className="shrink-0 whitespace-nowrap">{atleta.idade} anos</Badge>
-                  {atleta.posicao ? (
-                    <Badge tone="neutral" className="min-w-[104px] shrink-0 justify-center whitespace-nowrap">
-                      {POSICAO_ATLETA_LABEL[atleta.posicao]}
-                    </Badge>
-                  ) : null}
+              {demaisPaginas.length > 0 ? (
+                <div className="mt-6">
+                  <Carousel>
+                    {demaisPaginas.map((pagina, indice) => (
+                      <div key={indice} className="w-full shrink-0 snap-start">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                          {pagina.map((atleta) => (
+                            <AtletaCard key={atleta.id} atleta={atleta} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </Carousel>
                 </div>
-                {atleta.bio ? (
-                  <p className="mt-2 line-clamp-3 text-sm text-planalto-gray">{atleta.bio}</p>
-                ) : null}
-              </div>
-            </Card>
-          ))}
-        </div>
+              ) : null}
+            </>
+          );
+        })()
       )}
     </section>
   );

@@ -13,14 +13,13 @@ export default function InicioPage(): React.ReactElement {
       <div className="relative flex-1">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/images/marca/planalto_quadra.png"
+            src="/images/marca/capa-planalto-futsal.jpg"
             alt=""
             fill
-            className="object-cover object-bottom"
+            className="object-cover opacity-30"
             unoptimized
             priority
           />
-          <div className="absolute inset-0 bg-black/70" />
         </div>
 
         <div className="pt-3">
@@ -28,7 +27,7 @@ export default function InicioPage(): React.ReactElement {
           <main>
             <MuralSection />
             <EngajamentoSection />
-            <div className="mt-[188px]">
+            <div className="mt-10">
               <PatrocinadoresSection />
             </div>
           </main>

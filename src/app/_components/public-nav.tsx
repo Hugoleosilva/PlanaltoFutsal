@@ -11,11 +11,10 @@ const LINKS = [
   { href: "/elenco", label: "Elenco" },
   { href: "/diretoria", label: "Diretoria" },
   { href: "/agenda", label: "Agenda" },
-  { href: "/jogos", label: "Jogos" },
   { href: "/galeria", label: "Galeria" },
   { href: "/carona", label: "Carona" },
   { href: "/servicos", label: "Serviços" },
-  { href: "/apoie", label: "Apoie" },
+  { href: "/apoie", label: "Parceria" },
   { href: "/loja", label: "Loja" },
 ];
 

@@ -154,7 +154,7 @@ export async function cadastrarPatrocinadorAction(
     revalidatePath("/admin/conteudo");
     revalidatePath("/");
     revalidatePath("/inicio");
-    revalidatePath("/jogos");
+    revalidatePath("/agenda");
 
     return { error: null };
   } catch (error) {
@@ -194,7 +194,7 @@ export async function editarPatrocinadorAction(
     revalidatePath("/admin/conteudo");
     revalidatePath("/");
     revalidatePath("/inicio");
-    revalidatePath("/jogos");
+    revalidatePath("/agenda");
 
     return { error: null, sucesso: true };
   } catch (error) {
@@ -222,7 +222,7 @@ export async function desativarPatrocinadorAction(
     revalidatePath("/admin/conteudo");
     revalidatePath("/");
     revalidatePath("/inicio");
-    revalidatePath("/jogos");
+    revalidatePath("/agenda");
 
     return { error: null, sucesso: true };
   } catch (error) {

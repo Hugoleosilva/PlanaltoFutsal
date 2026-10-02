@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MongoJogoRepository } from "@/infrastructure/database/repositories/jogo.repository.mongo";
 import { Card } from "@/shared/components/ui/card";
 import { ConfrontoEscudos } from "./confronto-escudos";
@@ -43,12 +42,6 @@ export async function AgendaSection(): Promise<React.ReactElement> {
           ))}
         </div>
       )}
-
-      <p className="mt-6 text-center">
-        <Link href="/jogos" className="text-sm text-planalto-red underline">
-          Ver resultados anteriores
-        </Link>
-      </p>
     </section>
   );
 }

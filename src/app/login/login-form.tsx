@@ -100,7 +100,7 @@ export function LoginForm(): React.ReactElement {
         </p>
         <p className="text-center">
           <Link href="/inicio" className="text-xs text-planalto-gray hover:text-planalto-white">
-            ← Voltar ao início
+            Voltar ao início
           </Link>
         </p>
       </div>

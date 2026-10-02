@@ -5,7 +5,7 @@ export default function CadastroPage(): React.ReactElement {
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
       <Image
-        src="/images/marca/planalto_tela4.png"
+        src="/images/marca/capa-planalto-futsal.jpg"
         alt="Planalto Futsal"
         fill
         priority
