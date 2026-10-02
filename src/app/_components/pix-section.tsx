@@ -18,7 +18,7 @@ export function PixSection(): React.ReactElement {
   });
 
   useEffect(() => {
-    QRCode.toDataURL(copiaECola, { width: 240, margin: 1 })
+    QRCode.toDataURL(copiaECola, { width: 180, margin: 1 })
       .then(setQrCodeUrl)
       .catch(() => setQrCodeUrl(null));
   }, [copiaECola]);
@@ -30,18 +30,18 @@ export function PixSection(): React.ReactElement {
   }
 
   return (
-    <section id="apoie" className="mx-auto max-w-2xl px-6 py-16 text-center">
+    <section id="apoie" className="text-center">
       <h2 className="font-heading text-3xl font-bold text-planalto-white">Apoie o Planalto Futsal</h2>
       <p className="mt-3 text-planalto-gray">
         Toda doação ajuda com uniformes, arbitragem e taxas de inscrição em campeonatos.
       </p>
 
-      <div className="mt-8 flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-card p-8">
+      <div className="mt-6 flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-card p-6">
         {qrCodeUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={qrCodeUrl} alt="QR Code Pix" width={240} height={240} />
+          <img src={qrCodeUrl} alt="QR Code Pix" width={180} height={180} />
         ) : (
-          <div className="flex h-[240px] w-[240px] items-center justify-center text-sm text-planalto-gray">
+          <div className="flex h-[180px] w-[180px] items-center justify-center text-sm text-planalto-gray">
             Gerando QR Code...
           </div>
         )}

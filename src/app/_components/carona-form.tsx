@@ -20,14 +20,14 @@ export function CaronaForm({
 
   if (state.sucesso) {
     return (
-      <Card className="mt-8 text-center">
+      <Card className="text-center">
         <p className="text-planalto-white">Carona registrada! Obrigado por ajudar a torcida. 🚗</p>
       </Card>
     );
   }
 
   return (
-    <Card className="mt-8">
+    <Card>
       <h3 className="font-heading text-lg font-bold text-planalto-white">Oferecer carona</h3>
 
       <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">

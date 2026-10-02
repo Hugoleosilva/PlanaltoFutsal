@@ -50,7 +50,7 @@ export function SocioCta({
   const valorFinal = valorSelecionado === "OUTRO" ? Number(valorCustom) : valorSelecionado;
 
   return (
-    <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-white/10 bg-card p-6 text-center">
+    <div className="rounded-lg border border-white/10 bg-card p-6 text-center">
       <div className="flex items-center justify-center gap-2 text-planalto-red">
         <HeartHandshake size={22} />
         <p className="font-heading text-lg font-bold text-planalto-white">

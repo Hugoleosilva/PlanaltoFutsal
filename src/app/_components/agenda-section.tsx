@@ -22,9 +22,9 @@ export async function AgendaSection(): Promise<React.ReactElement> {
           Nenhum jogo agendado no momento.
         </p>
       ) : (
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {jogos.map((jogo) => (
-            <Card key={jogo.id} className="flex items-center justify-between gap-3">
+            <Card key={jogo.id} className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
                 <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
                 <div>

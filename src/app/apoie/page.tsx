@@ -34,14 +34,16 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
     <>
       <PublicNav />
       <HeroFaixa />
-      <main className="flex-1 pb-16">
-        <PixSection />
-        <SocioCta
-          logado={Boolean(session?.user)}
-          jaEhSocio={jaEhSocio}
-          planoAtual={planoAtual}
-          contribuicaoPendenteValor={contribuicaoPendenteValor}
-        />
+      <main className="flex-1 px-6 py-8">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-2">
+          <PixSection />
+          <SocioCta
+            logado={Boolean(session?.user)}
+            jaEhSocio={jaEhSocio}
+            planoAtual={planoAtual}
+            contribuicaoPendenteValor={contribuicaoPendenteValor}
+          />
+        </div>
       </main>
       <PublicFooter />
     </>
