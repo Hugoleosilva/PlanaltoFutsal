@@ -6,6 +6,7 @@ import { Check, X } from "lucide-react";
 import { aprovarServicoAction, rejeitarServicoAction, type ActionState } from "./actions";
 import { Button } from "@/shared/components/ui/button";
 import { Badge } from "@/shared/components/ui/badge";
+import { CATEGORIA_SERVICO_LABEL, type CategoriaServico } from "@/shared/constants/categorias-servico";
 
 const INITIAL_STATE: ActionState = { error: null };
 
@@ -22,6 +23,8 @@ interface ServicoCardProps {
   imagensUrls: string[];
   valores?: string;
   formasPagamento: string[];
+  categoria: CategoriaServico;
+  bairro: string;
   nomeContato: string;
   contato: string;
 }
@@ -33,6 +36,8 @@ export function ServicoCard({
   imagensUrls,
   valores,
   formasPagamento,
+  categoria,
+  bairro,
   nomeContato,
   contato,
 }: ServicoCardProps): React.ReactElement {
@@ -66,13 +71,14 @@ export function ServicoCard({
         {valores ? <p className="text-sm text-planalto-red">{valores}</p> : null}
 
         <div className="flex flex-wrap gap-1.5">
+          <Badge tone="neutral">{CATEGORIA_SERVICO_LABEL[categoria]}</Badge>
           {formasPagamento.map((forma) => (
             <Badge key={forma}>{FORMA_LABEL[forma] ?? forma}</Badge>
           ))}
         </div>
 
         <p className="text-xs text-planalto-gray">
-          {nomeContato} · <span className="whitespace-nowrap">{contato}</span>
+          {nomeContato} · <span className="whitespace-nowrap">{contato}</span> · {bairro}
         </p>
 
         <div className="flex gap-2 pt-2">

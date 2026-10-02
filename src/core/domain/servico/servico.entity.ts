@@ -7,9 +7,11 @@ import {
   RequiredRule,
   Validator,
 } from "@/shared/validation";
+import { CATEGORIAS_SERVICO, type CategoriaServico } from "@/shared/constants/categorias-servico";
 
 export type StatusServico = "PENDENTE_APROVACAO" | "APROVADO" | "REJEITADO";
 export type FormaPagamento = "DINHEIRO" | "PIX" | "CARTAO";
+export type { CategoriaServico };
 
 export const FORMAS_PAGAMENTO = ["DINHEIRO", "PIX", "CARTAO"] as const;
 export const MAX_IMAGENS_SERVICO = 2;
@@ -20,6 +22,8 @@ export interface ServicoState extends EntityState {
   imagensUrls: string[];
   valores?: string;
   formasPagamento: FormaPagamento[];
+  categoria: CategoriaServico;
+  bairro: string;
   nomeContato: string;
   contato: string;
   autorUserId: string;
@@ -62,6 +66,14 @@ export class Servico extends Entity<ServicoState> {
 
   get formasPagamento(): readonly FormaPagamento[] {
     return this.props.formasPagamento;
+  }
+
+  get categoria(): CategoriaServico {
+    return this.props.categoria;
+  }
+
+  get bairro(): string {
+    return this.props.bairro;
   }
 
   get nomeContato(): string {
@@ -110,6 +122,8 @@ export class Servico extends Entity<ServicoState> {
     imagensUrls: string[];
     valores?: string;
     formasPagamento: FormaPagamento[];
+    categoria: CategoriaServico;
+    bairro: string;
     nomeContato: string;
     contato: string;
   }): Servico {
@@ -133,6 +147,16 @@ export class Servico extends Entity<ServicoState> {
         code: "formasPagamento",
         value: this.props.formasPagamento,
         rules: [new RequiredRule(), new MinItemsRule(1)],
+      },
+      {
+        code: "categoria",
+        value: this.props.categoria,
+        rules: [new RequiredRule(), new InRule(CATEGORIAS_SERVICO)],
+      },
+      {
+        code: "bairro",
+        value: this.props.bairro,
+        rules: [new RequiredRule(), new MaxLengthRule(100)],
       },
       { code: "nomeContato", value: this.props.nomeContato, rules: [new RequiredRule()] },
       { code: "contato", value: this.props.contato, rules: [new RequiredRule()] },

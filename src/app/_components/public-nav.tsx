@@ -13,7 +13,7 @@ const LINKS = [
   { href: "/agenda", label: "Agenda" },
   { href: "/galeria", label: "Galeria" },
   { href: "/carona", label: "Carona" },
-  { href: "/servicos", label: "Serviços" },
+  { href: "/servicos", label: "Rede de Apoio" },
   { href: "/apoie", label: "Parceria" },
   { href: "/loja", label: "Loja" },
 ];

@@ -1,4 +1,4 @@
-import { FormaPagamento, Servico } from "@/core/domain/servico/servico.entity";
+import { FormaPagamento, Servico, type CategoriaServico } from "@/core/domain/servico/servico.entity";
 import { ServicoRepository } from "@/core/domain/servico/servico.repository";
 import { UseCase } from "../use-case";
 import { AuthenticatedActor, assertRole } from "../_shared/authorize";
@@ -10,6 +10,8 @@ export interface PublicarServicoIn {
   imagensUrls: string[];
   valores?: string;
   formasPagamento: FormaPagamento[];
+  categoria: CategoriaServico;
+  bairro: string;
   nomeContato: string;
   contato: string;
 }
@@ -39,6 +41,8 @@ export class PublicarServicoUseCase implements UseCase<PublicarServicoIn, Public
       imagensUrls: input.imagensUrls,
       valores: input.valores,
       formasPagamento: input.formasPagamento,
+      categoria: input.categoria,
+      bairro: input.bairro,
       nomeContato: input.nomeContato,
       contato: input.contato,
       autorUserId: input.actor.id,

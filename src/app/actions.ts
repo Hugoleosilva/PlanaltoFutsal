@@ -12,7 +12,7 @@ import { MongoEnqueteRepository } from "@/infrastructure/database/repositories/e
 import { MongoServicoRepository } from "@/infrastructure/database/repositories/servico.repository.mongo";
 import { auth } from "@/infrastructure/security/auth";
 import { UnauthorizedError, toActionError } from "@/infrastructure/errors";
-import type { FormaPagamento } from "@/core/domain/servico/servico.entity";
+import type { FormaPagamento, CategoriaServico } from "@/core/domain/servico/servico.entity";
 
 export interface ActionState {
   error: string | null;
@@ -125,6 +125,8 @@ export async function publicarServicoAction(
       .filter((url): url is string => typeof url === "string" && url.length > 0);
     const valores = formData.get("valores");
     const formasPagamento = formData.getAll("formasPagamento") as FormaPagamento[];
+    const categoria = formData.get("categoria");
+    const bairro = formData.get("bairro");
     const nomeContato = formData.get("nomeContato");
     const contato = formData.get("contato");
 
@@ -135,6 +137,8 @@ export async function publicarServicoAction(
       imagensUrls,
       valores: typeof valores === "string" && valores ? valores : undefined,
       formasPagamento,
+      categoria: categoria as CategoriaServico,
+      bairro: typeof bairro === "string" ? bairro : "",
       nomeContato: typeof nomeContato === "string" ? nomeContato : "",
       contato: typeof contato === "string" ? contato : "",
     });

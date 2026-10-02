@@ -28,6 +28,8 @@ export default async function ServicosModeracaoPage(): Promise<React.ReactElemen
               imagensUrls={[...servico.imagensUrls]}
               valores={servico.valores}
               formasPagamento={[...servico.formasPagamento]}
+              categoria={servico.categoria}
+              bairro={servico.bairro}
               nomeContato={servico.nomeContato}
               contato={servico.contato}
             />

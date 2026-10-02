@@ -1,5 +1,6 @@
 import { Schema, model, models, Types, type Model, type Document } from "mongoose";
 import { FORMAS_PAGAMENTO } from "@/core/domain/servico/servico.entity";
+import { CATEGORIAS_SERVICO } from "@/shared/constants/categorias-servico";
 
 export interface ServicoDocument extends Document {
   titulo: string;
@@ -7,6 +8,8 @@ export interface ServicoDocument extends Document {
   imagensUrls: string[];
   valores?: string;
   formasPagamento: string[];
+  categoria: string;
+  bairro: string;
   nomeContato: string;
   contato: string;
   autorUserId: Types.ObjectId;
@@ -24,6 +27,8 @@ const ServicoSchema = new Schema<ServicoDocument>(
     imagensUrls: { type: [String], required: true },
     valores: { type: String },
     formasPagamento: { type: [String], enum: FORMAS_PAGAMENTO, required: true },
+    categoria: { type: String, enum: CATEGORIAS_SERVICO, required: true },
+    bairro: { type: String, required: true, trim: true },
     nomeContato: { type: String, required: true },
     contato: { type: String, required: true },
     autorUserId: { type: Schema.Types.ObjectId, ref: "User", required: true },

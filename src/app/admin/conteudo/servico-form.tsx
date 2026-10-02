@@ -9,7 +9,9 @@ import { Input } from "@/shared/components/ui/input";
 import { TelefoneInput } from "@/shared/components/ui/telefone-input";
 import { Label } from "@/shared/components/ui/label";
 import { Textarea } from "@/shared/components/ui/textarea";
+import { Select } from "@/shared/components/ui/select";
 import { Collapsible } from "@/shared/components/ui/collapsible";
+import { CATEGORIAS_SERVICO, CATEGORIA_SERVICO_LABEL } from "@/shared/constants/categorias-servico";
 
 const INITIAL_STATE: ActionState = { error: null };
 const MAX_IMAGENS = 2;
@@ -27,6 +29,8 @@ interface ServicoAprovadoItem {
   imagensUrls: string[];
   valores?: string;
   formasPagamento: string[];
+  categoria: string;
+  bairro: string;
   nomeContato: string;
   contato: string;
 }
@@ -112,6 +116,22 @@ function EditarServicoControl({ servico }: { servico: ServicoAprovadoItem }): Re
       <div className="space-y-1">
         <Label>Valores (opcional)</Label>
         <Input name="valores" defaultValue={servico.valores} />
+      </div>
+
+      <div className="space-y-1">
+        <Label>Categoria</Label>
+        <Select name="categoria" required defaultValue={servico.categoria}>
+          {CATEGORIAS_SERVICO.map((categoria) => (
+            <option key={categoria} value={categoria}>
+              {CATEGORIA_SERVICO_LABEL[categoria]}
+            </option>
+          ))}
+        </Select>
+      </div>
+
+      <div className="space-y-1">
+        <Label>Bairro</Label>
+        <Input name="bairro" required maxLength={100} defaultValue={servico.bairro} />
       </div>
 
       <div className="space-y-1">
@@ -234,6 +254,25 @@ export function ServicoForm({
         <div className="space-y-1">
           <Label htmlFor="servico-valores">Valores (opcional)</Label>
           <Input id="servico-valores" name="valores" placeholder="Ex: A partir de R$ 25" />
+        </div>
+
+        <div className="space-y-1">
+          <Label htmlFor="servico-categoria">Categoria</Label>
+          <Select id="servico-categoria" name="categoria" required defaultValue="">
+            <option value="" disabled>
+              Selecione uma categoria
+            </option>
+            {CATEGORIAS_SERVICO.map((categoria) => (
+              <option key={categoria} value={categoria}>
+                {CATEGORIA_SERVICO_LABEL[categoria]}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <div className="space-y-1">
+          <Label htmlFor="servico-bairro">Bairro</Label>
+          <Input id="servico-bairro" name="bairro" required maxLength={100} placeholder="Ex: Jardim Planalto" />
         </div>
 
         <div className="space-y-1">

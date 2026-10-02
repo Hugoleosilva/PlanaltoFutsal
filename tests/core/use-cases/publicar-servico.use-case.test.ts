@@ -14,6 +14,8 @@ describe("PublicarServicoUseCase", () => {
       imagensUrls: ["/api/arquivos/1"],
       valores: "A partir de R$ 25",
       formasPagamento: ["DINHEIRO", "PIX"],
+      categoria: "SERVICOS_AUTONOMOS",
+      bairro: "Jardim Planalto",
       nomeContato: "Cicrano",
       contato: "81999999999",
     });
@@ -33,6 +35,8 @@ describe("PublicarServicoUseCase", () => {
       descricao: "Aulas particulares.",
       imagensUrls: ["/api/arquivos/2"],
       formasPagamento: ["PIX"],
+      categoria: "EDUCACAO_APOIO",
+      bairro: "Sancho",
       nomeContato: "Fulano",
       contato: "81988888888",
     });
@@ -50,6 +54,8 @@ describe("PublicarServicoUseCase", () => {
       descricao: "Sofás, colchões e carpetes.",
       imagensUrls: ["/api/arquivos/3"],
       formasPagamento: ["PIX"],
+      categoria: "SERVICOS_AUTONOMOS",
+      bairro: "Jardim Planalto",
       nomeContato: "Windson",
       contato: "81988505028",
     });

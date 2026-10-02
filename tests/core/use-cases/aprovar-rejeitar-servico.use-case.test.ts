@@ -12,6 +12,8 @@ function criarServicoPendente() {
     descricao: "Aulas particulares para crianças.",
     imagensUrls: ["/api/arquivos/1"],
     formasPagamento: ["PIX"],
+    categoria: "EDUCACAO_APOIO",
+    bairro: "Sancho",
     nomeContato: "Fulano",
     contato: "81999999999",
     autorUserId: "user-1",

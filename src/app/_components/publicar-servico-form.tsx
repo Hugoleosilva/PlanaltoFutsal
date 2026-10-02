@@ -8,8 +8,10 @@ import { Input } from "@/shared/components/ui/input";
 import { TelefoneInput } from "@/shared/components/ui/telefone-input";
 import { Label } from "@/shared/components/ui/label";
 import { Textarea } from "@/shared/components/ui/textarea";
+import { Select } from "@/shared/components/ui/select";
 import { Card } from "@/shared/components/ui/card";
 import { Collapsible } from "@/shared/components/ui/collapsible";
+import { CATEGORIAS_SERVICO, CATEGORIA_SERVICO_LABEL } from "@/shared/constants/categorias-servico";
 
 const INITIAL_STATE: ActionState = { error: null, sucesso: false };
 const MAX_IMAGENS = 2;
@@ -77,6 +79,25 @@ export function PublicarServicoForm(): React.ReactElement {
         <div className="space-y-1">
           <Label htmlFor="valores">Valores (opcional)</Label>
           <Input id="valores" name="valores" placeholder="Ex: A partir de R$ 25" />
+        </div>
+
+        <div className="space-y-1">
+          <Label htmlFor="categoria">Categoria</Label>
+          <Select id="categoria" name="categoria" required defaultValue="">
+            <option value="" disabled>
+              Selecione uma categoria
+            </option>
+            {CATEGORIAS_SERVICO.map((categoria) => (
+              <option key={categoria} value={categoria}>
+                {CATEGORIA_SERVICO_LABEL[categoria]}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <div className="space-y-1">
+          <Label htmlFor="bairro">Bairro</Label>
+          <Input id="bairro" name="bairro" required maxLength={100} placeholder="Ex: Jardim Planalto" />
         </div>
 
         <div className="space-y-1">

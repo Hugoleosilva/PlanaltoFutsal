@@ -7,8 +7,12 @@ import { PublicarServicoForm } from "../_components/publicar-servico-form";
 import { PublicFooter } from "../_components/public-footer";
 import { Card } from "@/shared/components/ui/card";
 
-export default async function ServicosPage(): Promise<React.ReactElement> {
-  const session = await auth();
+interface ServicosPageProps {
+  searchParams: Promise<{ categoria?: string }>;
+}
+
+export default async function ServicosPage({ searchParams }: ServicosPageProps): Promise<React.ReactElement> {
+  const [session, params] = await Promise.all([auth(), searchParams]);
 
   return (
     <>
@@ -16,14 +20,14 @@ export default async function ServicosPage(): Promise<React.ReactElement> {
       <HeroFaixa />
       <main className="flex-1 mx-auto max-w-5xl px-6 py-12">
         <h1 className="text-center font-heading text-3xl font-bold text-planalto-white">
-          Serviços da Comunidade
+          Rede de Apoio
         </h1>
         <p className="mx-auto mt-2 max-w-xl text-center text-planalto-gray">
           Trabalhos e serviços divulgados por gente da nossa torcida e do nosso elenco.
         </p>
 
         <div className="mt-10">
-          <ServicosLista />
+          <ServicosLista categoriaFiltro={params.categoria} />
         </div>
 
         <div className="mx-auto mt-10 max-w-xl">
