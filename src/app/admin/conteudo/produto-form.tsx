@@ -68,7 +68,7 @@ export function ProdutoForm(): React.ReactElement {
         </div>
 
         <p className="text-xs text-planalto-gray">
-          Quem quiser comprar vai poder falar com um dos diretores (cadastrados em "Diretoria") ou
+          Quem quiser comprar vai poder falar com um dos diretores (cadastrados em &quot;Diretoria&quot;) ou
           gerar um Pix direto na loja — não precisa mais de link de WhatsApp aqui.
         </p>
 

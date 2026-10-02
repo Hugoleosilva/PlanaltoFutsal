@@ -20,7 +20,7 @@ export function MembroForm(): React.ReactElement {
     <Card>
       <h2 className="font-heading text-lg font-bold text-planalto-white">Novo membro da diretoria</h2>
       <p className="mt-1 text-xs text-planalto-gray">
-        Aparece na página pública "Diretoria", logo depois do Elenco no menu.
+        Aparece na página pública &quot;Diretoria&quot;, logo depois do Elenco no menu.
       </p>
 
       <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
