@@ -16,9 +16,11 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
     <>
       <PublicNav />
       <HeroFaixa />
-      <main className="flex-1">
-        <AgendaSection />
-        <ResultadosSection mes={params.mes} ano={params.ano} />
+      <main className="flex-1 px-6 py-8">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
+          <AgendaSection />
+          <ResultadosSection mes={params.mes} ano={params.ano} />
+        </div>
       </main>
       <PatrocinadoresSection />
       <PublicFooter />

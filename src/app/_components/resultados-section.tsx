@@ -56,7 +56,7 @@ export async function ResultadosSection({
   );
 
   return (
-    <section id="resultados" className="mx-auto max-w-3xl px-6 py-16">
+    <section id="resultados">
       <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Resultados Anteriores
       </h2>

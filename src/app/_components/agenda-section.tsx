@@ -12,7 +12,7 @@ export async function AgendaSection(): Promise<React.ReactElement> {
   const jogos = await new MongoJogoRepository().findProximos();
 
   return (
-    <section id="agenda" className="mx-auto max-w-3xl px-6 py-16">
+    <section id="agenda">
       <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Agenda de Jogos
       </h2>
@@ -22,7 +22,7 @@ export async function AgendaSection(): Promise<React.ReactElement> {
           Nenhum jogo agendado no momento.
         </p>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 space-y-3">
           {jogos.map((jogo) => (
             <Card key={jogo.id} className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
