@@ -16,10 +16,18 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
     <>
       <PublicNav />
       <HeroFaixa />
-      <main className="flex-1 px-6 py-8">
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-2">
+      <main className="flex-1 px-6 py-12">
+        <div className="mx-auto max-w-3xl">
           <AgendaSection />
-          <ResultadosSection mes={params.mes} ano={params.ano} />
+
+          <details className="group mt-10 text-center" open={Boolean(params.mes || params.ano)}>
+            <summary className="cursor-pointer list-none text-sm font-semibold text-planalto-red underline [&::-webkit-details-marker]:hidden">
+              Ver resultados anteriores
+            </summary>
+            <div className="mt-6 text-left">
+              <ResultadosSection mes={params.mes} ano={params.ano} />
+            </div>
+          </details>
         </div>
       </main>
       <PatrocinadoresSection />
