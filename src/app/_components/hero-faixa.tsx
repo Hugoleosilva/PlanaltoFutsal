@@ -4,7 +4,7 @@ export function HeroFaixa(): React.ReactElement {
   return (
     <div className="relative h-20 w-full overflow-hidden sm:h-28">
       <Image
-        src="/images/marca/planalto_quadra.png"
+        src="/images/marca/fundo-tela-novo-planalto.jpg"
         alt=""
         fill
         className="object-cover"
