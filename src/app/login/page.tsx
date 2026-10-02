@@ -6,7 +6,7 @@ export default function LoginPage(): React.ReactElement {
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
       <Image
-        src="/images/marca/capa-planalto-futsal.jpg"
+        src="/images/marca/fundo-tela-novo-com-escudo-planalto.jpg"
         alt="Fundo Planalto Futsal"
         fill
         priority

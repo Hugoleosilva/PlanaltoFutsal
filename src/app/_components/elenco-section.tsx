@@ -12,7 +12,7 @@ import { cn } from "@/shared/utils/cn";
 import { POSICAO_ATLETA_LABEL } from "@/shared/constants/posicoes-atleta";
 import type { Atleta } from "@/core/domain/atleta/atleta.entity";
 
-const TAMANHO_PAGINA = 9;
+const TAMANHO_PAGINA = 12;
 
 function paginar<T>(itens: T[], tamanho: number): T[][] {
   const paginas: T[][] = [];
@@ -26,6 +26,23 @@ function completarLinha<T>(pagina: T[]): (T | null)[] {
   const resto = pagina.length % 3;
   const faltam = resto === 0 ? 0 : 3 - resto;
   return [...pagina, ...Array<null>(faltam).fill(null)];
+}
+
+/**
+ * O grid do CSS preenche por linha (esquerda->direita, cima->baixo). Pra
+ * preencher por coluna (um atleta embaixo do outro, só passando pra coluna
+ * seguinte quando a primeira estiver cheia), reordena os itens aqui antes
+ * de renderizar no grid normal.
+ */
+function emOrdemDeColuna<T>(itens: T[], colunas: number): T[] {
+  const linhas = Math.ceil(itens.length / colunas);
+  const resultado: T[] = [];
+  for (let linha = 0; linha < linhas; linha++) {
+    for (let coluna = 0; coluna < colunas; coluna++) {
+      resultado.push(itens[coluna * linhas + linha] as T);
+    }
+  }
+  return resultado;
 }
 
 function AtletaCardVazio(): React.ReactElement {
@@ -153,7 +170,7 @@ export async function ElencoSection({
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                      {completarLinha(pagina).map((atleta, posicao) =>
+                      {emOrdemDeColuna(completarLinha(pagina), 3).map((atleta, posicao) =>
                         atleta ? (
                           <AtletaCard key={atleta.id} atleta={atleta} />
                         ) : (
