@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { auth } from "@/infrastructure/security/auth";
 import { PublicNav } from "../_components/public-nav";
-import { HeroFaixa } from "../_components/hero-faixa";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { ServicosLista } from "../_components/servicos-lista";
 import { PublicarServicoForm } from "../_components/publicar-servico-form";
-import { PublicFooter } from "../_components/public-footer";
 import { Card } from "@/shared/components/ui/card";
 
 interface ServicosPageProps {
@@ -15,10 +14,9 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
   const [session, params] = await Promise.all([auth(), searchParams]);
 
   return (
-    <>
+    <QuadraBackdrop>
       <PublicNav />
-      <HeroFaixa />
-      <main className="flex-1 mx-auto max-w-5xl px-6 py-12">
+      <main className="mx-auto max-w-5xl flex-1 px-6 py-12">
         <h1 className="text-center font-heading text-3xl font-bold text-planalto-white">
           Rede de Apoio
         </h1>
@@ -57,7 +55,6 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
           )}
         </div>
       </main>
-      <PublicFooter />
-    </>
+    </QuadraBackdrop>
   );
 }

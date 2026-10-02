@@ -2,10 +2,9 @@ import { auth } from "@/infrastructure/security/auth";
 import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 import { MongoContribuicaoSocioRepository } from "@/infrastructure/database/repositories/contribuicao-socio.repository.mongo";
 import { PublicNav } from "../_components/public-nav";
-import { HeroFaixa } from "../_components/hero-faixa";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { PixSection } from "../_components/pix-section";
 import { SocioCta } from "../_components/socio-cta";
-import { PublicFooter } from "../_components/public-footer";
 
 export default async function ApoiePage(): Promise<React.ReactElement> {
   const session = await auth();
@@ -31,9 +30,8 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
   }
 
   return (
-    <>
+    <QuadraBackdrop>
       <PublicNav />
-      <HeroFaixa />
       <main className="flex-1 px-6 py-4">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
@@ -57,7 +55,6 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
           </div>
         </div>
       </main>
-      <PublicFooter />
-    </>
+    </QuadraBackdrop>
   );
 }

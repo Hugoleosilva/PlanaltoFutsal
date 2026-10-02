@@ -24,8 +24,8 @@ function paginar<T>(itens: T[], tamanho: number): T[][] {
 
 function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
   return (
-    <Card className="flex gap-4">
-      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-white/10">
+    <Card className="flex gap-3 p-4">
+      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-white/10">
         {atleta.fotoPrincipalUrl ? (
           <Image
             src={atleta.fotoPrincipalUrl}
@@ -43,13 +43,13 @@ function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
           <span className="shrink-0 text-xs text-planalto-gray">· {atleta.idade} anos</span>
         </div>
         {atleta.posicao ? (
-          <div className="mt-2 flex justify-center">
+          <div className="mt-1.5 flex justify-center">
             <Badge tone="neutral" className="whitespace-nowrap">
               {POSICAO_ATLETA_LABEL[atleta.posicao]}
             </Badge>
           </div>
         ) : null}
-        {atleta.bio ? <p className="mt-2 line-clamp-3 text-sm text-planalto-gray">{atleta.bio}</p> : null}
+        {atleta.bio ? <p className="mt-1.5 line-clamp-2 text-xs text-planalto-gray">{atleta.bio}</p> : null}
       </div>
     </Card>
   );
@@ -81,11 +81,11 @@ export async function ElencoSection({
   }
 
   return (
-    <section id="elenco" className="mx-auto max-w-5xl px-6 py-6">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">Nosso Elenco</h2>
+    <section id="elenco" className="mx-auto max-w-5xl px-6 py-3">
+      <h2 className="text-center font-heading text-2xl font-bold text-planalto-white">Nosso Elenco</h2>
 
       {campeonatosAtivos.length > 0 ? (
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
           {campeonatoSelecionado ? (
             <Link
               href="/elenco"
@@ -125,11 +125,11 @@ export async function ElencoSection({
           const paginas = paginar(atletas, TAMANHO_PAGINA);
 
           return (
-            <div className="mt-4">
+            <div className="mt-3">
               <Carousel>
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {pagina.map((atleta) => (
                         <AtletaCard key={atleta.id} atleta={atleta} />
                       ))}

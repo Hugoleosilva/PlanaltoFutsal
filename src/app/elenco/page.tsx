@@ -1,7 +1,6 @@
 import { PublicNav } from "../_components/public-nav";
-import { HeroFaixa } from "../_components/hero-faixa";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { ElencoSection } from "../_components/elenco-section";
-import { PublicFooter } from "../_components/public-footer";
 
 interface ElencoPublicoPageProps {
   searchParams: Promise<{ campeonato?: string }>;
@@ -13,13 +12,11 @@ export default async function ElencoPublicoPage({
   const params = await searchParams;
 
   return (
-    <>
+    <QuadraBackdrop>
       <PublicNav />
-      <HeroFaixa />
       <main className="flex-1">
         <ElencoSection campeonatoFiltro={params.campeonato} />
       </main>
-      <PublicFooter />
-    </>
+    </QuadraBackdrop>
   );
 }

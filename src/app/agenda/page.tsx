@@ -1,9 +1,7 @@
 import { PublicNav } from "../_components/public-nav";
-import { HeroFaixa } from "../_components/hero-faixa";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { AgendaSection } from "../_components/agenda-section";
 import { ResultadosSection } from "../_components/resultados-section";
-import { PatrocinadoresSection } from "../_components/patrocinadores-section";
-import { PublicFooter } from "../_components/public-footer";
 
 interface AgendaPageProps {
   searchParams: Promise<{ mes?: string; ano?: string }>;
@@ -13,9 +11,8 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
   const params = await searchParams;
 
   return (
-    <>
+    <QuadraBackdrop>
       <PublicNav />
-      <HeroFaixa />
       <main className="flex-1 px-6 py-8">
         <div className="mx-auto max-w-2xl">
           <AgendaSection />
@@ -30,8 +27,6 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
           </details>
         </div>
       </main>
-      <PatrocinadoresSection />
-      <PublicFooter />
-    </>
+    </QuadraBackdrop>
   );
 }

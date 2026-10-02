@@ -1,15 +1,13 @@
 import { PublicNav } from "../_components/public-nav";
-import { HeroFaixa } from "../_components/hero-faixa";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { GaleriaSection } from "../_components/galeria-section";
 import { EnviarFotoSection } from "../_components/enviar-foto-section";
-import { PublicFooter } from "../_components/public-footer";
 import { Collapsible } from "@/shared/components/ui/collapsible";
 
 export default function GaleriaPage(): React.ReactElement {
   return (
-    <>
+    <QuadraBackdrop>
       <PublicNav />
-      <HeroFaixa />
       <main className="flex-1">
         <GaleriaSection />
 
@@ -19,7 +17,6 @@ export default function GaleriaPage(): React.ReactElement {
           </Collapsible>
         </div>
       </main>
-      <PublicFooter />
-    </>
+    </QuadraBackdrop>
   );
 }
