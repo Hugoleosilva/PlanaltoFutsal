@@ -15,6 +15,8 @@ export interface FotoState extends EntityState {
   loteEnvioId: string;
   moderadoPorUserId?: string | null;
   moderadoEm?: Date | null;
+  topicoId?: string | null;
+  destaque?: boolean;
 }
 
 export class Foto extends Entity<FotoState> {
@@ -65,6 +67,18 @@ export class Foto extends Entity<FotoState> {
 
   get moderadoEm(): Date | null | undefined {
     return this.props.moderadoEm;
+  }
+
+  get topicoId(): string | null | undefined {
+    return this.props.topicoId;
+  }
+
+  get destaque(): boolean {
+    return this.props.destaque === true;
+  }
+
+  marcarDestaque(destaque: boolean): Foto {
+    return this.clone({ destaque } as Partial<FotoState>);
   }
 
   aprovar(moderadoPorUserId: string): Foto {

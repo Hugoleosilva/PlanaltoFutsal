@@ -1,4 +1,5 @@
 import { Schema, model, models, Types, type Model, type Document } from "mongoose";
+import { POSICOES_ATLETA, PosicaoAtleta } from "@/shared/constants/posicoes-atleta";
 
 export interface DocumentoAtletaSubdocument {
   tipo: "RG" | "CPF" | "ATESTADO_MEDICO";
@@ -14,7 +15,7 @@ export interface AtletaDocument extends Document {
   fotoPrincipalUrl?: string | null;
   galeriaFotosUrls: string[];
   bio?: string;
-  posicao?: "GOLEIRO" | "FIXO" | "ALA" | "PIVO" | "LINHA" | null;
+  posicao?: PosicaoAtleta | null;
   estiloDeJogo?: string;
   preferencias?: string;
   documentos: DocumentoAtletaSubdocument[];
@@ -43,7 +44,7 @@ const AtletaSchema = new Schema<AtletaDocument>(
     fotoPrincipalUrl: { type: String, default: null },
     galeriaFotosUrls: { type: [String], default: [] },
     bio: { type: String },
-    posicao: { type: String, enum: ["GOLEIRO", "FIXO", "ALA", "PIVO", "LINHA"], default: null },
+    posicao: { type: String, enum: POSICOES_ATLETA, default: null },
     estiloDeJogo: { type: String },
     preferencias: { type: String },
     documentos: { type: [DocumentoAtletaSchema], default: [] },

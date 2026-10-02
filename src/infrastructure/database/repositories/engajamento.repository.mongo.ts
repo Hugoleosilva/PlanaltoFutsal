@@ -16,7 +16,7 @@ function toEnqueteEntity(doc: EnqueteDocument): Enquete {
   const state: EnqueteState = {
     id: doc.id as string,
     pergunta: doc.pergunta,
-    opcoes: doc.opcoes,
+    opcoes: doc.opcoes.map((opcao) => ({ id: opcao.id, texto: opcao.texto, votos: opcao.votos })),
     status: doc.status,
     criadoPorUserId: doc.criadoPorUserId.toString(),
     createdAt: doc.createdAt,

@@ -7,12 +7,14 @@ function toEntity(doc: JogoDocument): Jogo {
   const state: JogoState = {
     id: doc.id as string,
     adversario: doc.adversario,
-    dataHora: doc.dataHora,
+    adversarioEscudoUrl: doc.adversarioEscudoUrl ?? null,
+    dataHora: doc.dataHora ?? null,
     local: doc.local,
     campeonatoId: doc.campeonatoId ? doc.campeonatoId.toString() : null,
     status: doc.status,
     placarPlanalto: doc.placarPlanalto ?? null,
     placarAdversario: doc.placarAdversario ?? null,
+    mandante: doc.mandante,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };
@@ -29,8 +31,17 @@ export class MongoJogoRepository implements JogoRepository {
 
   async findProximos(): Promise<Jogo[]> {
     await connectToDatabase();
-    const docs = await JogoModel.find({ status: "AGENDADO" }).sort({ dataHora: 1 });
-    return docs.map(toEntity);
+    const docs = await JogoModel.find({ status: "AGENDADO" });
+    const jogos = docs.map(toEntity);
+
+    // Jogos com data definida vêm primeiro, em ordem cronológica — um jogo
+    // sem data ainda não pode ser "o próximo", então fica sempre por último.
+    return jogos.sort((a, b) => {
+      if (a.dataHora && b.dataHora) return a.dataHora.getTime() - b.dataHora.getTime();
+      if (a.dataHora) return -1;
+      if (b.dataHora) return 1;
+      return 0;
+    });
   }
 
   async findAll(): Promise<Jogo[]> {
@@ -43,12 +54,14 @@ export class MongoJogoRepository implements JogoRepository {
     await connectToDatabase();
     const created = await JogoModel.create({
       adversario: jogo.adversario,
-      dataHora: jogo.dataHora,
+      adversarioEscudoUrl: jogo.adversarioEscudoUrl ?? null,
+      dataHora: jogo.dataHora ?? null,
       local: jogo.local,
       campeonatoId: jogo.campeonatoId ?? null,
       status: jogo.status,
       placarPlanalto: jogo.placarPlanalto ?? null,
       placarAdversario: jogo.placarAdversario ?? null,
+      mandante: jogo.mandante,
     });
     return toEntity(created);
   }
@@ -59,12 +72,14 @@ export class MongoJogoRepository implements JogoRepository {
       jogo.id,
       {
         adversario: jogo.adversario,
-        dataHora: jogo.dataHora,
+        adversarioEscudoUrl: jogo.adversarioEscudoUrl ?? null,
+        dataHora: jogo.dataHora ?? null,
         local: jogo.local,
         campeonatoId: jogo.campeonatoId ?? null,
         status: jogo.status,
         placarPlanalto: jogo.placarPlanalto ?? null,
         placarAdversario: jogo.placarAdversario ?? null,
+        mandante: jogo.mandante,
       },
       { new: true },
     );
@@ -74,5 +89,10 @@ export class MongoJogoRepository implements JogoRepository {
     }
 
     return toEntity(updated);
+  }
+
+  async delete(id: string): Promise<void> {
+    await connectToDatabase();
+    await JogoModel.findByIdAndDelete(id);
   }
 }

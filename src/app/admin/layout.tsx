@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/infrastructure/security/auth";
 import { AdminSidebar } from "./_components/admin-sidebar";
+import { AdminPresenceChat } from "./_components/admin-presence-chat";
 
 export default async function AdminLayout({
   children,
@@ -17,6 +18,7 @@ export default async function AdminLayout({
     <div className="flex min-h-screen bg-planalto-black">
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto p-8">{children}</main>
+      <AdminPresenceChat />
     </div>
   );
 }

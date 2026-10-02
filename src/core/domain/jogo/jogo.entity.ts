@@ -3,14 +3,19 @@ import { InRule, MaxLengthRule, RequiredRule, Validator } from "@/shared/validat
 
 export type StatusJogo = "AGENDADO" | "REALIZADO" | "CANCELADO";
 
+export const MANDANTES = ["PLANALTO", "ADVERSARIO"] as const;
+export type Mandante = (typeof MANDANTES)[number];
+
 export interface JogoState extends EntityState {
   adversario: string;
-  dataHora: Date;
+  adversarioEscudoUrl?: string | null;
+  dataHora?: Date | null;
   local: string;
   campeonatoId?: string | null;
   status: StatusJogo;
   placarPlanalto?: number | null;
   placarAdversario?: number | null;
+  mandante?: Mandante;
 }
 
 export class Jogo extends Entity<JogoState> {
@@ -27,7 +32,11 @@ export class Jogo extends Entity<JogoState> {
     return this.props.adversario;
   }
 
-  get dataHora(): Date {
+  get adversarioEscudoUrl(): string | null | undefined {
+    return this.props.adversarioEscudoUrl;
+  }
+
+  get dataHora(): Date | null | undefined {
     return this.props.dataHora;
   }
 
@@ -51,6 +60,10 @@ export class Jogo extends Entity<JogoState> {
     return this.props.placarAdversario;
   }
 
+  get mandante(): Mandante {
+    return this.props.mandante ?? "PLANALTO";
+  }
+
   registrarResultado(placarPlanalto: number, placarAdversario: number): Jogo {
     return this.clone({
       status: "REALIZADO",
@@ -70,13 +83,13 @@ export class Jogo extends Entity<JogoState> {
         value: this.props.adversario,
         rules: [new RequiredRule(), new MaxLengthRule(150)],
       },
-      { code: "dataHora", value: this.props.dataHora, rules: [new RequiredRule()] },
       { code: "local", value: this.props.local, rules: [new RequiredRule(), new MaxLengthRule(200)] },
       {
         code: "status",
         value: this.props.status,
         rules: [new RequiredRule(), new InRule(["AGENDADO", "REALIZADO", "CANCELADO"] as const)],
       },
+      { code: "mandante", value: this.props.mandante, rules: [new InRule(MANDANTES)] },
     ]);
   }
 }

@@ -13,6 +13,11 @@ export interface UserDocument extends Document {
   emailVerificadoEm?: Date | null;
   termsAcceptedAt?: Date | null;
   imageConsentAcceptedAt?: Date | null;
+  socio: boolean;
+  socioDesde?: Date | null;
+  socioTipoPlano?: "MENSAL" | "UNICO" | null;
+  socioValorPlano?: number | null;
+  socioDiaVencimento?: number | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -34,6 +39,11 @@ const UserSchema = new Schema<UserDocument>(
     emailVerificadoEm: { type: Date, default: null },
     termsAcceptedAt: { type: Date, default: null },
     imageConsentAcceptedAt: { type: Date, default: null },
+    socio: { type: Boolean, required: true, default: false },
+    socioDesde: { type: Date, default: null },
+    socioTipoPlano: { type: String, enum: ["MENSAL", "UNICO"], default: null },
+    socioValorPlano: { type: Number, default: null },
+    socioDiaVencimento: { type: Number, default: null },
   },
   { timestamps: true },
 );

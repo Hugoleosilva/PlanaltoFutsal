@@ -8,8 +8,9 @@ export interface CadastrarProdutoIn {
   nome: string;
   descricao?: string;
   preco?: number | null;
-  imagemUrl: string;
-  linkWhatsapp: string;
+  imagensUrls: string[];
+  linkWhatsapp?: string;
+  destaque?: boolean;
 }
 
 export interface CadastrarProdutoOut {
@@ -26,8 +27,9 @@ export class CadastrarProdutoUseCase implements UseCase<CadastrarProdutoIn, Cada
       nome: input.nome,
       descricao: input.descricao,
       preco: input.preco ?? null,
-      imagemUrl: input.imagemUrl,
+      imagensUrls: input.imagensUrls,
       linkWhatsapp: input.linkWhatsapp,
+      destaque: input.destaque ?? false,
       ativo: true,
     });
 

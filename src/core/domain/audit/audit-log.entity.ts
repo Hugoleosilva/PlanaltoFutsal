@@ -13,6 +13,8 @@ export const AUDIT_ACTIONS = [
   "MENSALIDADE_MARCADA_PAGA",
   "CAMPEONATO_CRIADO",
   "CAMPEONATO_EDITADO",
+  "SERVICO_APROVADO",
+  "SERVICO_REJEITADO",
 ] as const;
 
 export type AuditAction = (typeof AUDIT_ACTIONS)[number];

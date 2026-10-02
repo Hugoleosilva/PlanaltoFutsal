@@ -63,6 +63,7 @@ export async function cadastrarAtletaAction(
 
     revalidatePath("/admin/elenco");
     revalidatePath("/admin");
+    revalidatePath("/elenco");
 
     return { error: null };
   } catch (error) {
@@ -87,6 +88,49 @@ export async function atualizarFotoAtletaAction(atletaId: string, fotoPrincipalU
     });
 
     revalidatePath("/admin/elenco");
+    revalidatePath("/elenco");
+
+    return { error: null };
+  } catch (error) {
+    return { error: toActionError(error).message };
+  }
+}
+
+export async function editarAtletaAction(
+  _prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const session = await auth();
+    if (!session?.user) throw new UnauthorizedError();
+
+    const useCase = new EditarAtletaUseCase(new MongoAtletaRepository(), new MongoAuditLogRepository());
+
+    const atletaId = formData.get("atletaId");
+    const nomeCompleto = formData.get("nomeCompleto");
+    const apelido = formData.get("apelido");
+    const dataNascimento = formData.get("dataNascimento");
+    const bio = formData.get("bio");
+    const estiloDeJogo = formData.get("estiloDeJogo");
+    const contatoEmail = formData.get("contatoEmail");
+    const contatoWhatsapp = formData.get("contatoWhatsapp");
+
+    await useCase.execute({
+      actor: { id: session.user.id, role: session.user.role },
+      atletaId: typeof atletaId === "string" ? atletaId : "",
+      nomeCompleto: typeof nomeCompleto === "string" ? nomeCompleto : undefined,
+      apelido: typeof apelido === "string" ? apelido : undefined,
+      dataNascimento:
+        typeof dataNascimento === "string" && dataNascimento ? new Date(dataNascimento) : undefined,
+      posicao: readPosicao(formData),
+      bio: typeof bio === "string" ? bio : undefined,
+      estiloDeJogo: typeof estiloDeJogo === "string" ? estiloDeJogo : undefined,
+      contatoEmail: typeof contatoEmail === "string" ? contatoEmail : undefined,
+      contatoWhatsapp: typeof contatoWhatsapp === "string" ? contatoWhatsapp : undefined,
+    });
+
+    revalidatePath("/admin/elenco");
+    revalidatePath("/elenco");
 
     return { error: null };
   } catch (error) {
@@ -140,12 +184,12 @@ export async function promoverUsuarioAction(
       new MongoAtletaRepository(),
     );
 
-    const userEmail = formData.get("userEmail");
+    const termoBusca = formData.get("termoBusca");
     const atletaId = formData.get("atletaId");
 
     await useCase.execute({
       actor: { id: session.user.id, role: session.user.role },
-      userEmail: typeof userEmail === "string" ? userEmail : "",
+      termoBusca: typeof termoBusca === "string" ? termoBusca : "",
       atletaId: typeof atletaId === "string" ? atletaId : "",
     });
 
@@ -179,6 +223,7 @@ export async function desativarAtletaAction(
 
     revalidatePath("/admin/elenco");
     revalidatePath("/admin");
+    revalidatePath("/elenco");
 
     return { error: null };
   } catch (error) {

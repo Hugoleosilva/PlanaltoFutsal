@@ -5,6 +5,11 @@ const JPEG_QUALITY = 0.8;
  * Redimensiona/comprime a imagem no navegador antes do upload, para caber
  * confortavelmente no limite de MAX_IMAGE_BYTES e poupar espaço no cluster
  * MongoDB Atlas M0 (512MB no total).
+ *
+ * PNG/WebP viram PNG (sem perda, preserva transparência — importante pra
+ * escudos/logos sem fundo). Os demais viram JPEG (bem mais leve, mas sem
+ * canal alfa — se saísse JPEG aqui, qualquer PNG transparente ganharia um
+ * fundo preto sólido nessa conversão).
  */
 export async function compressImage(file: File): Promise<File> {
   if (!file.type.startsWith("image/")) return file;
@@ -23,12 +28,16 @@ export async function compressImage(file: File): Promise<File> {
 
   context.drawImage(bitmap, 0, 0, width, height);
 
+  const preservarTransparencia = file.type === "image/png" || file.type === "image/webp";
+  const tipoSaida = preservarTransparencia ? "image/png" : "image/jpeg";
+  const extensaoSaida = preservarTransparencia ? ".png" : ".jpg";
+
   const blob: Blob | null = await new Promise((resolve) =>
-    canvas.toBlob(resolve, "image/jpeg", JPEG_QUALITY),
+    canvas.toBlob(resolve, tipoSaida, preservarTransparencia ? undefined : JPEG_QUALITY),
   );
 
   if (!blob) return file;
 
-  const newName = file.name.replace(/\.[^.]+$/, "") + ".jpg";
-  return new File([blob], newName, { type: "image/jpeg" });
+  const newName = file.name.replace(/\.[^.]+$/, "") + extensaoSaida;
+  return new File([blob], newName, { type: tipoSaida });
 }

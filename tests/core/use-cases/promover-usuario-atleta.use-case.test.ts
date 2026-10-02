@@ -35,7 +35,7 @@ describe("PromoverUsuarioParaAtletaUseCase", () => {
 
     const { user: userAtualizado, atleta: atletaAtualizado } = await useCase.execute({
       actor: { id: "admin-1", role: "ADMIN" },
-      userEmail: "cicrano@example.com",
+      termoBusca: "cicrano@example.com",
       atletaId: atleta.id,
     });
 
@@ -63,7 +63,7 @@ describe("PromoverUsuarioParaAtletaUseCase", () => {
     await expect(
       useCase.execute({
         actor: { id: "admin-1", role: "ADMIN" },
-        userEmail: "inexistente@example.com",
+        termoBusca: "inexistente@example.com",
         atletaId: atleta.id,
       }),
     ).rejects.toBeInstanceOf(NotFoundError);
@@ -99,7 +99,7 @@ describe("PromoverUsuarioParaAtletaUseCase", () => {
     await expect(
       useCase.execute({
         actor: { id: "admin-1", role: "ADMIN" },
-        userEmail: "cicrano@example.com",
+        termoBusca: "cicrano@example.com",
         atletaId: atleta.id,
       }),
     ).rejects.toBeInstanceOf(AppError);

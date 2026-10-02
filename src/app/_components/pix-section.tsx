@@ -5,8 +5,7 @@ import QRCode from "qrcode";
 import { Copy, Check } from "lucide-react";
 import { gerarPixCopiaCola } from "@/shared/utils/pix";
 import { Button } from "@/shared/components/ui/button";
-
-const CHAVE_PIX = "planaltofutsal2025@gmail.com";
+import { CHAVE_PIX, NOME_BENEFICIARIO_PIX, CIDADE_PIX } from "@/shared/constants/pix";
 
 export function PixSection(): React.ReactElement {
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
@@ -14,8 +13,8 @@ export function PixSection(): React.ReactElement {
 
   const copiaECola = gerarPixCopiaCola({
     chave: CHAVE_PIX,
-    nomeBeneficiario: "Planalto Futsal",
-    cidade: "Recife",
+    nomeBeneficiario: NOME_BENEFICIARIO_PIX,
+    cidade: CIDADE_PIX,
   });
 
   useEffect(() => {

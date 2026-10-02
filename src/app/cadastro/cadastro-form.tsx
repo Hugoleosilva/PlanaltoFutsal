@@ -5,7 +5,9 @@ import Link from "next/link";
 import { registrarUsuarioAction, type ActionState } from "./actions";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
+import { TelefoneInput } from "@/shared/components/ui/telefone-input";
 import { Label } from "@/shared/components/ui/label";
+import { PasswordInput } from "@/shared/components/ui/password-input";
 
 const INITIAL_STATE: ActionState = { error: null, sucesso: false };
 
@@ -14,17 +16,23 @@ export function CadastroForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 text-center">
+      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-8 text-center backdrop-blur-md">
         <h1 className="font-heading text-2xl font-bold text-planalto-white">Quase lá!</h1>
         <p className="text-planalto-gray">
           Enviamos um link de confirmação para o seu e-mail. Clique nele para ativar sua conta.
         </p>
+        <Link href="/inicio" className="inline-block text-sm text-planalto-red underline">
+          ← Voltar ao início
+        </Link>
       </div>
     );
   }
 
   return (
-    <form action={formAction} className="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-card p-8">
+    <form
+      action={formAction}
+      className="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-black/30 p-8 backdrop-blur-md"
+    >
       <div>
         <h1 className="font-heading text-2xl font-bold text-planalto-white">Criar conta</h1>
         <p className="mt-1 text-sm text-planalto-gray">
@@ -44,12 +52,12 @@ export function CadastroForm(): React.ReactElement {
 
       <div className="space-y-1">
         <Label htmlFor="whatsapp">WhatsApp (opcional)</Label>
-        <Input id="whatsapp" name="whatsapp" placeholder="(81) 99999-9999" />
+        <TelefoneInput id="whatsapp" name="whatsapp" />
       </div>
 
       <div className="space-y-1">
         <Label htmlFor="senha">Senha</Label>
-        <Input id="senha" name="senha" type="password" required minLength={8} />
+        <PasswordInput id="senha" name="senha" required minLength={8} />
         <p className="text-xs text-planalto-gray">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
       </div>
 
@@ -59,12 +67,14 @@ export function CadastroForm(): React.ReactElement {
         {isPending ? "Criando conta..." : "Criar conta"}
       </Button>
 
-      <p className="text-center text-sm text-planalto-gray">
-        Já tem conta?{" "}
+      <div className="flex items-center justify-between text-sm text-planalto-gray">
+        <Link href="/inicio" className="hover:text-planalto-white">
+          ← Voltar ao início
+        </Link>
         <Link href="/login" className="text-planalto-red underline">
           Entrar
         </Link>
-      </p>
+      </div>
     </form>
   );
 }

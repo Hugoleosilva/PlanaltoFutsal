@@ -1,26 +1,49 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { registrarMovimentacaoAction, type ActionState } from "./actions";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select } from "@/shared/components/ui/select";
-import { Card } from "@/shared/components/ui/card";
+import { ComprovanteUpload } from "@/shared/components/comprovante-upload";
+import { cn } from "@/shared/utils/cn";
 
 const INITIAL_STATE: ActionState = { error: null };
 
 export function MovimentacaoForm(): React.ReactElement {
   const [state, formAction, isPending] = useActionState(registrarMovimentacaoAction, INITIAL_STATE);
+  const [comprovanteUrl, setComprovanteUrl] = useState<string | undefined>();
+  const [aberto, setAberto] = useState(true);
+  const [tipo, setTipo] = useState<"RECEITA" | "DESPESA">("RECEITA");
 
   return (
-    <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Nova movimentação</h2>
+    <div className="rounded-lg border border-white/10 bg-card">
+      <button
+        type="button"
+        onClick={() => setAberto((prev) => !prev)}
+        className="flex w-full items-center justify-between px-6 py-4 text-left"
+      >
+        <h2 className="font-heading text-lg font-bold text-planalto-white">Nova Movimentação</h2>
+        <span className="flex items-center gap-2 text-sm text-planalto-gray">
+          {aberto ? "Ocultar" : "Mostrar"}
+          <ChevronDown size={18} className={cn("transition-transform", aberto && "rotate-180")} />
+        </span>
+      </button>
 
-      <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {aberto ? (
+      <form action={formAction} className="grid grid-cols-1 gap-4 border-t border-white/10 px-6 py-4 sm:grid-cols-2">
+        <input type="hidden" name="comprovanteUrl" value={comprovanteUrl ?? ""} />
+
         <div className="space-y-1">
           <Label htmlFor="tipo">Tipo</Label>
-          <Select id="tipo" name="tipo" defaultValue="RECEITA">
+          <Select
+            id="tipo"
+            name="tipo"
+            value={tipo}
+            onChange={(event) => setTipo(event.target.value as "RECEITA" | "DESPESA")}
+          >
             <option value="RECEITA">Receita</option>
             <option value="DESPESA">Despesa</option>
           </Select>
@@ -41,21 +64,39 @@ export function MovimentacaoForm(): React.ReactElement {
           <Input id="data" name="data" type="date" required />
         </div>
 
-        <div className="space-y-1">
-          <Label htmlFor="categoria">Categoria (opcional)</Label>
-          <Input id="categoria" name="categoria" placeholder="Ex: mensalidade, arbitragem..." />
-        </div>
+        {tipo === "RECEITA" ? (
+          <div className="space-y-1">
+            <Label htmlFor="origemReceita">Origem da Receita</Label>
+            <Select id="origemReceita" name="origemReceita" defaultValue="APOIADORES">
+              <option value="COLABORACAO_INTERNA">Colaboração Interna (Dirigentes/Atletas)</option>
+              <option value="APOIADORES">Apoiadores (Comunidade Local)</option>
+              <option value="PATROCINADORES">Patrocinadores (Empresas/Parceiros)</option>
+              <option value="VENDAS">Vendas (Produtos/Serviços)</option>
+            </Select>
+          </div>
+        ) : (
+          <div className="space-y-1">
+            <Label htmlFor="categoria">Categoria (Opcional)</Label>
+            <Input id="categoria" name="categoria" placeholder="Ex: arbitragem, uniformes..." />
+          </div>
+        )}
 
         {state.error ? (
           <p className="text-sm text-planalto-red sm:col-span-2">{state.error}</p>
         ) : null}
 
-        <div className="sm:col-span-2">
+        <div className="flex flex-wrap items-center gap-3 sm:col-span-2">
+          <ComprovanteUpload
+            value={comprovanteUrl}
+            onUploaded={setComprovanteUrl}
+            onRemover={() => setComprovanteUrl(undefined)}
+          />
           <Button type="submit" disabled={isPending}>
             {isPending ? "Salvando..." : "Registrar movimentação"}
           </Button>
         </div>
       </form>
-    </Card>
+      ) : null}
+    </div>
   );
 }

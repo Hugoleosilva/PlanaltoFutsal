@@ -25,7 +25,7 @@ export function FotoCard({ id, url, descricao, categoria, enviadoPorNome }: Foto
   return (
     <div className="overflow-hidden rounded-lg border border-white/10 bg-card">
       <div className="relative aspect-square w-full bg-black/40">
-        <Image src={url} alt={descricao ?? ""} fill className="object-cover" unoptimized />
+        <Image src={url} alt={descricao ?? ""} fill className="object-cover object-top" unoptimized />
       </div>
 
       <div className="space-y-2 p-4">

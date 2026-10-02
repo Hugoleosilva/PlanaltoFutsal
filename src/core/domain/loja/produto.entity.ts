@@ -1,12 +1,15 @@
 import { Entity, EntityState } from "../entity";
-import { MaxLengthRule, PositiveRule, RequiredRule, Validator } from "@/shared/validation";
+import { MaxItemsRule, MaxLengthRule, MinItemsRule, PositiveRule, RequiredRule, Validator } from "@/shared/validation";
+
+const MAX_IMAGENS = 4;
 
 export interface ProdutoState extends EntityState {
   nome: string;
   descricao?: string;
   preco?: number | null;
-  imagemUrl: string;
-  linkWhatsapp: string;
+  imagensUrls: string[];
+  linkWhatsapp?: string;
+  destaque: boolean;
   ativo: boolean;
 }
 
@@ -32,12 +35,16 @@ export class Produto extends Entity<ProdutoState> {
     return this.props.preco;
   }
 
-  get imagemUrl(): string {
-    return this.props.imagemUrl;
+  get imagensUrls(): readonly string[] {
+    return this.props.imagensUrls;
   }
 
-  get linkWhatsapp(): string {
+  get linkWhatsapp(): string | undefined {
     return this.props.linkWhatsapp;
+  }
+
+  get destaque(): boolean {
+    return this.props.destaque;
   }
 
   get ativo(): boolean {
@@ -52,8 +59,11 @@ export class Produto extends Entity<ProdutoState> {
         rules: [new RequiredRule(), new MaxLengthRule(150)],
       },
       { code: "preco", value: this.props.preco, rules: [new PositiveRule()] },
-      { code: "imagemUrl", value: this.props.imagemUrl, rules: [new RequiredRule()] },
-      { code: "linkWhatsapp", value: this.props.linkWhatsapp, rules: [new RequiredRule()] },
+      {
+        code: "imagensUrls",
+        value: this.props.imagensUrls,
+        rules: [new RequiredRule(), new MinItemsRule(1), new MaxItemsRule(MAX_IMAGENS)],
+      },
     ]);
   }
 }

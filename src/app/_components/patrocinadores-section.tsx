@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MongoPatrocinadorRepository } from "@/infrastructure/database/repositories/patrocinio-loja.repository.mongo";
+import { MarqueeCarousel } from "@/shared/components/ui/marquee-carousel";
 
 export async function PatrocinadoresSection(): Promise<React.ReactElement> {
   const patrocinadores = await new MongoPatrocinadorRepository().findAllAtivos();
@@ -7,41 +8,39 @@ export async function PatrocinadoresSection(): Promise<React.ReactElement> {
   if (patrocinadores.length === 0) return <></>;
 
   return (
-    <section id="patrocinadores" className="mx-auto max-w-4xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
-        Patrocinadores & Apoiadores
+    <section id="patrocinadores" className="bg-planalto-black py-6">
+      <h2 className="mx-auto max-w-6xl px-6 text-center font-heading text-3xl font-bold text-planalto-gray">
+        Empresas Parceiras que Acreditam na Gente e Fortalecem Nossa Comunidade
       </h2>
 
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-8">
-        {patrocinadores.map((patrocinador) => {
-          const logo = (
-            <Image
-              src={patrocinador.logoUrl}
-              alt={patrocinador.nome}
-              width={120}
-              height={80}
-              className="object-contain"
-              unoptimized
-            />
-          );
+      <div className="mt-6">
+        <MarqueeCarousel>
+          {patrocinadores.map((patrocinador) => {
+            const logo = (
+              <Image
+                src={patrocinador.logoUrl}
+                alt={patrocinador.nome}
+                width={110}
+                height={70}
+                style={{ height: `${56 * (patrocinador.escala / 100)}px` }}
+                className="w-auto object-contain"
+                unoptimized
+              />
+            );
 
-          return (
-            <div key={patrocinador.id} className="flex flex-col items-center gap-2 text-center">
-              {patrocinador.link ? (
-                <a href={patrocinador.link} target="_blank" rel="noopener noreferrer">
-                  {logo}
-                </a>
-              ) : (
-                logo
-              )}
-              {patrocinador.depoimento ? (
-                <p className="max-w-[200px] text-xs text-planalto-gray">
-                  &ldquo;{patrocinador.depoimento}&rdquo;
-                </p>
-              ) : null}
-            </div>
-          );
-        })}
+            return (
+              <div key={patrocinador.id} className="mx-6 shrink-0">
+                {patrocinador.link ? (
+                  <a href={patrocinador.link} target="_blank" rel="noopener noreferrer">
+                    {logo}
+                  </a>
+                ) : (
+                  logo
+                )}
+              </div>
+            );
+          })}
+        </MarqueeCarousel>
       </div>
     </section>
   );

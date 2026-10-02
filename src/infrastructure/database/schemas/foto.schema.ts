@@ -11,6 +11,8 @@ export interface FotoDocument extends Document {
   loteEnvioId: string;
   moderadoPorUserId?: Types.ObjectId | null;
   moderadoEm?: Date | null;
+  topicoId?: Types.ObjectId | null;
+  destaque: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,11 +34,32 @@ const FotoSchema = new Schema<FotoDocument>(
     loteEnvioId: { type: String, required: true },
     moderadoPorUserId: { type: Schema.Types.ObjectId, ref: "User", default: null },
     moderadoEm: { type: Date, default: null },
+    topicoId: { type: Schema.Types.ObjectId, ref: "TopicoGaleria", default: null },
+    destaque: { type: Boolean, required: true, default: false },
   },
   { timestamps: true },
 );
 
 FotoSchema.index({ status: 1 });
 FotoSchema.index({ loteEnvioId: 1 });
+FotoSchema.index({ topicoId: 1 });
 
 export const FotoModel: Model<FotoDocument> = models.Foto ?? model<FotoDocument>("Foto", FotoSchema);
+
+export interface TopicoGaleriaDocument extends Document {
+  nome: string;
+  categoria: "ANTIGA" | "ATUAL";
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const TopicoGaleriaSchema = new Schema<TopicoGaleriaDocument>(
+  {
+    nome: { type: String, required: true, trim: true },
+    categoria: { type: String, enum: ["ANTIGA", "ATUAL"], required: true },
+  },
+  { timestamps: true },
+);
+
+export const TopicoGaleriaModel: Model<TopicoGaleriaDocument> =
+  models.TopicoGaleria ?? model<TopicoGaleriaDocument>("TopicoGaleria", TopicoGaleriaSchema);

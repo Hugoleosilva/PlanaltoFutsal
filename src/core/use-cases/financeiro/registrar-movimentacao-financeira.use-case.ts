@@ -2,6 +2,7 @@ import { AuditLog } from "@/core/domain/audit/audit-log.entity";
 import { AuditLogRepository } from "@/core/domain/audit/audit-log.repository";
 import {
   MovimentacaoFinanceira,
+  OrigemReceita,
   TipoMovimentacao,
 } from "@/core/domain/financeiro/movimentacao-financeira.entity";
 import { MovimentacaoFinanceiraRepository } from "@/core/domain/financeiro/movimentacao-financeira.repository";
@@ -15,7 +16,9 @@ export interface RegistrarMovimentacaoFinanceiraIn {
   valor: number;
   data: Date;
   categoria?: string;
+  origemReceita?: OrigemReceita | null;
   campeonatoId?: string | null;
+  comprovanteUrl?: string | null;
 }
 
 export interface RegistrarMovimentacaoFinanceiraOut {
@@ -41,8 +44,10 @@ export class RegistrarMovimentacaoFinanceiraUseCase
       valor: input.valor,
       data: input.data,
       categoria: input.categoria,
+      origemReceita: input.tipo === "RECEITA" ? (input.origemReceita ?? null) : null,
       campeonatoId: input.campeonatoId ?? null,
       registradoPorUserId: input.actor.id,
+      comprovanteUrl: input.comprovanteUrl ?? null,
     });
 
     const salva = await this.movimentacaoRepository.create(movimentacao);

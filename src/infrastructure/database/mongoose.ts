@@ -31,6 +31,15 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
     });
   }
 
-  cache.conn = await cache.promise;
+  try {
+    cache.conn = await cache.promise;
+  } catch (error) {
+    // Se a conexão falhar (ex: IP bloqueado no Atlas), não deixa essa
+    // promise rejeitada presa no cache pra sempre — a próxima chamada
+    // tenta conectar de novo, em vez de repetir o mesmo erro antigo.
+    cache.promise = null;
+    throw error;
+  }
+
   return cache.conn;
 }

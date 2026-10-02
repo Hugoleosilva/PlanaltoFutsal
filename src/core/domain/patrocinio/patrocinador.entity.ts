@@ -7,6 +7,8 @@ export interface PatrocinadorState extends EntityState {
   depoimento?: string;
   link?: string;
   ativo: boolean;
+  ordem?: number;
+  escala?: number;
 }
 
 export class Patrocinador extends Entity<PatrocinadorState> {
@@ -37,6 +39,29 @@ export class Patrocinador extends Entity<PatrocinadorState> {
 
   get ativo(): boolean {
     return this.props.ativo;
+  }
+
+  get ordem(): number {
+    return this.props.ordem ?? 0;
+  }
+
+  get escala(): number {
+    return this.props.escala ?? 100;
+  }
+
+  editar(props: {
+    nome: string;
+    logoUrl: string;
+    depoimento?: string;
+    link?: string;
+    ordem?: number;
+    escala?: number;
+  }): Patrocinador {
+    return this.clone(props);
+  }
+
+  desativar(): Patrocinador {
+    return this.clone({ ativo: false });
   }
 
   public validate(): void {

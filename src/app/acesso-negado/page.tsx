@@ -7,7 +7,7 @@ export default function AcessoNegadoPage(): React.ReactElement {
       <p className="text-planalto-gray">
         Você não tem permissão para acessar esta página.
       </p>
-      <Link href="/" className="text-planalto-red underline">
+      <Link href="/inicio" className="text-planalto-red underline">
         Voltar para a página inicial
       </Link>
     </main>

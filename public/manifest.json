@@ -9,9 +9,9 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/images/marca/escudo-planalto-futsal.jpg",
+      "src": "/images/marca/escudo-planalto-futsal.png",
       "sizes": "any",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

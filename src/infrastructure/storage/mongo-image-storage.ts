@@ -4,20 +4,33 @@ import { ALLOWED_IMAGE_CONTENT_TYPES, MAX_IMAGE_BYTES } from "@/shared/constants
 import { connectToDatabase } from "../database/mongoose";
 import { ArquivoModel } from "../database/schemas/arquivo.schema";
 
+export interface SaveArquivoOptions {
+  allowedContentTypes?: readonly string[];
+  maxBytes?: number;
+}
+
 export class MongoImageStorage implements ImageStoragePort {
-  async save(buffer: Buffer, contentType: string, nomeOriginal?: string): Promise<StoredImage> {
-    if (!ALLOWED_IMAGE_CONTENT_TYPES.includes(contentType as (typeof ALLOWED_IMAGE_CONTENT_TYPES)[number])) {
+  async save(
+    buffer: Buffer,
+    contentType: string,
+    nomeOriginal?: string,
+    options?: SaveArquivoOptions,
+  ): Promise<StoredImage> {
+    const allowedContentTypes = options?.allowedContentTypes ?? ALLOWED_IMAGE_CONTENT_TYPES;
+    const maxBytes = options?.maxBytes ?? MAX_IMAGE_BYTES;
+
+    if (!allowedContentTypes.includes(contentType)) {
       throw new AppError(
-        "Formato de imagem não suportado. Use JPEG, PNG ou WebP.",
-        "UNSUPPORTED_IMAGE_TYPE",
+        "Formato de arquivo não suportado.",
+        "UNSUPPORTED_FILE_TYPE",
         422,
       );
     }
 
-    if (buffer.byteLength > MAX_IMAGE_BYTES) {
+    if (buffer.byteLength > maxBytes) {
       throw new AppError(
-        `A imagem excede o limite de ${Math.round(MAX_IMAGE_BYTES / 1024 / 1024)}MB.`,
-        "IMAGE_TOO_LARGE",
+        `O arquivo excede o limite de ${Math.round(maxBytes / 1024 / 1024)}MB.`,
+        "FILE_TOO_LARGE",
         422,
       );
     }

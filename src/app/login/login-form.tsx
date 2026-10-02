@@ -7,11 +7,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { PasswordInput } from "@/shared/components/ui/password-input";
 
 export function LoginForm(): React.ReactElement {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/inicio";
   const verificacao = searchParams.get("verificacao");
 
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export function LoginForm(): React.ReactElement {
     setIsSubmitting(false);
 
     if (result?.error) {
-      setError("E-mail ou senha inválidos.");
+      setError("E-mail ou senha inválidos, ou e-mail ainda não confirmado.");
       return;
     }
 
@@ -44,7 +45,7 @@ export function LoginForm(): React.ReactElement {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-card p-8"
+      className="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-black/30 p-8 backdrop-blur-md"
     >
       <h1 className="font-heading text-2xl font-bold text-planalto-white">Entrar</h1>
 
@@ -73,9 +74,8 @@ export function LoginForm(): React.ReactElement {
 
       <div className="space-y-1">
         <Label htmlFor="password">Senha</Label>
-        <Input
+        <PasswordInput
           id="password"
-          type="password"
           required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
@@ -88,12 +88,22 @@ export function LoginForm(): React.ReactElement {
         {isSubmitting ? "Entrando..." : "Entrar"}
       </Button>
 
-      <p className="text-center text-sm text-planalto-gray">
-        Ainda não tem conta?{" "}
-        <Link href="/cadastro" className="text-planalto-red underline">
-          Cadastre-se
-        </Link>
-      </p>
+      <div className="space-y-3 pt-1">
+        <p className="text-center text-sm text-planalto-gray">
+          Não tem conta?{" "}
+          <Link
+            href="/cadastro"
+            className="font-semibold text-planalto-white underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
+          >
+            Cadastre-se
+          </Link>
+        </p>
+        <p className="text-center">
+          <Link href="/inicio" className="text-xs text-planalto-gray hover:text-planalto-white">
+            ← Voltar ao início
+          </Link>
+        </p>
+      </div>
     </form>
   );
 }

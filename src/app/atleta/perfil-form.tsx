@@ -8,16 +8,13 @@ import { Label } from "@/shared/components/ui/label";
 import { Select } from "@/shared/components/ui/select";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { Card } from "@/shared/components/ui/card";
+import { POSICOES_ATLETA, POSICAO_ATLETA_LABEL } from "@/shared/constants/posicoes-atleta";
 
 const INITIAL_STATE: ActionState = { error: null };
 
 const POSICOES = [
   { value: "", label: "Selecione (opcional)" },
-  { value: "GOLEIRO", label: "Goleiro" },
-  { value: "FIXO", label: "Fixo" },
-  { value: "ALA", label: "Ala" },
-  { value: "PIVO", label: "Pivô" },
-  { value: "LINHA", label: "Linha" },
+  ...POSICOES_ATLETA.map((posicao) => ({ value: posicao, label: POSICAO_ATLETA_LABEL[posicao] })),
 ];
 
 interface PerfilFormProps {

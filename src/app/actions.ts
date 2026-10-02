@@ -4,11 +4,15 @@ import { revalidatePath } from "next/cache";
 import { EnviarFotosTorcedorUseCase } from "@/core/use-cases/foto/enviar-fotos-torcedor.use-case";
 import { OferecerCaronaUseCase } from "@/core/use-cases/carona/oferecer-carona.use-case";
 import { VotarEnqueteUseCase } from "@/core/use-cases/engajamento/votar-enquete.use-case";
+import { PublicarServicoUseCase } from "@/core/use-cases/servico/publicar-servico.use-case";
 import { MongoFotoRepository } from "@/infrastructure/database/repositories/foto.repository.mongo";
 import { MongoCaronaSolidariaRepository } from "@/infrastructure/database/repositories/carona-solidaria.repository.mongo";
 import { MongoJogoRepository } from "@/infrastructure/database/repositories/jogo.repository.mongo";
 import { MongoEnqueteRepository } from "@/infrastructure/database/repositories/engajamento.repository.mongo";
-import { toActionError } from "@/infrastructure/errors";
+import { MongoServicoRepository } from "@/infrastructure/database/repositories/servico.repository.mongo";
+import { auth } from "@/infrastructure/security/auth";
+import { UnauthorizedError, toActionError } from "@/infrastructure/errors";
+import type { FormaPagamento } from "@/core/domain/servico/servico.entity";
 
 export interface ActionState {
   error: string | null;
@@ -73,7 +77,7 @@ export async function oferecerCaronaAction(
       vagasDisponiveis: Number(vagasDisponiveis) || 1,
     });
 
-    revalidatePath("/");
+    revalidatePath("/carona");
 
     return { error: null, sucesso: true };
   } catch (error) {
@@ -96,7 +100,46 @@ export async function votarEnqueteAction(
       opcaoId: typeof opcaoId === "string" ? opcaoId : "",
     });
 
-    revalidatePath("/");
+    revalidatePath("/inicio");
+
+    return { error: null, sucesso: true };
+  } catch (error) {
+    return { error: toActionError(error).message, sucesso: false };
+  }
+}
+
+export async function publicarServicoAction(
+  _prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const session = await auth();
+    if (!session?.user) throw new UnauthorizedError();
+
+    const useCase = new PublicarServicoUseCase(new MongoServicoRepository());
+
+    const titulo = formData.get("titulo");
+    const descricao = formData.get("descricao");
+    const imagensUrls = formData
+      .getAll("imagemUrl")
+      .filter((url): url is string => typeof url === "string" && url.length > 0);
+    const valores = formData.get("valores");
+    const formasPagamento = formData.getAll("formasPagamento") as FormaPagamento[];
+    const nomeContato = formData.get("nomeContato");
+    const contato = formData.get("contato");
+
+    await useCase.execute({
+      actor: { id: session.user.id, role: session.user.role },
+      titulo: typeof titulo === "string" ? titulo : "",
+      descricao: typeof descricao === "string" ? descricao : "",
+      imagensUrls,
+      valores: typeof valores === "string" && valores ? valores : undefined,
+      formasPagamento,
+      nomeContato: typeof nomeContato === "string" ? nomeContato : "",
+      contato: typeof contato === "string" ? contato : "",
+    });
+
+    revalidatePath("/admin/servicos");
 
     return { error: null, sucesso: true };
   } catch (error) {

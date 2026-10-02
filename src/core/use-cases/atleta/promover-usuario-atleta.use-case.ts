@@ -8,7 +8,7 @@ import { AuthenticatedActor, assertRole } from "../_shared/authorize";
 
 export interface PromoverUsuarioParaAtletaIn {
   actor: AuthenticatedActor;
-  userEmail: string;
+  termoBusca: string;
   atletaId: string;
 }
 
@@ -33,8 +33,10 @@ export class PromoverUsuarioParaAtletaUseCase
   async execute(input: PromoverUsuarioParaAtletaIn): Promise<PromoverUsuarioParaAtletaOut> {
     assertRole(input.actor, ["ADMIN"]);
 
-    const user = await this.userRepository.findByEmail(input.userEmail);
-    if (!user) throw new NotFoundError("Nenhum usuário encontrado com este e-mail.");
+    const user = await this.buscarUsuario(input.termoBusca);
+    if (!user) {
+      throw new NotFoundError("Nenhum usuário encontrado com esse e-mail, WhatsApp ou nome.");
+    }
 
     if (user.role === "ATLETA") {
       throw new AppError("Este usuário já é um atleta.", "USUARIO_JA_E_ATLETA", 409);
@@ -54,5 +56,21 @@ export class PromoverUsuarioParaAtletaUseCase
     const atletaSalvo = await this.atletaRepository.update(atletaVinculado);
 
     return { user: userSalvo, atleta: atletaSalvo };
+  }
+
+  private async buscarUsuario(termoBusca: string): Promise<User | null> {
+    const termo = termoBusca.trim();
+    if (!termo) return null;
+
+    if (termo.includes("@")) {
+      return this.userRepository.findByEmail(termo);
+    }
+
+    const digitos = termo.replace(/\D/g, "");
+    if (digitos.length >= 8) {
+      return this.userRepository.findByWhatsapp(termo);
+    }
+
+    return this.userRepository.findByName(termo);
   }
 }

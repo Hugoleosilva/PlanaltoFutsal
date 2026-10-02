@@ -17,8 +17,10 @@ function toEntity(doc: MovimentacaoFinanceiraDocument): MovimentacaoFinanceira {
     valor: doc.valor,
     data: doc.data,
     categoria: doc.categoria,
+    origemReceita: doc.origemReceita ?? null,
     campeonatoId: doc.campeonatoId ? doc.campeonatoId.toString() : null,
     registradoPorUserId: doc.registradoPorUserId.toString(),
+    comprovanteUrl: doc.comprovanteUrl ?? null,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };
@@ -55,8 +57,10 @@ export class MongoMovimentacaoFinanceiraRepository implements MovimentacaoFinanc
       valor: movimentacao.valor,
       data: movimentacao.data,
       categoria: movimentacao.categoria,
+      origemReceita: movimentacao.origemReceita ?? null,
       campeonatoId: movimentacao.campeonatoId ?? null,
       registradoPorUserId: movimentacao.registradoPorUserId,
+      comprovanteUrl: movimentacao.comprovanteUrl ?? null,
     });
     return toEntity(created);
   }

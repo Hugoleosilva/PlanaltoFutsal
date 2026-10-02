@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
+  /* Site é escuro sempre (sem alternância pra claro) — isso faz o Chrome/Edge
+     desenharem os seletores nativos (date/time picker, scrollbar) já no tema
+     escuro, em vez do branco padrão que não combinava com o resto da tela. */
+  color-scheme: dark;
+
   --background: 0 0% 4%;
   --foreground: 0 0% 96%;
   --primary: 357 68% 44%;

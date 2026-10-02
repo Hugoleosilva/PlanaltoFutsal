@@ -1,21 +1,16 @@
 import { MongoJogoRepository } from "@/infrastructure/database/repositories/jogo.repository.mongo";
+import { MongoCampeonatoRepository } from "@/infrastructure/database/repositories/campeonato.repository.mongo";
 import { Card } from "@/shared/components/ui/card";
-import { Badge } from "@/shared/components/ui/badge";
 import { JogoForm } from "./jogo-form";
-import { CancelarJogoButton } from "./cancelar-jogo-button";
-
-function formatDataHora(data: Date): string {
-  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
-}
-
-const STATUS_TONE: Record<string, "neutral" | "success" | "danger"> = {
-  AGENDADO: "neutral",
-  REALIZADO: "success",
-  CANCELADO: "danger",
-};
+import { JogoRow } from "./jogo-row";
 
 export default async function JogosPage(): Promise<React.ReactElement> {
-  const jogos = await new MongoJogoRepository().findAll();
+  const [jogos, campeonatos] = await Promise.all([
+    new MongoJogoRepository().findAll(),
+    new MongoCampeonatoRepository().findAll(),
+  ]);
+
+  const nomeCampeonatoPorId = new Map(campeonatos.map((campeonato) => [campeonato.id, campeonato.nome]));
 
   return (
     <div className="space-y-8">
@@ -24,7 +19,7 @@ export default async function JogosPage(): Promise<React.ReactElement> {
         <p className="mt-1 text-planalto-gray">Agenda exibida no Portal Público.</p>
       </div>
 
-      <JogoForm />
+      <JogoForm campeonatos={campeonatos.map((c) => ({ id: c.id, nome: c.nome }))} />
 
       <Card>
         <h2 className="font-heading text-lg font-bold text-planalto-white">Todos os jogos</h2>
@@ -34,21 +29,25 @@ export default async function JogosPage(): Promise<React.ReactElement> {
         ) : (
           <div className="mt-4 divide-y divide-white/10">
             {jogos.map((jogo) => (
-              <div key={jogo.id} className="flex items-center justify-between gap-4 py-3">
-                <div>
-                  <p className="text-sm font-medium text-planalto-white">
-                    Planalto Futsal x {jogo.adversario}
-                  </p>
-                  <p className="text-xs text-planalto-gray">
-                    {formatDataHora(jogo.dataHora)} · {jogo.local}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <Badge tone={STATUS_TONE[jogo.status]}>{jogo.status}</Badge>
-                  {jogo.status === "AGENDADO" ? <CancelarJogoButton id={jogo.id} /> : null}
-                </div>
-              </div>
+              <JogoRow
+                key={jogo.id}
+                jogo={{
+                  id: jogo.id,
+                  adversario: jogo.adversario,
+                  adversarioEscudoUrl: jogo.adversarioEscudoUrl ?? null,
+                  dataHora: jogo.dataHora,
+                  local: jogo.local,
+                  campeonatoId: jogo.campeonatoId ?? null,
+                  status: jogo.status,
+                  placarPlanalto: jogo.placarPlanalto ?? null,
+                  placarAdversario: jogo.placarAdversario ?? null,
+                  mandante: jogo.mandante,
+                }}
+                campeonatos={campeonatos.map((c) => ({ id: c.id, nome: c.nome }))}
+                nomeCampeonato={
+                  jogo.campeonatoId ? (nomeCampeonatoPorId.get(jogo.campeonatoId) ?? "Campeonato") : "Amistoso"
+                }
+              />
             ))}
           </div>
         )}

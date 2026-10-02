@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { oferecerCaronaAction, type ActionState } from "../actions";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
+import { TelefoneInput } from "@/shared/components/ui/telefone-input";
 import { Label } from "@/shared/components/ui/label";
 import { Select } from "@/shared/components/ui/select";
 import { Card } from "@/shared/components/ui/card";
@@ -48,7 +49,7 @@ export function CaronaForm({
 
         <div className="space-y-1">
           <Label htmlFor="contato">Contato (WhatsApp)</Label>
-          <Input id="contato" name="contato" required />
+          <TelefoneInput id="contato" name="contato" required />
         </div>
 
         <div className="space-y-1">

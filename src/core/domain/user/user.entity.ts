@@ -6,11 +6,15 @@ import {
   InRule,
   MinLengthRule,
   PhoneBrRule,
+  PositiveRule,
 } from "@/shared/validation";
 import { Role, ROLES } from "@/shared/types/role";
 
 export const USER_STATUSES = ["PENDENTE_VERIFICACAO", "ATIVO", "INATIVO"] as const;
 export type UserStatus = (typeof USER_STATUSES)[number];
+
+export const TIPOS_PLANO_SOCIO = ["MENSAL", "UNICO"] as const;
+export type TipoPlanoSocio = (typeof TIPOS_PLANO_SOCIO)[number];
 
 export interface UserState extends EntityState {
   name: string;
@@ -23,6 +27,11 @@ export interface UserState extends EntityState {
   emailVerificadoEm?: Date | null;
   termsAcceptedAt?: Date | null;
   imageConsentAcceptedAt?: Date | null;
+  socio?: boolean;
+  socioDesde?: Date | null;
+  socioTipoPlano?: TipoPlanoSocio | null;
+  socioValorPlano?: number | null;
+  socioDiaVencimento?: number | null;
 }
 
 export class User extends Entity<UserState> {
@@ -82,6 +91,26 @@ export class User extends Entity<UserState> {
     );
   }
 
+  get isSocio(): boolean {
+    return this.props.socio === true;
+  }
+
+  get socioDesde(): Date | null | undefined {
+    return this.props.socioDesde;
+  }
+
+  get socioTipoPlano(): TipoPlanoSocio | null | undefined {
+    return this.props.socioTipoPlano;
+  }
+
+  get socioValorPlano(): number | null | undefined {
+    return this.props.socioValorPlano;
+  }
+
+  get socioDiaVencimento(): number | null | undefined {
+    return this.props.socioDiaVencimento;
+  }
+
   isAdmin(): boolean {
     return this.props.role === "ADMIN";
   }
@@ -102,6 +131,20 @@ export class User extends Entity<UserState> {
     return this.clone({ role: "ATLETA", atletaId });
   }
 
+  tornarSocio(plano: {
+    tipo: TipoPlanoSocio;
+    valor: number;
+    diaVencimento?: number | null;
+  }): User {
+    return this.clone({
+      socio: true,
+      socioDesde: this.isSocio ? this.props.socioDesde : new Date(),
+      socioTipoPlano: plano.tipo,
+      socioValorPlano: plano.valor,
+      socioDiaVencimento: plano.tipo === "MENSAL" ? (plano.diaVencimento ?? null) : null,
+    });
+  }
+
   public validate(): void {
     Validator.validate([
       { code: "name", value: this.props.name, rules: [new RequiredRule(), new MinLengthRule(2)] },
@@ -114,6 +157,12 @@ export class User extends Entity<UserState> {
         value: this.props.status,
         rules: [new RequiredRule(), new InRule(USER_STATUSES)],
       },
+      {
+        code: "socioTipoPlano",
+        value: this.props.socioTipoPlano,
+        rules: [new InRule(TIPOS_PLANO_SOCIO)],
+      },
+      { code: "socioValorPlano", value: this.props.socioValorPlano, rules: [new PositiveRule()] },
     ]);
   }
 }

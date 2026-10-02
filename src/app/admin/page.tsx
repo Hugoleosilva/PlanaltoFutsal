@@ -3,18 +3,22 @@ import { MongoAtletaRepository } from "@/infrastructure/database/repositories/at
 import { MongoFotoRepository } from "@/infrastructure/database/repositories/foto.repository.mongo";
 import { MongoMovimentacaoFinanceiraRepository } from "@/infrastructure/database/repositories/movimentacao-financeira.repository.mongo";
 import { MongoCampeonatoRepository } from "@/infrastructure/database/repositories/campeonato.repository.mongo";
+import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 
 function formatBRL(valor: number): string {
   return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 export default async function AdminDashboardPage(): Promise<React.ReactElement> {
-  const [atletas, fotosPendentes, movimentacoes, campeonatos] = await Promise.all([
-    new MongoAtletaRepository().findAllAtivos(),
-    new MongoFotoRepository().findByStatus("PENDENTE_APROVACAO"),
-    new MongoMovimentacaoFinanceiraRepository().findRecentes(100),
-    new MongoCampeonatoRepository().findAll(),
-  ]);
+  const [atletas, fotosPendentes, movimentacoes, campeonatos, totalCadastros, totalApoiadores] =
+    await Promise.all([
+      new MongoAtletaRepository().findAllAtivos(),
+      new MongoFotoRepository().findByStatus("PENDENTE_APROVACAO"),
+      new MongoMovimentacaoFinanceiraRepository().findRecentes(100),
+      new MongoCampeonatoRepository().findAll(),
+      new MongoUserRepository().countAll(),
+      new MongoUserRepository().countSocios(),
+    ]);
 
   const saldo = movimentacoes.reduce((total, mov) => total + mov.valorComSinal, 0);
 
@@ -23,6 +27,8 @@ export default async function AdminDashboardPage(): Promise<React.ReactElement> 
     { label: "Fotos aguardando aprovação", value: fotosPendentes.length },
     { label: "Campeonatos cadastrados", value: campeonatos.length },
     { label: "Saldo (últimas movimentações)", value: formatBRL(saldo) },
+    { label: "Cadastros no site", value: totalCadastros },
+    { label: "Apoiadores (sócios)", value: totalApoiadores },
   ];
 
   return (

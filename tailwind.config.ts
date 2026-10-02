@@ -43,6 +43,20 @@ const config: Config = {
         heading: ["var(--font-heading)"],
         body: ["var(--font-body)"],
       },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "onda-sonora": {
+          "0%, 100%": { height: "20%" },
+          "50%": { height: "100%" },
+        },
+      },
+      animation: {
+        marquee: "marquee 30s linear infinite",
+        "onda-sonora": "onda-sonora 0.8s ease-in-out infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -12,6 +12,21 @@ export class FakeUserRepository implements UserRepository {
     return [...this.users.values()].find((user) => user.email === email) ?? null;
   }
 
+  async findByWhatsapp(whatsapp: string): Promise<User | null> {
+    const digitos = whatsapp.replace(/\D/g, "");
+    return (
+      [...this.users.values()].find((user) => (user.whatsapp ?? "").replace(/\D/g, "") === digitos) ??
+      null
+    );
+  }
+
+  async findByName(name: string): Promise<User | null> {
+    const nomeNormalizado = name.trim().toLowerCase();
+    return (
+      [...this.users.values()].find((user) => user.name.toLowerCase() === nomeNormalizado) ?? null
+    );
+  }
+
   async create(user: User): Promise<User> {
     this.users.set(user.id, user);
     return user;
@@ -20,5 +35,17 @@ export class FakeUserRepository implements UserRepository {
   async update(user: User): Promise<User> {
     this.users.set(user.id, user);
     return user;
+  }
+
+  async countAll(): Promise<number> {
+    return this.users.size;
+  }
+
+  async countSocios(): Promise<number> {
+    return [...this.users.values()].filter((user) => user.isSocio).length;
+  }
+
+  async findSocios(): Promise<User[]> {
+    return [...this.users.values()].filter((user) => user.isSocio);
   }
 }

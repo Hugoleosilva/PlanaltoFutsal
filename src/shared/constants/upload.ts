@@ -8,3 +8,15 @@ export const ALLOWED_IMAGE_CONTENT_TYPES = ["image/jpeg", "image/png", "image/we
  * a imagem antes de enviar (ver src/shared/components/image-upload.tsx).
  */
 export const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
+
+/**
+ * Comprovantes (nota fiscal/recibo) anexados a movimentações financeiras —
+ * aceita PDF além de imagem, e um limite maior já que PDF não passa pela
+ * compressão do lado do cliente.
+ */
+export const ALLOWED_ATTACHMENT_CONTENT_TYPES = [
+  ...ALLOWED_IMAGE_CONTENT_TYPES,
+  "application/pdf",
+] as const;
+
+export const MAX_ATTACHMENT_BYTES = 4 * 1024 * 1024;

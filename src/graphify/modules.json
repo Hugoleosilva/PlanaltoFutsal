@@ -30,16 +30,18 @@
     {
       "name": "Portal Público / Torcedor",
       "role": "GUEST | USER",
-      "route": "/",
+      "route": "/ (porta) -> /inicio (portal) + /jogos (resultados)",
       "status": "MVP funcional",
+      "note": "Estrutura em 2 camadas inspirada no site do Palmeiras: '/' é só uma porta de entrada (fundo, escudo, patrocinadores, botão 'Entrar no Site'), sem exigir login; o conteúdo real mora em /inicio. O menu (PublicNav) é o mesmo componente em /inicio e /jogos, e mostra Entrar/Criar conta (ou o painel do usuário + Sair) sem nunca bloquear acesso por falta de cadastro.",
       "features": [
-        "Hero, história, elenco + campeonatos ativos, agenda de jogos",
+        "Ticker do próximo jogo, história, elenco + campeonatos ativos",
         "Mural de avisos, galeria de fotos aprovadas",
+        "Resultados (jogos REALIZADO) com filtro por mês/ano em /jogos",
         "Envio de fotos pelo torcedor (max 5, PENDENTE_APROVACAO)",
         "Apoio financeiro via Pix (QR code + copia-e-cola gerados localmente)",
         "Carona solidária (listar + oferecer)",
-        "Enquete (votar) + espaço de web rádio (placeholder)",
-        "Patrocinadores / loja virtual com link WhatsApp"
+        "Enquete (votar) + espaço de web rádio (placeholder, parceria não fechada)",
+        "Patrocinadores / loja virtual em carrossel com link WhatsApp"
       ]
     }
   ],

@@ -9,7 +9,7 @@ export function AtletaTopbar(): React.ReactElement {
     <header className="flex items-center justify-between border-b border-white/10 bg-card px-6 py-4">
       <div className="flex items-center gap-3">
         <Image
-          src="/images/marca/escudo-planalto-futsal.jpg"
+          src="/images/marca/escudo-planalto-futsal.png"
           alt=""
           width={32}
           height={32}
@@ -22,7 +22,7 @@ export function AtletaTopbar(): React.ReactElement {
 
       <button
         type="button"
-        onClick={() => signOut({ callbackUrl: "/" })}
+        onClick={() => signOut({ callbackUrl: "/inicio" })}
         className="flex items-center gap-2 text-sm text-planalto-gray transition hover:text-planalto-white"
       >
         <LogOut size={16} />

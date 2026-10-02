@@ -17,6 +17,8 @@ export interface EditarAtletaIn {
   estiloDeJogo?: string;
   preferencias?: string;
   fotoPrincipalUrl?: string | null;
+  contatoEmail?: string;
+  contatoWhatsapp?: string;
 }
 
 export interface EditarAtletaOut {
@@ -45,6 +47,8 @@ export class EditarAtletaUseCase implements UseCase<EditarAtletaIn, EditarAtleta
       preferencias: input.preferencias ?? atleta.preferencias,
       fotoPrincipalUrl:
         input.fotoPrincipalUrl !== undefined ? input.fotoPrincipalUrl : atleta.fotoPrincipalUrl,
+      contatoEmail: input.contatoEmail ?? atleta.contatoEmail,
+      contatoWhatsapp: input.contatoWhatsapp ?? atleta.contatoWhatsapp,
     });
 
     const salvo = await this.atletaRepository.update(editado);

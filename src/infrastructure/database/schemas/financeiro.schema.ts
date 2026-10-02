@@ -6,8 +6,10 @@ export interface MovimentacaoFinanceiraDocument extends Document {
   valor: number;
   data: Date;
   categoria?: string;
+  origemReceita?: "COLABORACAO_INTERNA" | "APOIADORES" | "PATROCINADORES" | null;
   campeonatoId?: Types.ObjectId | null;
   registradoPorUserId: Types.ObjectId;
+  comprovanteUrl?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,8 +21,14 @@ const MovimentacaoFinanceiraSchema = new Schema<MovimentacaoFinanceiraDocument>(
     valor: { type: Number, required: true },
     data: { type: Date, required: true },
     categoria: { type: String },
+    origemReceita: {
+      type: String,
+      enum: ["COLABORACAO_INTERNA", "APOIADORES", "PATROCINADORES"],
+      default: null,
+    },
     campeonatoId: { type: Schema.Types.ObjectId, ref: "Campeonato", default: null },
     registradoPorUserId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    comprovanteUrl: { type: String, default: null },
   },
   { timestamps: true },
 );

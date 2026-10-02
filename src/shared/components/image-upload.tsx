@@ -6,7 +6,7 @@ import { compressImage } from "@/shared/utils/compress-image";
 import { Button } from "@/shared/components/ui/button";
 
 interface ImageUploadProps {
-  label: string;
+  label?: string;
   value?: string | null;
   onUploaded: (url: string) => void;
 }
@@ -46,7 +46,7 @@ export function ImageUpload({ label, value, onUploaded }: ImageUploadProps): Rea
 
   return (
     <div className="space-y-2">
-      <span className="text-sm text-planalto-gray">{label}</span>
+      {label ? <span className="text-sm text-planalto-gray">{label}</span> : null}
 
       <div className="flex items-center gap-3">
         {value ? (
@@ -55,7 +55,7 @@ export function ImageUpload({ label, value, onUploaded }: ImageUploadProps): Rea
             alt=""
             width={64}
             height={64}
-            className="h-16 w-16 rounded-md object-cover"
+            className="h-16 w-16 rounded-md object-cover object-top"
           />
         ) : (
           <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed border-white/20 text-xs text-planalto-gray">

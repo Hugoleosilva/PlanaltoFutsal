@@ -1,5 +1,5 @@
 import { Entity, EntityState } from "../entity";
-import { InRule, MaxLengthRule, PositiveRule, RequiredRule, Validator } from "@/shared/validation";
+import { InRule, MaxLengthRule, NonNegativeRule, RequiredRule, Validator } from "@/shared/validation";
 
 export type CampeonatoStatus = "OPORTUNIDADE" | "INSCRITO" | "EM_ANDAMENTO" | "ENCERRADO";
 
@@ -65,12 +65,12 @@ export class Campeonato extends Entity<CampeonatoState> {
       {
         code: "taxaInscricao",
         value: this.props.taxaInscricao,
-        rules: [new PositiveRule()],
+        rules: [new NonNegativeRule()],
       },
       {
         code: "taxaArbitragem",
         value: this.props.taxaArbitragem,
-        rules: [new PositiveRule()],
+        rules: [new NonNegativeRule()],
       },
       {
         code: "status",

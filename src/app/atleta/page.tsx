@@ -52,7 +52,7 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
             alt=""
             width={72}
             height={72}
-            className="h-18 w-18 rounded-full object-cover"
+            className="h-18 w-18 rounded-full object-cover object-top"
             unoptimized
           />
         ) : null}

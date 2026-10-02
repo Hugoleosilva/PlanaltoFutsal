@@ -53,6 +53,7 @@ export async function criarCampeonatoAction(
 
     revalidatePath("/admin/campeonatos");
     revalidatePath("/admin");
+    revalidatePath("/elenco");
 
     return { error: null };
   } catch (error) {

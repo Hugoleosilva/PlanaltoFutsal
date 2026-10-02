@@ -7,7 +7,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Select } from "@/shared/components/ui/select";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { Card } from "@/shared/components/ui/card";
+import { Collapsible } from "@/shared/components/ui/collapsible";
 
 const INITIAL_STATE: ActionState = { error: null };
 
@@ -15,10 +15,8 @@ export function ComunicadoForm(): React.ReactElement {
   const [state, formAction, isPending] = useActionState(publicarComunicadoAction, INITIAL_STATE);
 
   return (
-    <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Mural de avisos</h2>
-
-      <form action={formAction} className="mt-4 space-y-3">
+    <Collapsible titulo="Mural de avisos" abertoPorPadrao>
+      <form action={formAction} className="space-y-3">
         <div className="flex gap-3">
           <div className="flex-1 space-y-1">
             <Label htmlFor="titulo">Título</Label>
@@ -49,6 +47,6 @@ export function ComunicadoForm(): React.ReactElement {
           {isPending ? "Publicando..." : "Publicar"}
         </Button>
       </form>
-    </Card>
+    </Collapsible>
   );
 }

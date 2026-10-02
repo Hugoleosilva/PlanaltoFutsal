@@ -12,7 +12,7 @@ import { Card } from "@/shared/components/ui/card";
 const INITIAL_STATE: ActionState = { error: null, sucesso: false };
 const MAX_FOTOS = 5;
 
-export function EnviarFotoSection(): React.ReactElement {
+export function EnviarFotoSection({ semTitulo = false }: { semTitulo?: boolean } = {}): React.ReactElement {
   const [state, formAction, isPending] = useActionState(enviarFotosTorcedorAction, INITIAL_STATE);
   const [urls, setUrls] = useState<(string | undefined)[]>([undefined]);
 
@@ -25,14 +25,23 @@ export function EnviarFotoSection(): React.ReactElement {
   }
 
   return (
-    <section id="enviar-fotos" className="mx-auto max-w-2xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
-        Envie suas fotos
-      </h2>
-      <p className="mt-2 text-center text-planalto-gray">
-        Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam pendentes até a
-        diretoria aprovar.
-      </p>
+    <section id="enviar-fotos" className={semTitulo ? "" : "mx-auto max-w-2xl px-6 py-16"}>
+      {!semTitulo ? (
+        <>
+          <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+            Envie suas fotos
+          </h2>
+          <p className="mt-2 text-center text-planalto-gray">
+            Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam
+            pendentes até a diretoria aprovar.
+          </p>
+        </>
+      ) : (
+        <p className="text-sm text-planalto-gray">
+          Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam pendentes
+          até a diretoria aprovar.
+        </p>
+      )}
 
       {state.sucesso ? (
         <Card className="mt-8 text-center">

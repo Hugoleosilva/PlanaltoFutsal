@@ -1,16 +1,25 @@
 import Image from "next/image";
 import { MongoProdutoRepository } from "@/infrastructure/database/repositories/patrocinio-loja.repository.mongo";
-import { Card } from "@/shared/components/ui/card";
-import { Button } from "@/shared/components/ui/button";
-
-function formatBRL(valor: number): string {
-  return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
+import { MongoMembroDiretoriaRepository } from "@/infrastructure/database/repositories/membro-diretoria.repository.mongo";
+import { Carousel } from "@/shared/components/ui/carousel";
+import { MarqueeCarousel } from "@/shared/components/ui/marquee-carousel";
+import { ProdutoCard } from "./produto-card";
 
 export async function LojaSection(): Promise<React.ReactElement> {
-  const produtos = await new MongoProdutoRepository().findAllAtivos();
+  const [produtos, membrosDiretoria] = await Promise.all([
+    new MongoProdutoRepository().findAllAtivos(),
+    new MongoMembroDiretoriaRepository().findAllAtivos(),
+  ]);
 
   if (produtos.length === 0) return <></>;
+
+  const diretores = membrosDiretoria
+    .filter((membro) => membro.contato)
+    .map((membro) => ({ nome: membro.nome, contato: membro.contato as string }));
+
+  const destaques = produtos.filter((produto) => produto.destaque);
+  const semPreco = produtos.filter((produto) => !produto.destaque && !produto.preco);
+  const comPreco = produtos.filter((produto) => !produto.destaque && Boolean(produto.preco));
 
   return (
     <section id="loja" className="mx-auto max-w-5xl px-6 py-16">
@@ -18,26 +27,73 @@ export async function LojaSection(): Promise<React.ReactElement> {
         Loja Virtual
       </h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {produtos.map((produto) => (
-          <Card key={produto.id}>
-            <div className="relative aspect-square w-full overflow-hidden rounded-md bg-white/5">
-              <Image src={produto.imagemUrl} alt={produto.nome} fill className="object-cover" unoptimized />
-            </div>
-            <p className="mt-3 font-semibold text-planalto-white">{produto.nome}</p>
-            {produto.descricao ? (
-              <p className="text-sm text-planalto-gray">{produto.descricao}</p>
-            ) : null}
-            {produto.preco ? (
-              <p className="mt-1 text-planalto-red">{formatBRL(produto.preco)}</p>
-            ) : null}
+      {destaques.length > 0 ? (
+        <div className="mt-8">
+          <MarqueeCarousel>
+            {destaques.map((produto) => (
+              <div
+                key={produto.id}
+                className="relative h-64 w-64 shrink-0 overflow-hidden rounded-lg bg-white/5"
+              >
+                <Image
+                  src={produto.imagensUrls[0] ?? ""}
+                  alt={produto.nome}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-black/70 px-3 py-2">
+                  <p className="text-sm font-semibold text-white">{produto.nome}</p>
+                </div>
+              </div>
+            ))}
+          </MarqueeCarousel>
+        </div>
+      ) : null}
 
-            <a href={produto.linkWhatsapp} target="_blank" rel="noopener noreferrer" className="mt-3 block">
-              <Button className="w-full">Comprar no WhatsApp</Button>
-            </a>
-          </Card>
-        ))}
-      </div>
+      {semPreco.length > 0 ? (
+        <div className="mt-10">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-planalto-gray">
+            Vitrine
+          </h3>
+          <Carousel>
+            {semPreco.map((produto) => (
+              <div
+                key={produto.id}
+                className="relative aspect-square w-48 shrink-0 snap-start overflow-hidden rounded-md bg-white/5"
+              >
+                <Image
+                  src={produto.imagensUrls[0] ?? ""}
+                  alt={produto.nome}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+      ) : null}
+
+      {comPreco.length > 0 ? (
+        <div className="mt-10">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-planalto-gray">
+            Peças à venda
+          </h3>
+          <Carousel>
+            {comPreco.map((produto) => (
+              <ProdutoCard
+                key={produto.id}
+                nome={produto.nome}
+                descricao={produto.descricao}
+                preco={produto.preco as number}
+                imagensUrls={[...produto.imagensUrls]}
+                diretores={diretores}
+              />
+            ))}
+          </Carousel>
+        </div>
+      ) : null}
     </section>
   );
 }

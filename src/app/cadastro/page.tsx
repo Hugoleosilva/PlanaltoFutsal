@@ -1,9 +1,20 @@
+import Image from "next/image";
 import { CadastroForm } from "./cadastro-form";
 
 export default function CadastroPage(): React.ReactElement {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-planalto-black px-6">
-      <CadastroForm />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+      <Image
+        src="/images/marca/planalto_tela4.png"
+        alt="Planalto Futsal"
+        fill
+        priority
+        className="object-cover opacity-30"
+      />
+
+      <div className="relative z-10 w-full max-w-md">
+        <CadastroForm />
+      </div>
     </main>
   );
 }

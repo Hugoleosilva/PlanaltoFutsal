@@ -66,8 +66,12 @@ export function CampeonatoAccordion({
           <p className="font-semibold text-planalto-white">{nome}</p>
           <p className="text-xs text-planalto-gray">
             {inscritos.length} atleta(s) vinculado(s)
-            {taxaInscricao ? ` · inscrição ${formatBRL(taxaInscricao)}` : ""}
-            {taxaArbitragem ? ` · arbitragem ${formatBRL(taxaArbitragem)}` : ""}
+            {taxaInscricao != null
+              ? ` · inscrição ${taxaInscricao === 0 ? "grátis" : formatBRL(taxaInscricao)}`
+              : ""}
+            {taxaArbitragem != null
+              ? ` · arbitragem ${taxaArbitragem === 0 ? "grátis" : formatBRL(taxaArbitragem)}`
+              : ""}
           </p>
         </div>
 

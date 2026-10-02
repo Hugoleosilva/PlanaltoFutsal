@@ -10,9 +10,10 @@ import {
   RequiredRule,
   Validator,
 } from "@/shared/validation";
+import { POSICOES_ATLETA, PosicaoAtleta } from "@/shared/constants/posicoes-atleta";
 
 export type AtletaStatus = "ATIVO" | "INATIVO";
-export type AtletaPosicao = "GOLEIRO" | "FIXO" | "ALA" | "PIVO" | "LINHA";
+export type AtletaPosicao = PosicaoAtleta;
 
 export interface DocumentoAtleta {
   tipo: "RG" | "CPF" | "ATESTADO_MEDICO";
@@ -156,9 +157,7 @@ export class Atleta extends Entity<AtletaState> {
       {
         code: "posicao",
         value: this.props.posicao,
-        rules: [
-          new InRule(["GOLEIRO", "FIXO", "ALA", "PIVO", "LINHA"] as const),
-        ],
+        rules: [new InRule(POSICOES_ATLETA)],
       },
       {
         code: "status",

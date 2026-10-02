@@ -6,6 +6,7 @@ export * from "./max-items.rule";
 export * from "./max-length.rule";
 export * from "./min-items.rule";
 export * from "./min-length.rule";
+export * from "./non-negative.rule";
 export * from "./past-date.rule";
 export * from "./phone-br.rule";
 export * from "./positive.rule";

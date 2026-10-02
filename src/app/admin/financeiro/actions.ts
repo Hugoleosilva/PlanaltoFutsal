@@ -30,6 +30,8 @@ export async function registrarMovimentacaoAction(
     const valor = formData.get("valor");
     const data = formData.get("data");
     const categoria = formData.get("categoria");
+    const origemReceita = formData.get("origemReceita");
+    const comprovanteUrl = formData.get("comprovanteUrl");
 
     await useCase.execute({
       actor: { id: session.user.id, role: session.user.role },
@@ -38,6 +40,12 @@ export async function registrarMovimentacaoAction(
       valor: Number(valor),
       data: typeof data === "string" && data ? new Date(data) : new Date(),
       categoria: typeof categoria === "string" && categoria ? categoria : undefined,
+      origemReceita:
+        typeof origemReceita === "string" &&
+        ["COLABORACAO_INTERNA", "APOIADORES", "PATROCINADORES"].includes(origemReceita)
+          ? (origemReceita as "COLABORACAO_INTERNA" | "APOIADORES" | "PATROCINADORES")
+          : null,
+      comprovanteUrl: typeof comprovanteUrl === "string" && comprovanteUrl ? comprovanteUrl : null,
     });
 
     revalidatePath("/admin/financeiro");

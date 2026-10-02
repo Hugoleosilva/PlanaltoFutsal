@@ -36,8 +36,8 @@ export function VincularUsuarioForm({
 
       <form action={formAction} className="mt-4 flex flex-wrap items-end gap-3">
         <div className="space-y-1">
-          <Label htmlFor="userEmail">E-mail da conta do torcedor</Label>
-          <Input id="userEmail" name="userEmail" type="email" required className="min-w-[220px]" />
+          <Label htmlFor="termoBusca">E-mail, WhatsApp ou nome da conta do torcedor</Label>
+          <Input id="termoBusca" name="termoBusca" required className="min-w-[260px]" />
         </div>
 
         <div className="space-y-1">

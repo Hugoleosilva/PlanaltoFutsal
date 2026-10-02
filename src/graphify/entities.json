@@ -117,8 +117,9 @@
       "name": "Produto",
       "path": "src/core/domain/loja/produto.entity.ts",
       "schema": "src/infrastructure/database/schemas/patrocinio-loja.schema.ts",
-      "repository": null,
-      "fields": ["nome", "descricao", "preco", "imagemUrl", "linkWhatsapp", "ativo"]
+      "repository": { "contract": "patrocinio-loja.repository.ts", "mongo": "patrocinio-loja.repository.mongo.ts" },
+      "fields": ["nome", "descricao", "preco", "imagensUrls(1-4, front/back p/ roupas)", "linkWhatsapp", "destaque", "ativo"],
+      "note": "imagensUrls substituiu imagemUrl (2026-09-26) pra suportar frente/verso; destaque controla o carrossel infinito no topo da /loja. Vitrine (sem preço) e peças à venda (com preço) são separadas por preco ser null ou não."
     },
     {
       "name": "ConsentimentoLgpd",

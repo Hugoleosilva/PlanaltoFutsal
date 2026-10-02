@@ -3,14 +3,23 @@ import { InRule, MaxLengthRule, PositiveRule, RequiredRule, Validator } from "@/
 
 export type TipoMovimentacao = "RECEITA" | "DESPESA";
 
+export const ORIGENS_RECEITA = [
+  "COLABORACAO_INTERNA",
+  "APOIADORES",
+  "PATROCINADORES",
+] as const;
+export type OrigemReceita = (typeof ORIGENS_RECEITA)[number];
+
 export interface MovimentacaoFinanceiraState extends EntityState {
   tipo: TipoMovimentacao;
   descricao: string;
   valor: number;
   data: Date;
   categoria?: string;
+  origemReceita?: OrigemReceita | null;
   campeonatoId?: string | null;
   registradoPorUserId: string;
+  comprovanteUrl?: string | null;
 }
 
 export class MovimentacaoFinanceira extends Entity<MovimentacaoFinanceiraState> {
@@ -43,12 +52,20 @@ export class MovimentacaoFinanceira extends Entity<MovimentacaoFinanceiraState> 
     return this.props.categoria;
   }
 
+  get origemReceita(): OrigemReceita | null | undefined {
+    return this.props.origemReceita;
+  }
+
   get campeonatoId(): string | null | undefined {
     return this.props.campeonatoId;
   }
 
   get registradoPorUserId(): string {
     return this.props.registradoPorUserId;
+  }
+
+  get comprovanteUrl(): string | null | undefined {
+    return this.props.comprovanteUrl;
   }
 
   get valorComSinal(): number {
@@ -69,6 +86,11 @@ export class MovimentacaoFinanceira extends Entity<MovimentacaoFinanceiraState> 
       },
       { code: "valor", value: this.props.valor, rules: [new RequiredRule(), new PositiveRule()] },
       { code: "data", value: this.props.data, rules: [new RequiredRule()] },
+      {
+        code: "origemReceita",
+        value: this.props.origemReceita,
+        rules: [new InRule(ORIGENS_RECEITA)],
+      },
       {
         code: "registradoPorUserId",
         value: this.props.registradoPorUserId,

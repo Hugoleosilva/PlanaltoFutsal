@@ -60,8 +60,8 @@ export function GaleriaManager({
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {galeria.map((url) => (
-            <div key={url} className="relative aspect-square overflow-hidden rounded-md">
-              <Image src={url} alt="" fill className="object-cover" unoptimized />
+            <div key={url} className="relative aspect-square overflow-hidden rounded-md bg-white/5">
+              <Image src={url} alt="" fill className="object-cover object-top" unoptimized />
               <button
                 type="button"
                 onClick={() => handleRemover(url)}

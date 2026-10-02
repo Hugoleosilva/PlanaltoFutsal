@@ -20,6 +20,8 @@ function toPatrocinadorEntity(doc: PatrocinadorDocument): Patrocinador {
     depoimento: doc.depoimento,
     link: doc.link,
     ativo: doc.ativo,
+    ordem: doc.ordem,
+    escala: doc.escala,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };
@@ -30,8 +32,14 @@ function toPatrocinadorEntity(doc: PatrocinadorDocument): Patrocinador {
 export class MongoPatrocinadorRepository implements PatrocinadorRepository {
   async findAllAtivos(): Promise<Patrocinador[]> {
     await connectToDatabase();
-    const docs = await PatrocinadorModel.find({ ativo: true }).sort({ nome: 1 });
+    const docs = await PatrocinadorModel.find({ ativo: true }).sort({ ordem: 1, createdAt: 1 });
     return docs.map(toPatrocinadorEntity);
+  }
+
+  async findById(id: string): Promise<Patrocinador | null> {
+    await connectToDatabase();
+    const doc = await PatrocinadorModel.findById(id);
+    return doc ? toPatrocinadorEntity(doc) : null;
   }
 
   async create(patrocinador: Patrocinador): Promise<Patrocinador> {
@@ -42,8 +50,33 @@ export class MongoPatrocinadorRepository implements PatrocinadorRepository {
       depoimento: patrocinador.depoimento,
       link: patrocinador.link,
       ativo: patrocinador.ativo,
+      ordem: patrocinador.ordem,
+      escala: patrocinador.escala,
     });
     return toPatrocinadorEntity(created);
+  }
+
+  async update(patrocinador: Patrocinador): Promise<Patrocinador> {
+    await connectToDatabase();
+    const updated = await PatrocinadorModel.findByIdAndUpdate(
+      patrocinador.id,
+      {
+        nome: patrocinador.nome,
+        logoUrl: patrocinador.logoUrl,
+        depoimento: patrocinador.depoimento,
+        link: patrocinador.link,
+        ativo: patrocinador.ativo,
+        ordem: patrocinador.ordem,
+        escala: patrocinador.escala,
+      },
+      { new: true },
+    );
+
+    if (!updated) {
+      throw new Error(`Patrocinador ${patrocinador.id} não encontrado para atualização.`);
+    }
+
+    return toPatrocinadorEntity(updated);
   }
 }
 
@@ -53,8 +86,9 @@ function toProdutoEntity(doc: ProdutoDocument): Produto {
     nome: doc.nome,
     descricao: doc.descricao,
     preco: doc.preco ?? null,
-    imagemUrl: doc.imagemUrl,
+    imagensUrls: doc.imagensUrls,
     linkWhatsapp: doc.linkWhatsapp,
+    destaque: doc.destaque,
     ativo: doc.ativo,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
@@ -76,8 +110,9 @@ export class MongoProdutoRepository implements ProdutoRepository {
       nome: produto.nome,
       descricao: produto.descricao,
       preco: produto.preco ?? null,
-      imagemUrl: produto.imagemUrl,
+      imagensUrls: [...produto.imagensUrls],
       linkWhatsapp: produto.linkWhatsapp,
+      destaque: produto.destaque,
       ativo: produto.ativo,
     });
     return toProdutoEntity(created);

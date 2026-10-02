@@ -31,6 +31,7 @@ export async function aprovarFotoAction(
 
     revalidatePath("/admin/moderacao");
     revalidatePath("/admin");
+    revalidatePath("/galeria");
 
     return { error: null };
   } catch (error) {

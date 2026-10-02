@@ -1,7 +1,11 @@
+import Link from "next/link";
 import { MongoJogoRepository } from "@/infrastructure/database/repositories/jogo.repository.mongo";
 import { Card } from "@/shared/components/ui/card";
+import { ConfrontoEscudos } from "./confronto-escudos";
+import { tituloConfronto } from "./confronto-texto";
 
-function formatDataHora(data: Date): string {
+function formatDataHora(data?: Date | null): string {
+  if (!data) return "Data e Hora ainda não definidas!";
   return data.toLocaleString("pt-BR", { dateStyle: "full", timeStyle: "short" });
 }
 
@@ -21,16 +25,30 @@ export async function AgendaSection(): Promise<React.ReactElement> {
       ) : (
         <div className="mt-6 space-y-3">
           {jogos.map((jogo) => (
-            <Card key={jogo.id} className="flex items-center justify-between">
-              <div>
-                <p className="font-semibold text-planalto-white">Planalto Futsal x {jogo.adversario}</p>
-                <p className="text-sm text-planalto-gray">{jogo.local}</p>
+            <Card key={jogo.id} className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
+                <div>
+                  <p className="font-semibold text-planalto-white">
+                    {tituloConfronto(jogo.adversario, jogo.mandante)}
+                  </p>
+                  <p className="text-sm text-planalto-gray">
+                    {jogo.local}
+                    {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
+                  </p>
+                </div>
               </div>
               <p className="text-sm text-planalto-red">{formatDataHora(jogo.dataHora)}</p>
             </Card>
           ))}
         </div>
       )}
+
+      <p className="mt-6 text-center">
+        <Link href="/jogos" className="text-sm text-planalto-red underline">
+          Ver resultados anteriores
+        </Link>
+      </p>
     </section>
   );
 }

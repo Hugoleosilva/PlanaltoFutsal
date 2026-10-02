@@ -33,8 +33,12 @@ export default async function ElencoPage(): Promise<React.ReactElement> {
               id={atleta.id}
               nomeCompleto={atleta.nomeCompleto}
               apelido={atleta.apelido}
-              idade={atleta.idade}
+              dataNascimento={atleta.dataNascimento}
               posicao={atleta.posicao ?? null}
+              bio={atleta.bio ?? ""}
+              estiloDeJogo={atleta.estiloDeJogo ?? ""}
+              contatoEmail={atleta.contatoEmail ?? ""}
+              contatoWhatsapp={atleta.contatoWhatsapp ?? ""}
               fotoPrincipalUrl={atleta.fotoPrincipalUrl ?? null}
               temAcesso={Boolean(atleta.userId)}
             />

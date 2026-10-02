@@ -1,4 +1,4 @@
-import { Jogo } from "@/core/domain/jogo/jogo.entity";
+import { Jogo, Mandante } from "@/core/domain/jogo/jogo.entity";
 import { JogoRepository } from "@/core/domain/jogo/jogo.repository";
 import { UseCase } from "../use-case";
 import { AuthenticatedActor, assertRole } from "../_shared/authorize";
@@ -6,9 +6,11 @@ import { AuthenticatedActor, assertRole } from "../_shared/authorize";
 export interface CadastrarJogoIn {
   actor: AuthenticatedActor;
   adversario: string;
-  dataHora: Date;
+  adversarioEscudoUrl?: string | null;
+  dataHora?: Date | null;
   local: string;
   campeonatoId?: string | null;
+  mandante?: Mandante;
 }
 
 export interface CadastrarJogoOut {
@@ -23,10 +25,12 @@ export class CadastrarJogoUseCase implements UseCase<CadastrarJogoIn, CadastrarJ
 
     const jogo = Jogo.create({
       adversario: input.adversario,
-      dataHora: input.dataHora,
+      adversarioEscudoUrl: input.adversarioEscudoUrl ?? null,
+      dataHora: input.dataHora ?? null,
       local: input.local,
       campeonatoId: input.campeonatoId ?? null,
       status: "AGENDADO",
+      mandante: input.mandante ?? "PLANALTO",
     });
 
     const salvo = await this.jogoRepository.create(jogo);

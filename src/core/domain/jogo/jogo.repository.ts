@@ -6,4 +6,5 @@ export interface JogoRepository {
   findAll(): Promise<Jogo[]>;
   create(jogo: Jogo): Promise<Jogo>;
   update(jogo: Jogo): Promise<Jogo>;
+  delete(id: string): Promise<void>;
 }

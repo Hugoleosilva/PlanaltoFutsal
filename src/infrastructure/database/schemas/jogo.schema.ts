@@ -2,12 +2,14 @@ import { Schema, model, models, Types, type Model, type Document } from "mongoos
 
 export interface JogoDocument extends Document {
   adversario: string;
-  dataHora: Date;
+  adversarioEscudoUrl?: string | null;
+  dataHora?: Date | null;
   local: string;
   campeonatoId?: Types.ObjectId | null;
   status: "AGENDADO" | "REALIZADO" | "CANCELADO";
   placarPlanalto?: number | null;
   placarAdversario?: number | null;
+  mandante: "PLANALTO" | "ADVERSARIO";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,12 +17,14 @@ export interface JogoDocument extends Document {
 const JogoSchema = new Schema<JogoDocument>(
   {
     adversario: { type: String, required: true, trim: true },
-    dataHora: { type: Date, required: true },
+    adversarioEscudoUrl: { type: String, default: null },
+    dataHora: { type: Date, default: null },
     local: { type: String, required: true },
     campeonatoId: { type: Schema.Types.ObjectId, ref: "Campeonato", default: null },
     status: { type: String, enum: ["AGENDADO", "REALIZADO", "CANCELADO"], required: true, default: "AGENDADO" },
     placarPlanalto: { type: Number, default: null },
     placarAdversario: { type: Number, default: null },
+    mandante: { type: String, enum: ["PLANALTO", "ADVERSARIO"], required: true, default: "PLANALTO" },
   },
   { timestamps: true },
 );

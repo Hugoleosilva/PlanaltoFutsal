@@ -9,6 +9,8 @@ export interface CadastrarPatrocinadorIn {
   logoUrl: string;
   depoimento?: string;
   link?: string;
+  ordem?: number;
+  escala?: number;
 }
 
 export interface CadastrarPatrocinadorOut {
@@ -29,6 +31,8 @@ export class CadastrarPatrocinadorUseCase
       depoimento: input.depoimento,
       link: input.link,
       ativo: true,
+      ordem: input.ordem ?? 0,
+      escala: input.escala ?? 100,
     });
 
     const salvo = await this.patrocinadorRepository.create(patrocinador);

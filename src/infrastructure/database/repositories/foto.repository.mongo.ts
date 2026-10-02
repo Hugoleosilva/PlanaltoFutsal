@@ -1,7 +1,17 @@
-import { Foto, FotoState, StatusFoto } from "@/core/domain/foto/foto.entity";
+import { Foto, FotoState, StatusFoto, CategoriaFoto } from "@/core/domain/foto/foto.entity";
 import { FotoRepository } from "@/core/domain/foto/foto.repository";
+import {
+  TopicoGaleria,
+  TopicoGaleriaState,
+} from "@/core/domain/foto/topico-galeria.entity";
+import { TopicoGaleriaRepository } from "@/core/domain/foto/topico-galeria.repository";
 import { connectToDatabase } from "../mongoose";
-import { FotoDocument, FotoModel } from "../schemas/foto.schema";
+import {
+  FotoDocument,
+  FotoModel,
+  TopicoGaleriaDocument,
+  TopicoGaleriaModel,
+} from "../schemas/foto.schema";
 
 function toEntity(doc: FotoDocument): Foto {
   const state: FotoState = {
@@ -16,6 +26,8 @@ function toEntity(doc: FotoDocument): Foto {
     loteEnvioId: doc.loteEnvioId,
     moderadoPorUserId: doc.moderadoPorUserId ? doc.moderadoPorUserId.toString() : null,
     moderadoEm: doc.moderadoEm ?? null,
+    topicoId: doc.topicoId ? doc.topicoId.toString() : null,
+    destaque: doc.destaque,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
   };
@@ -33,6 +45,8 @@ function toDocumentProps(foto: Foto) {
     enviadoPorContato: foto.enviadoPorContato,
     loteEnvioId: foto.loteEnvioId,
     atletaId: foto.atletaId ?? null,
+    topicoId: foto.topicoId ?? null,
+    destaque: foto.destaque,
   };
 }
 
@@ -72,8 +86,11 @@ export class MongoFotoRepository implements FotoRepository {
       foto.id,
       {
         status: foto.status,
+        categoria: foto.categoria,
         moderadoPorUserId: foto.moderadoPorUserId ?? null,
         moderadoEm: foto.moderadoEm ?? null,
+        topicoId: foto.topicoId ?? null,
+        destaque: foto.destaque,
       },
       { new: true },
     );
@@ -83,5 +100,46 @@ export class MongoFotoRepository implements FotoRepository {
     }
 
     return toEntity(updated);
+  }
+}
+
+function toTopicoEntity(doc: TopicoGaleriaDocument): TopicoGaleria {
+  const state: TopicoGaleriaState = {
+    id: doc.id as string,
+    nome: doc.nome,
+    categoria: doc.categoria,
+    createdAt: doc.createdAt,
+    updatedAt: doc.updatedAt,
+  };
+
+  return TopicoGaleria.create(state);
+}
+
+export class MongoTopicoGaleriaRepository implements TopicoGaleriaRepository {
+  async findById(id: string): Promise<TopicoGaleria | null> {
+    await connectToDatabase();
+    const doc = await TopicoGaleriaModel.findById(id);
+    return doc ? toTopicoEntity(doc) : null;
+  }
+
+  async findAll(): Promise<TopicoGaleria[]> {
+    await connectToDatabase();
+    const docs = await TopicoGaleriaModel.find().sort({ createdAt: -1 });
+    return docs.map(toTopicoEntity);
+  }
+
+  async findByCategoria(categoria: CategoriaFoto): Promise<TopicoGaleria[]> {
+    await connectToDatabase();
+    const docs = await TopicoGaleriaModel.find({ categoria }).sort({ createdAt: -1 });
+    return docs.map(toTopicoEntity);
+  }
+
+  async create(topico: TopicoGaleria): Promise<TopicoGaleria> {
+    await connectToDatabase();
+    const created = await TopicoGaleriaModel.create({
+      nome: topico.nome,
+      categoria: topico.categoria,
+    });
+    return toTopicoEntity(created);
   }
 }
