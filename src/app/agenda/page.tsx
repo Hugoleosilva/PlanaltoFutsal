@@ -16,8 +16,8 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
     <>
       <PublicNav />
       <HeroFaixa />
-      <main className="flex-1 px-6 py-12">
-        <div className="mx-auto max-w-3xl">
+      <main className="flex-1 px-6 py-8">
+        <div className="mx-auto max-w-2xl">
           <AgendaSection />
 
           <details className="group mt-10 text-center" open={Boolean(params.mes || params.ano)}>

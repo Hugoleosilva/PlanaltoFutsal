@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Car } from "lucide-react";
 import { MongoJogoRepository } from "@/infrastructure/database/repositories/jogo.repository.mongo";
 import { Card } from "@/shared/components/ui/card";
 import { ConfrontoEscudos } from "./confronto-escudos";
@@ -38,6 +40,13 @@ export async function AgendaSection(): Promise<React.ReactElement> {
                 </div>
               </div>
               <p className="text-sm text-planalto-red">{formatDataHora(jogo.dataHora)}</p>
+              <Link
+                href="/carona"
+                className="flex items-center gap-1.5 text-xs font-semibold text-planalto-gray hover:text-planalto-white"
+              >
+                <Car size={14} />
+                Pode ajudar com uma carona? Clique aqui
+              </Link>
             </Card>
           ))}
         </div>

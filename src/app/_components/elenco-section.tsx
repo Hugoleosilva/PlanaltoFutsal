@@ -39,10 +39,10 @@ function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
 
       <div className="min-w-0 flex-1">
         <p className="font-heading font-bold text-planalto-white">{atleta.apelido}</p>
-        <div className="mt-1 flex gap-1.5">
+        <div className="mt-1 flex flex-wrap gap-1.5">
           <Badge className="shrink-0 whitespace-nowrap">{atleta.idade} anos</Badge>
           {atleta.posicao ? (
-            <Badge tone="neutral" className="min-w-[104px] shrink-0 justify-center whitespace-nowrap">
+            <Badge tone="neutral" className="w-[132px] shrink-0 justify-center whitespace-nowrap">
               {POSICAO_ATLETA_LABEL[atleta.posicao]}
             </Badge>
           ) : null}
@@ -79,7 +79,7 @@ export async function ElencoSection({
   }
 
   return (
-    <section id="elenco" className="mx-auto max-w-5xl px-6 py-16">
+    <section id="elenco" className="mx-auto max-w-5xl px-6 py-6">
       <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">Nosso Elenco</h2>
 
       {campeonatosAtivos.length > 0 ? (
@@ -123,7 +123,7 @@ export async function ElencoSection({
           const paginas = paginar(atletas, TAMANHO_PAGINA);
 
           return (
-            <div className="mt-8">
+            <div className="mt-4">
               <Carousel>
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">

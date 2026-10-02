@@ -16,7 +16,7 @@ export async function CaronaSection(): Promise<React.ReactElement> {
   const jogoPorId = new Map(jogos.map((jogo) => [jogo.id, jogo]));
 
   return (
-    <section id="carona" className="mx-auto max-w-5xl px-6 py-8">
+    <section id="carona" className="mx-auto max-w-5xl px-6 py-6">
       <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Carona Solidária
       </h2>
@@ -24,14 +24,14 @@ export async function CaronaSection(): Promise<React.ReactElement> {
         Ofereça ou encontre uma carona para o próximo jogo.
       </p>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div>
+      <div className="mt-6 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+        <Card className="flex h-full flex-col">
           {caronas.length > 0 ? (
             <div className="space-y-3">
               {caronas.map((carona) => {
                 const jogo = jogoPorId.get(carona.jogoId);
                 return (
-                  <Card key={carona.id}>
+                  <div key={carona.id} className="rounded-md bg-black/20 p-3">
                     <p className="font-semibold text-planalto-white">
                       {jogo ? `Planalto Futsal x ${jogo.adversario}` : "Jogo"}
                     </p>
@@ -42,16 +42,18 @@ export async function CaronaSection(): Promise<React.ReactElement> {
                       Motorista: {carona.motoristaNome} · {carona.contato} ·{" "}
                       {carona.vagasDisponiveis} vaga(s)
                     </p>
-                  </Card>
+                  </div>
                 );
               })}
             </div>
           ) : (
-            <p className="text-center text-sm text-planalto-gray">Nenhuma carona oferecida ainda.</p>
+            <p className="m-auto text-center text-sm text-planalto-gray">
+              Nenhuma carona oferecida ainda.
+            </p>
           )}
-        </div>
+        </Card>
 
-        <div>
+        <div className="h-full">
           {jogos.length > 0 ? (
             <CaronaForm jogos={jogos.map((jogo) => ({ id: jogo.id, adversario: jogo.adversario }))} />
           ) : null}
