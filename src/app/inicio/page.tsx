@@ -27,7 +27,7 @@ export default function InicioPage(): React.ReactElement {
           <ProximoJogoTicker />
           <main>
             <MuralSection />
-            <div className="mt-40 sm:mt-56">
+            <div className="mt-52 sm:mt-72">
               <EngajamentoSection />
             </div>
             {/* <div className="mt-10">
