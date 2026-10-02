@@ -5,7 +5,7 @@ export function PublicFooter(): React.ReactElement {
     <footer className="border-t border-white/10">
       <div className="relative h-28 w-full overflow-hidden sm:h-36">
         <Image
-          src="/images/marca/banner-rodape.png"
+          src="/images/marca/banner-rodape-vermelho.png"
           alt=""
           fill
           className="object-cover"

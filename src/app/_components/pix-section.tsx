@@ -31,7 +31,7 @@ export function PixSection(): React.ReactElement {
   }
 
   return (
-    <Card id="apoie" className="flex h-full flex-col items-center justify-center gap-4 text-center">
+    <Card id="apoie" className="flex h-full flex-col items-center justify-center gap-3 p-5 text-center">
       <div className="flex items-center gap-2 text-planalto-red">
         <QrCode size={22} />
         <p className="font-heading text-lg font-bold text-planalto-white">Pix Avulso</p>

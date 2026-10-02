@@ -9,7 +9,7 @@ function formatBRL(valor: number): string {
 }
 
 function formatData(data: Date): string {
-  return data.toLocaleDateString("pt-BR");
+  return data.toLocaleDateString("pt-BR", { timeZone: "America/Recife" });
 }
 
 function referenciaDoMes(data: Date): string {

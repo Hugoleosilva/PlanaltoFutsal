@@ -3,7 +3,7 @@ import { Card } from "@/shared/components/ui/card";
 import { Badge } from "@/shared/components/ui/badge";
 
 function formatData(data: Date): string {
-  return data.toLocaleDateString("pt-BR");
+  return data.toLocaleDateString("pt-BR", { timeZone: "America/Recife" });
 }
 
 export async function MuralSection(): Promise<React.ReactElement> {

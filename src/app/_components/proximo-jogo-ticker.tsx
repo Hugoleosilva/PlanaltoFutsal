@@ -3,7 +3,7 @@ import { tituloConfronto } from "./confronto-texto";
 
 function formatDataHora(data?: Date | null): string {
   if (!data) return "Data e Hora ainda não definidas!";
-  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short", timeZone: "America/Recife" });
 }
 
 export async function ProximoJogoTicker(): Promise<React.ReactElement> {

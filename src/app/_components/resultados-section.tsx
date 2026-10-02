@@ -13,7 +13,7 @@ const MESES = [
 
 function formatData(data?: Date | null): string {
   if (!data) return "Data e Hora ainda não definidas!";
-  return data.toLocaleDateString("pt-BR");
+  return data.toLocaleDateString("pt-BR", { timeZone: "America/Recife" });
 }
 
 export async function ResultadosSection({

@@ -7,7 +7,7 @@ import { tituloConfronto } from "./confronto-texto";
 
 function formatDataHora(data?: Date | null): string {
   if (!data) return "Data e Hora ainda não definidas!";
-  return data.toLocaleString("pt-BR", { dateStyle: "full", timeStyle: "short" });
+  return data.toLocaleString("pt-BR", { dateStyle: "full", timeStyle: "short", timeZone: "America/Recife" });
 }
 
 export async function AgendaSection(): Promise<React.ReactElement> {
@@ -26,32 +26,28 @@ export async function AgendaSection(): Promise<React.ReactElement> {
       ) : (
         <div className="mt-6 space-y-3">
           {jogos.map((jogo) => (
-            <Card key={jogo.id}>
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
-                  <div>
-                    <p className="font-semibold text-planalto-white">
-                      {tituloConfronto(jogo.adversario, jogo.mandante)}
-                    </p>
-                    <p className="text-sm text-planalto-gray">
-                      {jogo.local}
-                      {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
-                    </p>
-                  </div>
-                </div>
-                <p className="shrink-0 text-right text-sm text-planalto-red">
-                  {formatDataHora(jogo.dataHora)}
-                </p>
-              </div>
-
+            <Card key={jogo.id} className="relative">
               <Link
                 href="/carona"
-                className="mt-3 flex items-center justify-center gap-1.5 border-t border-white/10 pt-3 text-xs font-semibold text-planalto-gray hover:text-planalto-white"
+                className="absolute right-4 top-4 flex w-16 flex-col items-center gap-1 text-center text-[10px] font-semibold leading-tight text-planalto-gray hover:text-planalto-white"
               >
-                <Car size={14} />
-                Pode ajudar com uma carona? Clique aqui
+                <Car size={16} />
+                Pode ajudar com carona?
               </Link>
+
+              <div className="flex items-start gap-3 pr-16">
+                <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
+                <div>
+                  <p className="font-semibold text-planalto-white">
+                    {tituloConfronto(jogo.adversario, jogo.mandante)}
+                  </p>
+                  <p className="text-sm text-planalto-gray">
+                    {jogo.local}
+                    {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
+                  </p>
+                  <p className="text-sm text-planalto-red">{formatDataHora(jogo.dataHora)}</p>
+                </div>
+              </div>
             </Card>
           ))}
         </div>

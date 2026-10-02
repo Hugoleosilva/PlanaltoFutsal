@@ -25,7 +25,7 @@ const STATUS_TONE: Record<string, "neutral" | "success" | "danger"> = {
 
 function formatDataHora(data?: Date | null): string {
   if (!data) return "Data e Hora ainda não definidas!";
-  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short", timeZone: "America/Recife" });
 }
 
 function toDatetimeLocalValue(data?: Date | null): string {

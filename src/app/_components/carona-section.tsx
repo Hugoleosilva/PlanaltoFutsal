@@ -4,7 +4,7 @@ import { CaronaForm } from "./carona-form";
 import { Card } from "@/shared/components/ui/card";
 
 function formatDataHora(data: Date): string {
-  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+  return data.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short", timeZone: "America/Recife" });
 }
 
 export async function CaronaSection(): Promise<React.ReactElement> {
@@ -25,6 +25,12 @@ export async function CaronaSection(): Promise<React.ReactElement> {
       </p>
 
       <div className="mt-6 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+        <div className="h-full">
+          {jogos.length > 0 ? (
+            <CaronaForm jogos={jogos.map((jogo) => ({ id: jogo.id, adversario: jogo.adversario }))} />
+          ) : null}
+        </div>
+
         <Card className="flex h-full flex-col">
           {caronas.length > 0 ? (
             <div className="space-y-3">
@@ -52,12 +58,6 @@ export async function CaronaSection(): Promise<React.ReactElement> {
             </p>
           )}
         </Card>
-
-        <div className="h-full">
-          {jogos.length > 0 ? (
-            <CaronaForm jogos={jogos.map((jogo) => ({ id: jogo.id, adversario: jogo.adversario }))} />
-          ) : null}
-        </div>
       </div>
     </section>
   );

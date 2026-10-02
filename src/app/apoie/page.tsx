@@ -34,7 +34,7 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
     <>
       <PublicNav />
       <HeroFaixa />
-      <main className="flex-1 px-6 py-8">
+      <main className="flex-1 px-6 py-4">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h1 className="font-heading text-3xl font-bold text-planalto-white">
@@ -46,7 +46,7 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
             </p>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
             <PixSection />
             <SocioCta
               logado={Boolean(session?.user)}
