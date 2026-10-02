@@ -5,7 +5,7 @@ export function QuadraBackdrop({ children }: { children: React.ReactNode }): Rea
     <div className="relative flex min-h-screen flex-1 flex-col">
       <div className="fixed inset-0 -z-10">
         <Image
-          src="/images/marca/planalto_quadra.png"
+          src="/images/marca/fundo-tela-novo-planalto.jpg"
           alt=""
           fill
           className="object-cover"
