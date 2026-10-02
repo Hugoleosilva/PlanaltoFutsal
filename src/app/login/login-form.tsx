@@ -45,7 +45,7 @@ export function LoginForm(): React.ReactElement {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-sm space-y-4 rounded-lg border border-white/10 bg-black/30 p-8 backdrop-blur-md"
+      className="w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
     >
       <h1 className="font-heading text-2xl font-bold text-planalto-white">Entrar</h1>
 
@@ -73,7 +73,12 @@ export function LoginForm(): React.ReactElement {
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="password">Senha</Label>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="password">Senha</Label>
+          <Link href="/esqueci-senha" className="text-xs text-planalto-gray hover:text-planalto-white">
+            Esqueceu a senha?
+          </Link>
+        </div>
         <PasswordInput
           id="password"
           required

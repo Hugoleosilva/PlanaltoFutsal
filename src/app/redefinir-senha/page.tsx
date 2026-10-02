@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 import Image from "next/image";
-import { LoginForm } from "./login-form";
+import { RedefinirSenhaForm } from "./redefinir-senha-form";
 
-export default function LoginPage(): React.ReactElement {
+export default function RedefinirSenhaPage(): React.ReactElement {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden px-6 pb-12 pt-56">
       <Image
         src="/images/marca/fundo-tela-novo-com-escudo-planalto.jpg"
-        alt="Fundo Planalto Futsal"
+        alt="Planalto Futsal"
         fill
         priority
         className="object-cover object-top"
@@ -16,7 +16,7 @@ export default function LoginPage(): React.ReactElement {
 
       <div className="relative z-10 w-full max-w-md">
         <Suspense fallback={null}>
-          <LoginForm />
+          <RedefinirSenhaForm />
         </Suspense>
       </div>
     </main>
