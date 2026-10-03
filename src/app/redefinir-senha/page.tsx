@@ -4,7 +4,7 @@ import { RedefinirSenhaForm } from "./redefinir-senha-form";
 
 export default function RedefinirSenhaPage(): React.ReactElement {
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden px-6 pb-12 pt-80">
+    <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden px-6 pb-12 pt-96">
       <Image
         src="/images/marca/fundo-tela-novo-com-escudo-planalto.jpg"
         alt="Planalto Futsal"

@@ -169,7 +169,7 @@ export async function ElencoSection({
               <Carousel>
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                       {emOrdemDeColuna(completarLinha(pagina), 3).map((atleta, posicao) =>
                         atleta ? (
                           <AtletaCard key={atleta.id} atleta={atleta} />

@@ -90,9 +90,9 @@ export async function ResultadosSection({
         <div className="mt-8 space-y-3">
           {resultados.map((jogo) => (
             <Card key={jogo.id} className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-3">
                 <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
-                <div>
+                <div className="min-w-0">
                   <p className="font-semibold text-planalto-white">
                     {tituloConfronto(jogo.adversario, jogo.mandante)}
                   </p>
@@ -102,7 +102,7 @@ export async function ResultadosSection({
                   </p>
                 </div>
               </div>
-              <Badge tone="success">
+              <Badge tone="success" className="shrink-0 whitespace-nowrap">
                 {jogo.mandante === "PLANALTO"
                   ? `${jogo.placarPlanalto} x ${jogo.placarAdversario}`
                   : `${jogo.placarAdversario} x ${jogo.placarPlanalto}`}

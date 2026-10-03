@@ -10,7 +10,7 @@ interface MembroItem {
 
 export function DiretoriaGrid({ membros }: { membros: MembroItem[] }): React.ReactElement {
   return (
-    <div className="mt-5 grid grid-cols-6 items-stretch gap-4">
+    <div className="mt-5 grid grid-cols-2 items-stretch gap-4 sm:grid-cols-3 lg:grid-cols-6">
       {membros.map((membro) => (
         <MembroDiretoriaCard
           key={membro.id}

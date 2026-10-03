@@ -26,8 +26,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${oswald.variable}`}>
-      <body className="flex min-h-screen flex-col font-body antialiased">
+    <html lang="pt-BR" className={`${inter.variable} ${oswald.variable} overflow-x-hidden`}>
+      <body className="flex min-h-screen w-full max-w-[100vw] flex-col overflow-x-hidden font-body antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>
