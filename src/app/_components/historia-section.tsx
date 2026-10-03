@@ -9,15 +9,23 @@ export function HistoriaSection(): React.ReactElement {
         </p>
 
         <p className="text-muted-foreground mb-4">
-          Estamos reunindo Fatos, Histórias e Lembranças de todas a fases em que o Planalto e Região foram representados através do Futebol e seus personagens.
+          A história do futebol do Planalto e Região precisa ser contada — e nós estamos reunindo os fatos, memórias e personagens de todas as épocas!
         </p>
 
         <p className="text-muted-foreground mb-4">
-          Times marcantes como: Planalto, Bangu, Barcelona, Tô Fraco, Águia de Ouro, Verona, Constelação, Águia, Vasco... entre outros com aquela verdadeira seleção de craques, títulos inesquecíveis, e claro os grandes clássicos cheios de polêmica que ninguém esquece: Planalto x Barcelona, as Rivalidades: Planalto x Roça, Quadra 6 x Quadra 7... Muitas lembranças boas... Que em breve iremos estaremos disponibilizando aqui, com os principais acontecimentos, conquistas e momentos marcantes da nossa Comunidade. 
+          Quem não se lembra de times lendários como Planalto, Bangu, Barcelona, Tô Fraco, Águia de Ouro, Constelação, Ou dos clássicos marcantes como Planalto x Barcelona e das rivalidades históricas entre Planalto x Roça e Quadra 6 x Quadra 7? 
            </p>
 
         <p className="text-muted-foreground mb-4">
-          E contamos com a sua ajuda para que possamos resgatar e registrar tudo isso, afinal, essa é a nossa História! Se você tem algum fatointeressanteou fotos que gostaria de compartilhar, entra no nosso site, na seção Galeria, deixa lá teu registro e ajuda a gente a contar essa História! Blz? Valeu!
+          Em breve, vamos publicar por aqui os principais títulos, polêmicas e momentos inesquecíveis da nossa comunidade.
+        </p>
+
+        <p className="text-muted-foreground mb-4">
+          E queremos a sua ajuda! Tem fotos antigas ou algum fato marcante na memória? Acesse a aba Galeria no nosso site e envie seu registro. Essa história pertence a todos nós!
+        </p>
+
+        <p className="text-muted-foreground mb-4">
+          Contamos com você. Valeu!
         </p>
       </div>
     </section>

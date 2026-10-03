@@ -36,7 +36,7 @@ export async function GaleriaSection(): Promise<React.ReactElement> {
       </h2>
       {fotosItem.length > 0 ? (
         <p className="mt-1 text-center text-xs text-planalto-gray">
-          Clique numa categoria pra ver os tópicos, e numa foto pra abrir com a descrição.
+          Clique numa categoria Atuais ou Das Antigas para ver as fotos.
         </p>
       ) : null}
 

@@ -12,7 +12,7 @@ export default function GaleriaPage(): React.ReactElement {
         <GaleriaSection />
 
         <div className="mx-auto max-w-2xl px-6 pb-16">
-          <Collapsible titulo="Quer enviar suas fotos?">
+          <Collapsible titulo="Tem Alguma Foto Massa? Manda Aqui Pra Gente?">
             <EnviarFotoSection semTitulo />
           </Collapsible>
         </div>

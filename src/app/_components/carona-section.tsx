@@ -21,7 +21,7 @@ export async function CaronaSection(): Promise<React.ReactElement> {
         Carona Solidária
       </h2>
       <p className="mt-1 text-center text-sm text-planalto-gray">
-        Ofereça ou encontre uma carona para o próximo jogo.
+        Ofereça ou encontre uma carona para o próximo Jogo.
       </p>
 
       <div className="mt-3 grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2">

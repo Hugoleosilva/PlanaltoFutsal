@@ -39,8 +39,8 @@ export default async function ApoiePage(): Promise<React.ReactElement> {
               Apoie o Planalto Futsal
             </h1>
             <p className="mx-auto mt-1 max-w-xl text-sm text-planalto-gray">
-              Toda doação ajuda com uniformes, arbitragem e taxas de inscrição em campeonatos — faça um
-              Pix avulso ou vire sócio Planalto Meu Amor!
+              Seu Apoio Ajuda na Inscrição e Taxas das Competições,  Uniformes e e Logística — Faça um
+              Pix Qualquer ou Seja um Sócio Planalto Meu Amor!
             </p>
           </div>
 

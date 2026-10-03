@@ -34,6 +34,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground) / <alpha-value>)",
         },
         surface: "hsl(var(--surface) / <alpha-value>)",
+        chrome: "hsl(var(--chrome) / <alpha-value>)",
       },
       borderRadius: {
         lg: "var(--radius)",

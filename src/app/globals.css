@@ -19,6 +19,10 @@
      border-surface/10) — branco no escuro, preto no claro, pra sempre destacar
      um pouco contra o fundo de base. */
   --surface: 0 0% 100%;
+  /* Fundo do cabeçalho/rodapé fixos (PublicNav/PublicFooter) — preto no
+     escuro (se mistura com a página) e vermelho da marca no claro. O texto
+     em cima deles é sempre branco/cinza fixo, nos dois temas. */
+  --chrome: 0 0% 4%;
   --radius: 0.75rem;
 
   --font-heading: var(--font-oswald, sans-serif);
@@ -28,14 +32,15 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --background: 0 0% 97%;
+  --background: 0 0% 98%;
   --foreground: 0 0% 9%;
   --muted: 0 0% 90%;
   --muted-foreground: 0 0% 35%;
-  --card: 0 0% 100%;
+  --card: 0 0% 90%;
   --card-foreground: 0 0% 9%;
-  --border: 0 0% 85%;
+  --border: 0 0% 82%;
   --surface: 0 0% 0%;
+  --chrome: 357 68% 44%;
 }
 
 * {

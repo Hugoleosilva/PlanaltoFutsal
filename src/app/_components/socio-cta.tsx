@@ -236,9 +236,8 @@ export function SocioCta({
           ) : null}
 
           <p className="text-center text-xs text-muted-foreground">
-            Sua primeira contribuição já é gerada agora, com Pix pra pagar na hora. Como não temos
-            gateway de pagamento, os próximos meses dependem de você mesmo pagar na data escolhida —
-            a diretoria confirma o recebimento.
+            Sua primeira contribuição é gerada agora via Pix. Nos próximos meses contaremos com você para apoiar na data escolhida —
+            A Diretoria Confirma o Recebimento.
           </p>
 
           <div className="flex justify-center">

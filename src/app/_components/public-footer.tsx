@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function PublicFooter(): React.ReactElement {
   return (
-    <footer className="border-t border-surface/10">
+    <footer className="border-t border-white/10">
       <div className="relative h-28 w-full overflow-hidden sm:h-36">
         <Image
           src="/images/marca/banner-rodape-quadra-vermelha.png"
@@ -13,7 +13,7 @@ export function PublicFooter(): React.ReactElement {
         />
       </div>
 
-      <div className="bg-background px-6 py-3 text-center text-sm text-muted-foreground">
+      <div className="bg-chrome px-6 py-3 text-center text-sm text-white/70">
         <p>Planalto Futsal — Jardim Planalto, Sancho, Recife-PE. @Copyright 2026</p>
       </div>
     </footer>

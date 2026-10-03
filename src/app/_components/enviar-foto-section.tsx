@@ -29,23 +29,23 @@ export function EnviarFotoSection({ semTitulo = false }: { semTitulo?: boolean }
       {!semTitulo ? (
         <>
           <h2 className="text-center font-heading text-3xl font-bold text-foreground">
-            Envie suas fotos
+            Envie suas Fotos
           </h2>
           <p className="mt-2 text-center text-muted-foreground">
-            Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam
-            pendentes até a diretoria aprovar.
+            Fotos Antigas ou Atuais do Time, Torcida ou Comunidade — até {MAX_FOTOS} por envio. Ficam
+            pendentes até a Diretoria Aprovar.
           </p>
         </>
       ) : (
         <p className="text-sm text-muted-foreground">
-          Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam pendentes
-          até a diretoria aprovar.
+          Fotos Antigas ou Atuais do Time, Torcida ou Comunidade — até {MAX_FOTOS} por envio. Ficam Pendentes
+          até a Diretoria Aprovar.
         </p>
       )}
 
       {state.sucesso ? (
         <Card className="mt-8 text-center">
-          <p className="text-foreground">Fotos enviadas! Obrigado pela contribuição 🙌</p>
+          <p className="text-foreground">Fotos Enviadas! Valeu aí pela Contribuição 🙌</p>
         </Card>
       ) : (
         <Card className="mt-8">

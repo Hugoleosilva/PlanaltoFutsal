@@ -52,7 +52,7 @@ export function PublicarServicoForm(): React.ReactElement {
         {imagens.map((url, index) => (
           <div key={index}>
             <ImageUpload
-              label={`Foto ou arte do trabalho ${index + 1}`}
+              label={`Foto ou Arte do trabalho ${index + 1}`}
               value={url}
               onUploaded={(novaUrl) => atualizarImagem(index, novaUrl)}
             />

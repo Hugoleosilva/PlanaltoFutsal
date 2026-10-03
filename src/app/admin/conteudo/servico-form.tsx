@@ -89,7 +89,7 @@ function EditarServicoControl({ servico }: { servico: ServicoAprovadoItem }): Re
       {imagens.map((url, index) => (
         <div key={index}>
           <ImageUpload
-            label={`Foto ou arte do trabalho ${index + 1}`}
+            label={`Foto ou Arte do trabalho ${index + 1}`}
             value={url}
             onUploaded={(novaUrl) => atualizarImagem(index, novaUrl)}
           />
@@ -221,7 +221,7 @@ export function ServicoForm({
         {imagens.map((url, index) => (
           <div key={index}>
             <ImageUpload
-              label={`Foto ou arte do trabalho ${index + 1}`}
+              label={`Foto ou Arte do trabalho ${index + 1}`}
               value={url}
               onUploaded={(novaUrl) => atualizarImagem(index, novaUrl)}
             />
