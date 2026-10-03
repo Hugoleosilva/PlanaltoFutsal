@@ -165,7 +165,7 @@ export async function ElencoSection({
 
           return (
             <div className="mt-3">
-              <Carousel>
+              <Carousel paginas>
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
                     <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
