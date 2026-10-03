@@ -19,10 +19,6 @@
      border-surface/10) — branco no escuro, preto no claro, pra sempre destacar
      um pouco contra o fundo de base. */
   --surface: 0 0% 100%;
-  /* Fundo do cabeçalho/rodapé fixos (PublicNav/PublicFooter) — preto no
-     escuro (se mistura com a página) e vermelho da marca no claro. O texto
-     em cima deles é sempre branco/cinza fixo, nos dois temas. */
-  --chrome: 0 0% 4%;
   --radius: 0.75rem;
 
   --font-heading: var(--font-oswald, sans-serif);
@@ -40,7 +36,6 @@
   --card-foreground: 0 0% 9%;
   --border: 0 0% 82%;
   --surface: 0 0% 0%;
-  --chrome: 357 68% 44%;
 }
 
 * {

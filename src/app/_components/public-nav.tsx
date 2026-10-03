@@ -49,7 +49,7 @@ export function PublicNav(): React.ReactElement {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-chrome/95 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-surface/10 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 overflow-x-auto px-6 py-3">
         <Link href="/inicio" className="flex shrink-0 items-center gap-2">
           <Image
@@ -59,12 +59,12 @@ export function PublicNav(): React.ReactElement {
             height={28}
             className="rounded-full"
           />
-          <span className="font-heading text-sm font-bold uppercase text-planalto-white">
+          <span className="font-heading text-sm font-bold uppercase text-foreground">
             Planalto Futsal
           </span>
         </Link>
 
-        <nav className="flex shrink-0 gap-4 text-sm text-white/70">
+        <nav className="flex shrink-0 gap-4 text-sm text-muted-foreground">
           {LINKS.map((link) => {
             const ativo = pathname === link.href;
             return (
@@ -73,8 +73,8 @@ export function PublicNav(): React.ReactElement {
                 ref={ativo ? linkAtivoRef : undefined}
                 href={link.href}
                 className={cn(
-                  "whitespace-nowrap hover:text-planalto-white",
-                  ativo && "font-semibold text-planalto-white",
+                  "whitespace-nowrap hover:text-foreground",
+                  ativo && "font-semibold text-foreground",
                 )}
               >
                 {link.label}
@@ -84,7 +84,7 @@ export function PublicNav(): React.ReactElement {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
-          <ThemeToggle sobreCor />
+          <ThemeToggle />
           {status === "authenticated" && session.user ? (
             <>
               {(() => {
@@ -94,13 +94,13 @@ export function PublicNav(): React.ReactElement {
                     <Link
                       key={dashboard.href}
                       href={dashboard.href}
-                      className="whitespace-nowrap text-sm text-white/70 hover:text-planalto-white"
+                      className="whitespace-nowrap text-sm text-muted-foreground hover:text-foreground"
                     >
                       {dashboard.label}
                     </Link>
                   ))
                 ) : (
-                  <span className="whitespace-nowrap text-sm text-white/70">
+                  <span className="whitespace-nowrap text-sm text-muted-foreground">
                     Olá, {session.user.name}
                   </span>
                 );
@@ -108,7 +108,7 @@ export function PublicNav(): React.ReactElement {
               <button
                 type="button"
                 onClick={() => signOut({ callbackUrl: "/inicio" })}
-                className="rounded-md border border-white/20 px-3 py-1.5 text-sm font-semibold text-planalto-white hover:bg-white/10"
+                className="rounded-md border border-surface/20 px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-surface/10"
               >
                 Sair
               </button>
@@ -117,13 +117,13 @@ export function PublicNav(): React.ReactElement {
             <>
               <Link
                 href="/login"
-                className="rounded-md border border-white bg-white px-3 py-1.5 text-sm font-semibold text-planalto-red hover:bg-white/90"
+                className="rounded-md bg-planalto-red px-3 py-1.5 text-sm font-semibold text-white hover:bg-planalto-red-dark"
               >
                 Fazer Login
               </Link>
               <Link
                 href="/cadastro"
-                className="rounded-md border border-white/20 px-3 py-1.5 text-sm font-semibold text-planalto-white hover:bg-white/10"
+                className="rounded-md border border-surface/20 px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-surface/10"
               >
                 Criar conta
               </Link>
