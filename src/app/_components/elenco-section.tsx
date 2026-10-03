@@ -22,9 +22,8 @@ function paginar<T>(itens: T[], tamanho: number): T[][] {
   return paginas;
 }
 
-function completarLinha<T>(pagina: T[]): (T | null)[] {
-  const resto = pagina.length % 3;
-  const faltam = resto === 0 ? 0 : 3 - resto;
+function completarPagina<T>(pagina: T[], tamanho: number): (T | null)[] {
+  const faltam = Math.max(0, tamanho - pagina.length);
   return [...pagina, ...Array<null>(faltam).fill(null)];
 }
 
@@ -170,7 +169,7 @@ export async function ElencoSection({
                 {paginas.map((pagina, indice) => (
                   <div key={indice} className="w-full shrink-0 snap-start">
                     <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-                      {emOrdemDeColuna(completarLinha(pagina), 3).map((atleta, posicao) =>
+                      {emOrdemDeColuna(completarPagina(pagina, TAMANHO_PAGINA), 3).map((atleta, posicao) =>
                         atleta ? (
                           <AtletaCard key={atleta.id} atleta={atleta} />
                         ) : (
