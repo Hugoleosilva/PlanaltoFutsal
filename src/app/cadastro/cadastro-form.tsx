@@ -31,7 +31,7 @@ export function CadastroForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
     >
       <div>
         <h1 className="font-heading text-2xl font-bold text-planalto-white">Criar conta</h1>

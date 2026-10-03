@@ -44,7 +44,7 @@ export function RedefinirSenhaForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
     >
       <input type="hidden" name="token" value={token} />
 
