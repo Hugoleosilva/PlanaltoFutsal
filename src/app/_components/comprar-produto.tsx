@@ -80,7 +80,7 @@ export function ComprarProduto({
               href={linkWhatsappDiretor(diretor.contato, nomeProduto)}
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-md bg-white/10 px-2.5 py-1.5 text-center text-xs font-semibold text-white hover:bg-white/20"
+              className="block rounded-md bg-surface/10 px-2.5 py-1.5 text-center text-xs font-semibold text-white hover:bg-surface/20"
             >
               {diretor.nome}
             </a>
@@ -94,14 +94,14 @@ export function ComprarProduto({
             // eslint-disable-next-line @next/next/no-img-element
             <img src={qrCodeUrl} alt="QR Code Pix" width={160} height={160} />
           ) : (
-            <div className="flex h-[160px] w-[160px] items-center justify-center text-xs text-planalto-gray">
+            <div className="flex h-[160px] w-[160px] items-center justify-center text-xs text-muted-foreground">
               Gerando QR Code...
             </div>
           )}
           <button
             type="button"
             onClick={handleCopiar}
-            className="flex items-center gap-1.5 text-xs font-semibold text-planalto-white underline"
+            className="flex items-center gap-1.5 text-xs font-semibold text-foreground underline"
           >
             {copiado ? <Check size={14} /> : <Copy size={14} />}
             {copiado ? "Copiado!" : "Copiar código Pix"}

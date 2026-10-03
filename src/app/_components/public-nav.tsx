@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { cn } from "@/shared/utils/cn";
+import { ThemeToggle } from "./theme-toggle";
 
 const LINKS = [
   { href: "/historia", label: "História" },
@@ -48,7 +49,7 @@ export function PublicNav(): React.ReactElement {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-white/10 bg-planalto-black/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-surface/10 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 overflow-x-auto px-6 py-3">
         <Link href="/inicio" className="flex shrink-0 items-center gap-2">
           <Image
@@ -58,12 +59,12 @@ export function PublicNav(): React.ReactElement {
             height={28}
             className="rounded-full"
           />
-          <span className="font-heading text-sm font-bold uppercase text-planalto-white">
+          <span className="font-heading text-sm font-bold uppercase text-foreground">
             Planalto Futsal
           </span>
         </Link>
 
-        <nav className="flex shrink-0 gap-4 text-sm text-planalto-gray">
+        <nav className="flex shrink-0 gap-4 text-sm text-muted-foreground">
           {LINKS.map((link) => {
             const ativo = pathname === link.href;
             return (
@@ -72,8 +73,8 @@ export function PublicNav(): React.ReactElement {
                 ref={ativo ? linkAtivoRef : undefined}
                 href={link.href}
                 className={cn(
-                  "whitespace-nowrap hover:text-planalto-white",
-                  ativo && "font-semibold text-planalto-white",
+                  "whitespace-nowrap hover:text-foreground",
+                  ativo && "font-semibold text-foreground",
                 )}
               >
                 {link.label}
@@ -83,6 +84,7 @@ export function PublicNav(): React.ReactElement {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
+          <ThemeToggle />
           {status === "authenticated" && session.user ? (
             <>
               {(() => {
@@ -92,13 +94,13 @@ export function PublicNav(): React.ReactElement {
                     <Link
                       key={dashboard.href}
                       href={dashboard.href}
-                      className="whitespace-nowrap text-sm text-planalto-gray hover:text-planalto-white"
+                      className="whitespace-nowrap text-sm text-muted-foreground hover:text-foreground"
                     >
                       {dashboard.label}
                     </Link>
                   ))
                 ) : (
-                  <span className="whitespace-nowrap text-sm text-planalto-gray">
+                  <span className="whitespace-nowrap text-sm text-muted-foreground">
                     Olá, {session.user.name}
                   </span>
                 );
@@ -106,7 +108,7 @@ export function PublicNav(): React.ReactElement {
               <button
                 type="button"
                 onClick={() => signOut({ callbackUrl: "/inicio" })}
-                className="rounded-md border border-white/20 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white/10"
+                className="rounded-md border border-surface/20 px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-surface/10"
               >
                 Sair
               </button>
@@ -121,7 +123,7 @@ export function PublicNav(): React.ReactElement {
               </Link>
               <Link
                 href="/cadastro"
-                className="rounded-md border border-white/20 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white/10"
+                className="rounded-md border border-surface/20 px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-surface/10"
               >
                 Criar conta
               </Link>

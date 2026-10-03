@@ -12,9 +12,9 @@ export async function ProximoJogoTicker(): Promise<React.ReactElement> {
   if (!proximoJogo) return <></>;
 
   return (
-    <div className="border-b border-white/10 bg-card">
+    <div className="border-b border-surface/10 bg-card">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-6 py-3 text-sm">
-        <p className="text-planalto-white">
+        <p className="text-foreground">
           <span className="font-semibold text-planalto-red">Próximo jogo:</span>{" "}
           {tituloConfronto(proximoJogo.adversario, proximoJogo.mandante)} · {proximoJogo.local}
         </p>

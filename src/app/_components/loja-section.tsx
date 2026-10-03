@@ -23,7 +23,7 @@ export async function LojaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="loja" className="mx-auto max-w-5xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
         Loja Virtual
       </h2>
 
@@ -33,7 +33,7 @@ export async function LojaSection(): Promise<React.ReactElement> {
             {destaques.map((produto) => (
               <div
                 key={produto.id}
-                className="relative h-64 w-64 shrink-0 overflow-hidden rounded-lg bg-white/5"
+                className="relative h-64 w-64 shrink-0 overflow-hidden rounded-lg bg-surface/5"
               >
                 <Image
                   src={produto.imagensUrls[0] ?? ""}
@@ -53,14 +53,14 @@ export async function LojaSection(): Promise<React.ReactElement> {
 
       {semPreco.length > 0 ? (
         <div className="mt-10">
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-planalto-gray">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Vitrine
           </h3>
           <Carousel>
             {semPreco.map((produto) => (
               <div
                 key={produto.id}
-                className="relative aspect-square w-48 shrink-0 snap-start overflow-hidden rounded-md bg-white/5"
+                className="relative aspect-square w-48 shrink-0 snap-start overflow-hidden rounded-md bg-surface/5"
               >
                 <Image
                   src={produto.imagensUrls[0] ?? ""}
@@ -77,7 +77,7 @@ export async function LojaSection(): Promise<React.ReactElement> {
 
       {comPreco.length > 0 ? (
         <div className="mt-10">
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-planalto-gray">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Peças à venda
           </h3>
           <Carousel>

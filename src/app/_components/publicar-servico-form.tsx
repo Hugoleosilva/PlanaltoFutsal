@@ -39,7 +39,7 @@ export function PublicarServicoForm(): React.ReactElement {
   if (state.sucesso) {
     return (
       <Card className="text-center">
-        <p className="text-planalto-white">
+        <p className="text-foreground">
           Serviço enviado! Fica pendente até a diretoria aprovar. Valeu por divulgar seu trabalho 🙌
         </p>
       </Card>
@@ -104,7 +104,7 @@ export function PublicarServicoForm(): React.ReactElement {
           <Label>Formas de pagamento</Label>
           <div className="flex flex-wrap gap-4">
             {FORMAS_PAGAMENTO.map((forma) => (
-              <label key={forma.value} className="flex items-center gap-2 text-sm text-planalto-gray">
+              <label key={forma.value} className="flex items-center gap-2 text-sm text-muted-foreground">
                 <input
                   type="checkbox"
                   name="formasPagamento"

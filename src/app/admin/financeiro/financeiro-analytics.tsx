@@ -210,20 +210,20 @@ function ChartCard({
   const [aberto, setAberto] = useState(true);
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card">
+    <div className="rounded-lg border border-surface/10 bg-card">
       <button
         type="button"
         onClick={() => setAberto((prev) => !prev)}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
-        <h2 className="font-heading text-lg font-bold text-planalto-white">{titulo}</h2>
-        <span className="flex items-center gap-2 text-sm text-planalto-gray">
+        <h2 className="font-heading text-lg font-bold text-foreground">{titulo}</h2>
+        <span className="flex items-center gap-2 text-sm text-muted-foreground">
           {aberto ? "Ocultar" : "Mostrar"}
           <ChevronDown size={18} className={cn("transition-transform", aberto && "rotate-180")} />
         </span>
       </button>
 
-      {aberto ? <div className="border-t border-white/10 px-6 py-4">{children}</div> : null}
+      {aberto ? <div className="border-t border-surface/10 px-6 py-4">{children}</div> : null}
     </div>
   );
 }
@@ -244,8 +244,8 @@ function TooltipCombo({
   const saldo = payload.find((p) => p.dataKey === "saldo")?.value ?? 0;
 
   return (
-    <div className="rounded-md border border-white/10 bg-[#1a1a19] px-3 py-2 text-xs shadow-lg">
-      <p className="font-semibold text-planalto-white">{label}</p>
+    <div className="rounded-md border border-surface/10 bg-[#1a1a19] px-3 py-2 text-xs shadow-lg">
+      <p className="font-semibold text-foreground">{label}</p>
       <p style={{ color: COR_RECEITA }}>Receita: {formatBRL(receita)}</p>
       <p style={{ color: COR_DESPESA }}>Despesa: {formatBRL(Math.abs(despesa))}</p>
       <p style={{ color: COR_SALDO }}>Saldo acumulado: {formatBRL(saldo)}</p>
@@ -276,8 +276,8 @@ export function FinanceiroAnalytics({
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="font-heading text-lg font-bold text-planalto-white">Balanço Financeiro</h2>
-          <p className="text-xs text-planalto-gray">{rotuloPeriodo}</p>
+          <h2 className="font-heading text-lg font-bold text-foreground">Balanço Financeiro</h2>
+          <p className="text-xs text-muted-foreground">{rotuloPeriodo}</p>
         </div>
         <Select
           value={selecaoPeriodo}
@@ -299,7 +299,7 @@ export function FinanceiroAnalytics({
       </div>
 
       <ChartCard titulo="Receitas, Despesas e Saldo Acumulado">
-        <div className="mb-3 flex flex-wrap gap-4 text-xs text-planalto-gray">
+        <div className="mb-3 flex flex-wrap gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: COR_RECEITA }} />
             Receita
@@ -381,16 +381,16 @@ export function FinanceiroAnalytics({
           <div className="flex-1 space-y-2">
             {origemReceita.map((item, index) => (
               <div key={item.key} className="flex items-center justify-between gap-3 text-sm">
-                <span className="flex items-center gap-2 text-planalto-gray">
+                <span className="flex items-center gap-2 text-muted-foreground">
                   <span
                     className="h-2.5 w-2.5 rounded-sm"
                     style={{ backgroundColor: CORES_ORIGEM[index % CORES_ORIGEM.length] }}
                   />
                   {item.label}
                 </span>
-                <span className="font-medium text-planalto-white">
+                <span className="font-medium text-foreground">
                   {formatBRL(item.valor)}{" "}
-                  <span className="text-xs text-planalto-gray">({item.pct.toFixed(1)}%)</span>
+                  <span className="text-xs text-muted-foreground">({item.pct.toFixed(1)}%)</span>
                 </span>
               </div>
             ))}
@@ -400,7 +400,7 @@ export function FinanceiroAnalytics({
 
       <ChartCard titulo="Despesas por categoria">
         {despesasPorCategoria.length === 0 ? (
-          <p className="text-sm text-planalto-gray">Nenhuma despesa nesse período.</p>
+          <p className="text-sm text-muted-foreground">Nenhuma despesa nesse período.</p>
         ) : (
           <ResponsiveContainer width="100%" height={Math.max(120, despesasPorCategoria.length * 42)}>
             <BarChart
@@ -442,9 +442,9 @@ export function FinanceiroAnalytics({
         {despesasPorCategoria.length > 0 ? (
           <div className="mt-3 space-y-1">
             {despesasPorCategoria.map((item) => (
-              <div key={item.categoria} className="flex items-center justify-between text-xs text-planalto-gray">
+              <div key={item.categoria} className="flex items-center justify-between text-xs text-muted-foreground">
                 <span>{item.categoria}</span>
-                <span className="font-medium text-planalto-white">
+                <span className="font-medium text-foreground">
                   {formatBRL(item.valor)} ({item.pct.toFixed(1)}%)
                 </span>
               </div>

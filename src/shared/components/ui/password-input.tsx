@@ -16,7 +16,7 @@ export const PasswordInput = forwardRef<
         ref={ref}
         type={visivel ? "text" : "password"}
         className={cn(
-          "w-full rounded-md border border-white/10 bg-transparent px-3 py-2 pr-10 text-sm text-planalto-white outline-none placeholder:text-planalto-gray focus:border-planalto-red",
+          "w-full rounded-md border border-surface/10 bg-transparent px-3 py-2 pr-10 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-planalto-red",
           className,
         )}
         {...props}
@@ -25,7 +25,7 @@ export const PasswordInput = forwardRef<
         type="button"
         onClick={() => setVisivel((prev) => !prev)}
         aria-label={visivel ? "Ocultar senha" : "Mostrar senha"}
-        className="absolute inset-y-0 right-0 flex items-center px-3 text-planalto-gray hover:text-planalto-white"
+        className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
       >
         {visivel ? <EyeOff size={16} /> : <Eye size={16} />}
       </button>

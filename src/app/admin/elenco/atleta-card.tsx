@@ -89,7 +89,7 @@ export function AtletaCard({
 
   if (editando) {
     return (
-      <div className="rounded-lg border border-white/10 bg-card p-4">
+      <div className="rounded-lg border border-surface/10 bg-card p-4">
         <form action={editarAction} className="space-y-3">
           <input type="hidden" name="atletaId" value={id} />
 
@@ -172,10 +172,10 @@ export function AtletaCard({
   }
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card p-4">
+    <div className="rounded-lg border border-surface/10 bg-card p-4">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-semibold text-planalto-white">{apelido}</p>
+          <p className="font-semibold text-foreground">{apelido}</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -183,7 +183,7 @@ export function AtletaCard({
             type="button"
             onClick={() => setEditando(true)}
             aria-label="Editar atleta"
-            className="text-planalto-gray transition hover:text-planalto-white"
+            className="text-muted-foreground transition hover:text-foreground"
           >
             <Pencil size={16} />
           </button>
@@ -194,7 +194,7 @@ export function AtletaCard({
               type="submit"
               disabled={isDesativando}
               aria-label="Desativar atleta"
-              className="text-planalto-gray transition hover:text-planalto-red disabled:opacity-50"
+              className="text-muted-foreground transition hover:text-planalto-red disabled:opacity-50"
             >
               <UserX size={16} />
             </button>
@@ -223,7 +223,7 @@ export function AtletaCard({
       ) : null}
 
       {!temAcesso ? (
-        <div className="mt-4 border-t border-white/10 pt-4">
+        <div className="mt-4 border-t border-surface/10 pt-4">
           {!mostrarAcesso ? (
             <Button variant="secondary" onClick={() => setMostrarAcesso(true)}>
               <KeyRound size={14} /> Criar acesso de login

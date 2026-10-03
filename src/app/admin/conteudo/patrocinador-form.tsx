@@ -51,13 +51,13 @@ function EditarPatrocinadorControl({
           alt=""
           width={64}
           height={48}
-          className="h-12 w-16 shrink-0 rounded-md bg-white/10 object-contain"
+          className="h-12 w-16 shrink-0 rounded-md bg-surface/10 object-contain"
           unoptimized
         />
         <div className="flex-1">
-          <p className="text-sm text-planalto-white">
+          <p className="text-sm text-foreground">
             {patrocinador.nome}{" "}
-            <span className="text-xs text-planalto-gray">
+            <span className="text-xs text-muted-foreground">
               (ordem {patrocinador.ordem} · {patrocinador.escala}%)
             </span>
           </p>
@@ -65,7 +65,7 @@ function EditarPatrocinadorControl({
             <button
               type="button"
               onClick={() => setEditando(true)}
-              className="text-xs font-semibold text-planalto-white underline hover:text-planalto-red"
+              className="text-xs font-semibold text-foreground underline hover:text-planalto-red"
             >
               Editar
             </button>
@@ -113,13 +113,13 @@ function EditarPatrocinadorControl({
       <div className="space-y-1">
         <Label>Ordem de exibição</Label>
         <Input name="ordem" type="number" min="0" defaultValue={patrocinador.ordem} />
-        <p className="text-xs text-planalto-gray">Quanto menor o número, mais cedo aparece.</p>
+        <p className="text-xs text-muted-foreground">Quanto menor o número, mais cedo aparece.</p>
       </div>
 
       <div className="space-y-1">
         <Label>Tamanho do logo (%)</Label>
         <Input name="escala" type="number" min="50" max="200" defaultValue={patrocinador.escala} />
-        <p className="text-xs text-planalto-gray">
+        <p className="text-xs text-muted-foreground">
           100% é o padrão. Aumente ou diminua pra igualar o tamanho visual entre logos diferentes.
         </p>
       </div>
@@ -187,7 +187,7 @@ export function PatrocinadorForm({
         </div>
 
         {state.error ? <p className="text-sm text-planalto-red">{state.error}</p> : null}
-        {!logoUrl ? <p className="text-xs text-planalto-gray">Envie a logo antes de salvar.</p> : null}
+        {!logoUrl ? <p className="text-xs text-muted-foreground">Envie a logo antes de salvar.</p> : null}
 
         <Button type="submit" disabled={isPending || !logoUrl}>
           {isPending ? "Salvando..." : "Adicionar patrocinador"}
@@ -195,14 +195,14 @@ export function PatrocinadorForm({
       </form>
 
       {patrocinadores.length > 0 ? (
-        <div className="mt-4 border-t border-white/10 pt-4">
+        <div className="mt-4 border-t border-surface/10 pt-4">
           <button
             type="button"
             onClick={() => setMostrarLista((prev) => !prev)}
-            className="flex w-full items-center justify-between text-sm font-semibold text-planalto-white"
+            className="flex w-full items-center justify-between text-sm font-semibold text-foreground"
           >
             Editar patrocinadores ({patrocinadores.length})
-            <span className="text-xs font-normal text-planalto-gray">
+            <span className="text-xs font-normal text-muted-foreground">
               {mostrarLista ? "Ocultar" : "Mostrar"}
             </span>
           </button>

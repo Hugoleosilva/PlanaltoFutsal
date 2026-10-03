@@ -8,8 +8,8 @@ export async function PatrocinadoresSection(): Promise<React.ReactElement> {
   if (patrocinadores.length === 0) return <></>;
 
   return (
-    <section id="patrocinadores" className="bg-planalto-black pt-6 pb-0">
-      <h2 className="mx-auto max-w-6xl px-6 text-center font-heading text-3xl font-bold text-planalto-gray">
+    <section id="patrocinadores" className="bg-background pt-6 pb-0">
+      <h2 className="mx-auto max-w-6xl px-6 text-center font-heading text-3xl font-bold text-muted-foreground">
         Empresas Parceiras que Acreditam na Gente e Fortalecem Nossa Comunidade
       </h2>
 

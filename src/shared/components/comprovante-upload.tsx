@@ -53,7 +53,7 @@ export function ComprovanteUpload({
           href={value}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-sm text-planalto-white hover:border-planalto-red"
+          className="flex items-center gap-2 rounded-md border border-surface/10 px-3 py-2 text-sm text-foreground hover:border-planalto-red"
         >
           <FileText size={16} />
           Ver comprovante anexado
@@ -74,7 +74,7 @@ export function ComprovanteUpload({
           type="button"
           onClick={onRemover}
           aria-label="Remover comprovante"
-          className="text-planalto-gray hover:text-planalto-red"
+          className="text-muted-foreground hover:text-planalto-red"
         >
           <X size={16} />
         </button>

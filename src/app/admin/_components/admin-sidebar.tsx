@@ -22,6 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/shared/utils/cn";
+import { ThemeToggle } from "../../_components/theme-toggle";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Visão Geral", icon: LayoutDashboard },
@@ -47,7 +48,7 @@ export function AdminSidebar(): React.ReactElement {
 
   return (
     <>
-      <header className="flex items-center justify-between border-b border-white/10 bg-card px-4 py-3 lg:hidden">
+      <header className="flex items-center justify-between border-b border-surface/10 bg-card px-4 py-3 lg:hidden">
         <div className="flex items-center gap-2">
           <Image
             src="/images/marca/escudo-planalto-futsal.png"
@@ -56,18 +57,21 @@ export function AdminSidebar(): React.ReactElement {
             height={28}
             className="rounded-full"
           />
-          <p className="font-heading text-sm font-bold uppercase text-planalto-white">
+          <p className="font-heading text-sm font-bold uppercase text-foreground">
             Planalto Futsal
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setAberto(true)}
-          aria-label="Abrir menu"
-          className="text-planalto-white"
-        >
-          <Menu size={24} />
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setAberto(true)}
+            aria-label="Abrir menu"
+            className="text-foreground"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
       </header>
 
       {aberto ? (
@@ -80,7 +84,7 @@ export function AdminSidebar(): React.ReactElement {
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col border-r border-white/10 bg-card transition-transform duration-200 lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col border-r border-surface/10 bg-card transition-transform duration-200 lg:static lg:translate-x-0",
           aberto ? "translate-x-0" : "-translate-x-full",
         )}
       >
@@ -93,7 +97,7 @@ export function AdminSidebar(): React.ReactElement {
               height={36}
               className="rounded-full"
             />
-            <p className="font-heading text-sm font-bold uppercase text-planalto-white">
+            <p className="font-heading text-sm font-bold uppercase text-foreground">
               Planalto Futsal
             </p>
           </div>
@@ -101,7 +105,7 @@ export function AdminSidebar(): React.ReactElement {
             type="button"
             onClick={() => setAberto(false)}
             aria-label="Fechar menu"
-            className="text-planalto-gray lg:hidden"
+            className="text-muted-foreground lg:hidden"
           >
             <X size={20} />
           </button>
@@ -120,7 +124,7 @@ export function AdminSidebar(): React.ReactElement {
                   "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
                   isActive
                     ? "bg-planalto-red text-white"
-                    : "text-planalto-gray hover:bg-white/5 hover:text-planalto-white",
+                    : "text-muted-foreground hover:bg-surface/5 hover:text-foreground",
                 )}
               >
                 <Icon size={18} />
@@ -129,7 +133,7 @@ export function AdminSidebar(): React.ReactElement {
             );
           })}
 
-          <p className="px-3 pb-1 pt-4 text-xs uppercase tracking-wide text-planalto-gray">
+          <p className="px-3 pb-1 pt-4 text-xs uppercase tracking-wide text-muted-foreground">
             Ir Para
           </p>
           {LINKS_SITE.map(({ href, label, icon: Icon }) => (
@@ -137,7 +141,7 @@ export function AdminSidebar(): React.ReactElement {
               key={href}
               href={href}
               onClick={() => setAberto(false)}
-              className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-planalto-gray transition hover:bg-white/5 hover:text-planalto-white"
+              className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-surface/5 hover:text-foreground"
             >
               <Icon size={18} />
               {label}
@@ -145,14 +149,17 @@ export function AdminSidebar(): React.ReactElement {
           ))}
         </nav>
 
-        <button
-          type="button"
-          onClick={() => signOut({ callbackUrl: "/inicio" })}
-          className="flex items-center gap-3 border-t border-white/10 px-5 py-4 text-sm text-planalto-gray transition hover:text-planalto-white"
-        >
-          <LogOut size={18} />
-          Sair
-        </button>
+        <div className="flex items-center justify-between gap-3 border-t border-surface/10 px-5 py-4">
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/inicio" })}
+            className="flex items-center gap-3 text-sm text-muted-foreground transition hover:text-foreground"
+          >
+            <LogOut size={18} />
+            Sair
+          </button>
+          <ThemeToggle />
+        </div>
       </aside>
     </>
   );

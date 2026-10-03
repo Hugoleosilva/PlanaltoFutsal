@@ -45,9 +45,9 @@ export function LoginForm(): React.ReactElement {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
     >
-      <h1 className="font-heading text-2xl font-bold text-planalto-white">Entrar</h1>
+      <h1 className="font-heading text-2xl font-bold text-foreground">Entrar</h1>
 
       {verificacao === "ok" ? (
         <p className="rounded-md bg-emerald-900/40 px-3 py-2 text-sm text-emerald-300">
@@ -90,7 +90,7 @@ export function LoginForm(): React.ReactElement {
           </div>
         </div>
         <div className="text-right">
-          <Link href="/esqueci-senha" className="text-xs text-planalto-gray hover:text-planalto-white">
+          <Link href="/esqueci-senha" className="text-xs text-muted-foreground hover:text-foreground">
             Esqueceu a senha?
           </Link>
         </div>
@@ -103,17 +103,17 @@ export function LoginForm(): React.ReactElement {
       </Button>
 
       <div className="space-y-3 pt-1">
-        <p className="text-center text-sm text-planalto-gray">
+        <p className="text-center text-sm text-muted-foreground">
           Não tem conta?{" "}
           <Link
             href="/cadastro"
-            className="font-semibold text-planalto-white underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
+            className="font-semibold text-foreground underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
           >
             Cadastre-se
           </Link>
         </p>
         <p className="text-center">
-          <Link href="/inicio" className="text-xs text-planalto-gray hover:text-planalto-white">
+          <Link href="/inicio" className="text-xs text-muted-foreground hover:text-foreground">
             Voltar ao início
           </Link>
         </p>

@@ -17,10 +17,10 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
     <QuadraBackdrop>
       <PublicNav />
       <main className="mx-auto max-w-5xl flex-1 px-6 py-12">
-        <h1 className="text-center font-heading text-3xl font-bold text-planalto-white">
+        <h1 className="text-center font-heading text-3xl font-bold text-foreground">
           Rede de Apoio
         </h1>
-        <p className="mx-auto mt-2 max-w-xl text-center text-planalto-gray">
+        <p className="mx-auto mt-2 max-w-xl text-center text-muted-foreground">
           Trabalhos e serviços divulgados por gente da nossa torcida e do nosso elenco.
         </p>
 
@@ -33,8 +33,8 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
             <PublicarServicoForm />
           ) : (
             <Card className="text-center">
-              <p className="text-planalto-white">Quer divulgar seu trabalho aqui?</p>
-              <p className="mt-1 text-sm text-planalto-gray">
+              <p className="text-foreground">Quer divulgar seu trabalho aqui?</p>
+              <p className="mt-1 text-sm text-muted-foreground">
                 Só quem tem conta no site pode publicar. É rápido e grátis.
               </p>
               <div className="mt-4 flex justify-center gap-3">
@@ -46,7 +46,7 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
                 </Link>
                 <Link
                   href="/cadastro"
-                  className="rounded-md border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+                  className="rounded-md border border-surface/20 px-4 py-2 text-sm font-semibold text-foreground hover:bg-surface/10"
                 >
                   Criar conta
                 </Link>

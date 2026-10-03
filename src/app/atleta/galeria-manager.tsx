@@ -45,8 +45,8 @@ export function GaleriaManager({
   return (
     <Card className="space-y-6">
       <div>
-        <h2 className="font-heading text-lg font-bold text-planalto-white">Fotos</h2>
-        <p className="mt-1 text-xs text-planalto-gray">
+        <h2 className="font-heading text-lg font-bold text-foreground">Fotos</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
           Foto principal + até {MAX_FOTOS_GALERIA} fotos jogando.
         </p>
       </div>
@@ -54,13 +54,13 @@ export function GaleriaManager({
       <ImageUpload label="Foto principal" value={fotoPrincipal} onUploaded={handlePrincipalUploaded} />
 
       <div>
-        <p className="mb-2 text-sm text-planalto-gray">
+        <p className="mb-2 text-sm text-muted-foreground">
           Galeria ({galeria.length}/{MAX_FOTOS_GALERIA})
         </p>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {galeria.map((url) => (
-            <div key={url} className="relative aspect-square overflow-hidden rounded-md bg-white/5">
+            <div key={url} className="relative aspect-square overflow-hidden rounded-md bg-surface/5">
               <Image src={url} alt="" fill className="object-cover object-top" unoptimized />
               <button
                 type="button"

@@ -23,8 +23,8 @@ export function AtletaForm(): React.ReactElement {
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Novo Atleta</h2>
-      <p className="mt-1 text-xs text-planalto-gray">
+      <h2 className="font-heading text-lg font-bold text-foreground">Novo Atleta</h2>
+      <p className="mt-1 text-xs text-muted-foreground">
         Informe o e-mail ou WhatsApp de contato: quando essa pessoa se cadastrar no site com o
         mesmo contato, ela já vira atleta automaticamente. A foto de perfil pode ser adicionada
         depois no card do atleta.

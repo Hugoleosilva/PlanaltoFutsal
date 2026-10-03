@@ -46,7 +46,7 @@ export function ImageUpload({ label, value, onUploaded }: ImageUploadProps): Rea
 
   return (
     <div className="space-y-2">
-      {label ? <span className="text-sm text-planalto-gray">{label}</span> : null}
+      {label ? <span className="text-sm text-muted-foreground">{label}</span> : null}
 
       <div className="flex items-center gap-3">
         {value ? (
@@ -58,7 +58,7 @@ export function ImageUpload({ label, value, onUploaded }: ImageUploadProps): Rea
             className="h-16 w-16 rounded-md object-cover object-top"
           />
         ) : (
-          <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed border-white/20 text-xs text-planalto-gray">
+          <div className="flex h-16 w-16 items-center justify-center rounded-md border border-dashed border-surface/20 text-xs text-muted-foreground">
             sem foto
           </div>
         )}

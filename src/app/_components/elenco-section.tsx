@@ -47,11 +47,11 @@ function emOrdemDeColuna<T>(itens: T[], colunas: number): T[] {
 function AtletaCardVazio(): React.ReactElement {
   return (
     <Card className="flex gap-3 p-4 opacity-40">
-      <div className="h-20 w-20 shrink-0 rounded-lg bg-white/10" />
+      <div className="h-20 w-20 shrink-0 rounded-lg bg-surface/10" />
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-1.5">
-          <p className="font-heading font-bold text-planalto-white">Nome</p>
-          <span className="shrink-0 text-xs text-planalto-gray">· 00 anos</span>
+          <p className="font-heading font-bold text-foreground">Nome</p>
+          <span className="shrink-0 text-xs text-muted-foreground">· 00 anos</span>
         </div>
         <div className="mt-1.5 flex justify-center">
           <Badge tone="neutral">Posição</Badge>
@@ -64,7 +64,7 @@ function AtletaCardVazio(): React.ReactElement {
 function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
   return (
     <Card className="flex gap-3 p-4">
-      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-white/10">
+      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-surface/10">
         {atleta.fotoPrincipalUrl ? (
           <Image
             src={atleta.fotoPrincipalUrl}
@@ -78,8 +78,8 @@ function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
 
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-1.5">
-          <p className="truncate font-heading font-bold text-planalto-white">{atleta.apelido}</p>
-          <span className="shrink-0 text-xs text-planalto-gray">· {atleta.idade} anos</span>
+          <p className="truncate font-heading font-bold text-foreground">{atleta.apelido}</p>
+          <span className="shrink-0 text-xs text-muted-foreground">· {atleta.idade} anos</span>
         </div>
         {atleta.posicao ? (
           <div className="mt-1.5 flex justify-center">
@@ -88,7 +88,7 @@ function AtletaCard({ atleta }: { atleta: Atleta }): React.ReactElement {
             </Badge>
           </div>
         ) : null}
-        {atleta.bio ? <p className="mt-1.5 line-clamp-2 text-xs text-planalto-gray">{atleta.bio}</p> : null}
+        {atleta.bio ? <p className="mt-1.5 line-clamp-2 text-xs text-muted-foreground">{atleta.bio}</p> : null}
       </div>
     </Card>
   );
@@ -121,14 +121,14 @@ export async function ElencoSection({
 
   return (
     <section id="elenco" className="mx-auto max-w-5xl px-6 py-3">
-      <h2 className="text-center font-heading text-2xl font-bold text-planalto-white">Nosso Elenco</h2>
+      <h2 className="text-center font-heading text-2xl font-bold text-foreground">Nosso Elenco</h2>
 
       {campeonatosAtivos.length > 0 ? (
         <div className="mt-3 flex flex-wrap justify-center gap-2">
           {campeonatoSelecionado ? (
             <Link
               href="/elenco"
-              className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-planalto-white transition hover:bg-white/20"
+              className="inline-flex items-center rounded-full bg-surface/10 px-2.5 py-0.5 text-xs font-medium text-foreground transition hover:bg-surface/20"
             >
               Todos os atletas
             </Link>
@@ -143,7 +143,7 @@ export async function ElencoSection({
                   "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition",
                   ativo
                     ? "bg-planalto-red text-white"
-                    : "bg-white/10 text-planalto-white hover:bg-white/20",
+                    : "bg-surface/10 text-foreground hover:bg-surface/20",
                 )}
               >
                 {campeonato.nome}
@@ -154,11 +154,11 @@ export async function ElencoSection({
       ) : null}
 
       {campeonatoSelecionado && atletas.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-planalto-gray">
+        <p className="mt-8 text-center text-sm text-muted-foreground">
           Nenhum atleta vinculado a esse campeonato ainda.
         </p>
       ) : atletas.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-planalto-gray">Elenco em atualização.</p>
+        <p className="mt-8 text-center text-sm text-muted-foreground">Elenco em atualização.</p>
       ) : (
         (() => {
           const paginas = paginar(atletas, TAMANHO_PAGINA);

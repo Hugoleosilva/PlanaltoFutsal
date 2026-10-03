@@ -25,7 +25,7 @@ export function RadioMiniBar(): React.ReactElement {
   const { estacao, tocando, alternarPlayPause } = useRadioPlayer();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/10 bg-planalto-black/95 backdrop-blur">
+    <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-surface/10 bg-background/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2">
         <button
           type="button"
@@ -38,8 +38,8 @@ export function RadioMiniBar(): React.ReactElement {
 
         <OndaSonora ativa={tocando} />
 
-        <p className="truncate text-sm text-planalto-white">
-          <span className="text-planalto-gray">Web Rádio ·</span> {estacao.label}
+        <p className="truncate text-sm text-foreground">
+          <span className="text-muted-foreground">Web Rádio ·</span> {estacao.label}
         </p>
       </div>
     </div>

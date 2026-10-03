@@ -16,7 +16,7 @@ export function ExcluirJogoButton({ id }: { id: string }): React.ReactElement {
         type="submit"
         disabled={isPending}
         aria-label="Excluir jogo"
-        className="text-planalto-gray transition hover:text-planalto-red disabled:opacity-50"
+        className="text-muted-foreground transition hover:text-planalto-red disabled:opacity-50"
       >
         <Trash2 size={16} />
       </button>

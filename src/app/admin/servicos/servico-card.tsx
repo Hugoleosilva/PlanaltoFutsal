@@ -50,7 +50,7 @@ export function ServicoCard({
   const isPending = isAprovando || isRejeitando;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-white/10 bg-card">
+    <div className="overflow-hidden rounded-lg border border-surface/10 bg-card">
       <div className="flex gap-2 bg-black/40 p-2">
         {imagensUrls.map((url, index) => (
           <div key={url} className="relative aspect-square w-full overflow-hidden rounded-md">
@@ -66,8 +66,8 @@ export function ServicoCard({
       </div>
 
       <div className="space-y-2 p-4">
-        <p className="font-semibold text-planalto-white">{titulo}</p>
-        <p className="text-sm text-planalto-gray">{descricao}</p>
+        <p className="font-semibold text-foreground">{titulo}</p>
+        <p className="text-sm text-muted-foreground">{descricao}</p>
         {valores ? <p className="text-sm text-planalto-red">{valores}</p> : null}
 
         <div className="flex flex-wrap gap-1.5">
@@ -77,7 +77,7 @@ export function ServicoCard({
           ))}
         </div>
 
-        <p className="text-xs text-planalto-gray">
+        <p className="text-xs text-muted-foreground">
           {nomeContato} · <span className="whitespace-nowrap">{contato}</span> · {bairro}
         </p>
 

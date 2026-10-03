@@ -51,23 +51,23 @@ export function MovimentacoesList({
   }, [movimentacoes, ordenacao, filtroTipo]);
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card">
+    <div className="rounded-lg border border-surface/10 bg-card">
       <button
         type="button"
         onClick={() => setAberto((prev) => !prev)}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
-        <h2 className="font-heading text-lg font-bold text-planalto-white">
+        <h2 className="font-heading text-lg font-bold text-foreground">
           Movimentações recentes
         </h2>
-        <span className="flex items-center gap-2 text-sm text-planalto-gray">
+        <span className="flex items-center gap-2 text-sm text-muted-foreground">
           {aberto ? "Ocultar" : "Mostrar"}
           <ChevronDown size={18} className={cn("transition-transform", aberto && "rotate-180")} />
         </span>
       </button>
 
       {aberto ? (
-        <div className="border-t border-white/10 px-6 py-4">
+        <div className="border-t border-surface/10 px-6 py-4">
           <div className="flex flex-wrap gap-3">
             <Select
               value={ordenacao}
@@ -90,14 +90,14 @@ export function MovimentacoesList({
           </div>
 
           {listaExibida.length === 0 ? (
-            <p className="mt-4 text-sm text-planalto-gray">Nenhuma movimentação para esse filtro.</p>
+            <p className="mt-4 text-sm text-muted-foreground">Nenhuma movimentação para esse filtro.</p>
           ) : (
             <div className="mt-4 divide-y divide-white/10">
               {listaExibida.map((mov) => (
                 <div key={mov.id} className="flex items-center justify-between gap-4 py-3">
                   <div>
-                    <p className="text-sm font-medium text-planalto-white">{mov.descricao}</p>
-                    <p className="text-xs text-planalto-gray">
+                    <p className="text-sm font-medium text-foreground">{mov.descricao}</p>
+                    <p className="text-xs text-muted-foreground">
                       {formatData(mov.data)} {mov.categoria ? `· ${mov.categoria}` : ""}
                     </p>
                   </div>
@@ -109,7 +109,7 @@ export function MovimentacoesList({
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Ver comprovante"
-                        className="text-planalto-gray hover:text-planalto-white"
+                        className="text-muted-foreground hover:text-foreground"
                       >
                         <FileText size={16} />
                       </a>

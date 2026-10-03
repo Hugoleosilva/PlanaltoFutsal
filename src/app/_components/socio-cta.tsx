@@ -50,20 +50,20 @@ export function SocioCta({
   const valorFinal = valorSelecionado === "OUTRO" ? Number(valorCustom) : valorSelecionado;
 
   return (
-    <div className="flex h-full flex-col rounded-lg border border-white/10 bg-card p-5 text-center">
+    <div className="flex h-full flex-col rounded-lg border border-surface/10 bg-card p-5 text-center">
       <div className="flex items-center justify-center gap-2 text-planalto-red">
         <HeartHandshake size={22} />
-        <p className="font-heading text-lg font-bold text-planalto-white">Planalto Meu Amor!</p>
+        <p className="font-heading text-lg font-bold text-foreground">Planalto Meu Amor!</p>
       </div>
-      <p className="mt-2 text-sm text-planalto-gray">
-        A partir de <span className="font-semibold text-planalto-white">R$ 5</span> por mês você já
+      <p className="mt-2 text-sm text-muted-foreground">
+        A partir de <span className="font-semibold text-foreground">R$ 5</span> por mês você já
         ajuda a manter as despesas do time — arbitragem, uniformes e inscrições em campeonatos.
       </p>
 
       <button
         type="button"
         onClick={() => setSaibaMaisAberto((prev) => !prev)}
-        className="mx-auto mt-3 flex items-center gap-1 text-xs font-semibold text-planalto-white hover:underline"
+        className="mx-auto mt-3 flex items-center gap-1 text-xs font-semibold text-foreground hover:underline"
       >
         Saiba mais
         <ChevronDown size={14} className={cn("transition-transform", saibaMaisAberto && "rotate-180")} />
@@ -71,12 +71,12 @@ export function SocioCta({
 
       {saibaMaisAberto ? (
         <div className="mx-auto mt-3 max-w-md space-y-2 rounded-md bg-black/20 p-4 text-left">
-          <p className="text-xs text-planalto-gray">
+          <p className="text-xs text-muted-foreground">
             Sendo sócio Planalto Meu Amor!, você ajuda a manter o time de pé e ainda fica de olho em
             vantagens que vamos liberando aos poucos:
           </p>
           {VANTAGENS.map(({ icon: Icon, texto }) => (
-            <p key={texto} className="flex items-center gap-2 text-xs text-planalto-white">
+            <p key={texto} className="flex items-center gap-2 text-xs text-foreground">
               <Icon size={14} className="shrink-0 text-planalto-red" />
               {texto}
             </p>
@@ -94,17 +94,17 @@ export function SocioCta({
           </Link>
           <Link
             href="/cadastro"
-            className="rounded-md border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
+            className="rounded-md border border-surface/20 px-4 py-2 text-sm font-semibold text-foreground hover:bg-surface/10"
           >
             Criar conta
           </Link>
         </div>
       ) : jaEhSocio && planoAtual ? (
         <div className="mt-4 space-y-4">
-          <p className="text-sm font-semibold text-planalto-white">
+          <p className="text-sm font-semibold text-foreground">
             Você já é sócio Planalto Meu Amor! Valeu por fazer parte disso! 💜
           </p>
-          <p className="text-xs text-planalto-gray">
+          <p className="text-xs text-muted-foreground">
             Plano atual:{" "}
             {planoAtual.tipo === "MENSAL"
               ? `mensal de ${formatBRL(planoAtual.valor)}, todo dia ${planoAtual.diaVencimento}`
@@ -112,18 +112,18 @@ export function SocioCta({
           </p>
           {pixParaMostrar ? (
             <div>
-              <p className="mb-2 text-xs text-planalto-gray">
+              <p className="mb-2 text-xs text-muted-foreground">
                 Você tem uma contribuição pendente — pague pelo Pix abaixo:
               </p>
               <PixValorFixo valor={pixParaMostrar} />
             </div>
           ) : (
-            <p className="text-xs text-planalto-gray">Nenhuma contribuição pendente no momento.</p>
+            <p className="text-xs text-muted-foreground">Nenhuma contribuição pendente no momento.</p>
           )}
         </div>
       ) : virouSocioAgora ? (
         <div className="mt-4 space-y-3">
-          <p className="text-sm font-semibold text-planalto-white">
+          <p className="text-sm font-semibold text-foreground">
             Prontinho! Você agora é sócio Planalto Meu Amor! 💜 Pague sua primeira contribuição:
           </p>
           <PixValorFixo valor={state.contribuicaoValor!} />
@@ -131,7 +131,7 @@ export function SocioCta({
       ) : (
         <form action={formAction} className="mt-5 space-y-4 text-left">
           {jaEhSocio ? (
-            <p className="text-center text-sm font-semibold text-planalto-white">
+            <p className="text-center text-sm font-semibold text-foreground">
               Você já é sócio Planalto Meu Amor! Falta só escolher seu plano de contribuição:
             </p>
           ) : null}
@@ -150,7 +150,7 @@ export function SocioCta({
                 "rounded-md px-4 py-2 text-sm font-semibold transition",
                 tipo === "MENSAL"
                   ? "bg-planalto-red text-white"
-                  : "bg-white/10 text-planalto-gray hover:bg-white/20",
+                  : "bg-surface/10 text-muted-foreground hover:bg-surface/20",
               )}
             >
               Apoio mensal
@@ -165,7 +165,7 @@ export function SocioCta({
                 "rounded-md px-4 py-2 text-sm font-semibold transition",
                 tipo === "UNICO"
                   ? "bg-planalto-red text-white"
-                  : "bg-white/10 text-planalto-gray hover:bg-white/20",
+                  : "bg-surface/10 text-muted-foreground hover:bg-surface/20",
               )}
             >
               Aporte único
@@ -181,8 +181,8 @@ export function SocioCta({
                 className={cn(
                   "rounded-md border px-3 py-1.5 text-sm font-medium transition",
                   valorSelecionado === valor
-                    ? "border-planalto-red bg-planalto-red/20 text-planalto-white"
-                    : "border-white/10 text-planalto-gray hover:border-white/30",
+                    ? "border-planalto-red bg-planalto-red/20 text-foreground"
+                    : "border-surface/10 text-muted-foreground hover:border-surface/30",
                 )}
               >
                 {formatBRL(valor)}
@@ -194,8 +194,8 @@ export function SocioCta({
               className={cn(
                 "rounded-md border px-3 py-1.5 text-sm font-medium transition",
                 valorSelecionado === "OUTRO"
-                  ? "border-planalto-red bg-planalto-red/20 text-planalto-white"
-                  : "border-white/10 text-planalto-gray hover:border-white/30",
+                  ? "border-planalto-red bg-planalto-red/20 text-foreground"
+                  : "border-surface/10 text-muted-foreground hover:border-surface/30",
               )}
             >
               Outro valor
@@ -204,7 +204,7 @@ export function SocioCta({
 
           {valorSelecionado === "OUTRO" ? (
             <div className="mx-auto flex max-w-[200px] items-center gap-2">
-              <span className="text-sm text-planalto-gray">R$</span>
+              <span className="text-sm text-muted-foreground">R$</span>
               <input
                 type="number"
                 min={1}
@@ -212,14 +212,14 @@ export function SocioCta({
                 value={valorCustom}
                 onChange={(event) => setValorCustom(event.target.value)}
                 placeholder="0,00"
-                className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-1.5 text-sm text-white outline-none focus:border-planalto-red"
+                className="w-full rounded-md border border-surface/10 bg-black/30 px-3 py-1.5 text-sm text-white outline-none focus:border-planalto-red"
               />
             </div>
           ) : null}
 
           {tipo === "MENSAL" ? (
             <div className="mx-auto flex max-w-[240px] items-center justify-center gap-2">
-              <span className="text-xs text-planalto-gray">Todo dia</span>
+              <span className="text-xs text-muted-foreground">Todo dia</span>
               <Select
                 value={diaVencimento}
                 onChange={(event) => setDiaVencimento(Number(event.target.value))}
@@ -231,11 +231,11 @@ export function SocioCta({
                   </option>
                 ))}
               </Select>
-              <span className="text-xs text-planalto-gray">do mês</span>
+              <span className="text-xs text-muted-foreground">do mês</span>
             </div>
           ) : null}
 
-          <p className="text-center text-xs text-planalto-gray">
+          <p className="text-center text-xs text-muted-foreground">
             Sua primeira contribuição já é gerada agora, com Pix pra pagar na hora. Como não temos
             gateway de pagamento, os próximos meses dependem de você mesmo pagar na data escolhida —
             a diretoria confirma o recebimento.

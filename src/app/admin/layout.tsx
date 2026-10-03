@@ -15,7 +15,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-planalto-black lg:flex-row">
+    <div className="flex min-h-screen flex-col bg-background lg:flex-row">
       <AdminSidebar />
       <main className="min-w-0 flex-1 overflow-y-auto p-4 lg:p-8">{children}</main>
       <AdminPresenceChat />

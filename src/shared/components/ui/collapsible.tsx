@@ -16,17 +16,17 @@ export function Collapsible({
   const [aberto, setAberto] = useState(abertoPorPadrao);
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card">
+    <div className="rounded-lg border border-surface/10 bg-card">
       <button
         type="button"
         onClick={() => setAberto((prev) => !prev)}
-        className="flex w-full items-center justify-between px-5 py-4 text-left font-heading font-bold text-planalto-white"
+        className="flex w-full items-center justify-between px-5 py-4 text-left font-heading font-bold text-foreground"
       >
         {titulo}
         <ChevronDown size={18} className={cn("transition-transform", aberto && "rotate-180")} />
       </button>
 
-      {aberto ? <div className="border-t border-white/10 p-5">{children}</div> : null}
+      {aberto ? <div className="border-t border-surface/10 p-5">{children}</div> : null}
     </div>
   );
 }

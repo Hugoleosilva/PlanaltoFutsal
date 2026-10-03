@@ -43,8 +43,8 @@ export function EnqueteForm({ enqueteAtiva }: { enqueteAtiva: EnqueteAtual | nul
     <Collapsible titulo="Enquete" abertoPorPadrao>
       {enqueteAtiva ? (
         <div className="space-y-3">
-          <p className="text-sm text-planalto-white">{enqueteAtiva.pergunta}</p>
-          <ul className="space-y-1 text-sm text-planalto-gray">
+          <p className="text-sm text-foreground">{enqueteAtiva.pergunta}</p>
+          <ul className="space-y-1 text-sm text-muted-foreground">
             {enqueteAtiva.opcoes.map((opcao) => (
               <li key={opcao.id} className="flex justify-between">
                 <span>{opcao.texto}</span>
@@ -87,7 +87,7 @@ export function EnqueteForm({ enqueteAtiva }: { enqueteAtiva: EnqueteAtual | nul
                       type="button"
                       onClick={() => removerOpcao(index)}
                       aria-label="Remover opção"
-                      className="shrink-0 text-planalto-gray hover:text-planalto-red"
+                      className="shrink-0 text-muted-foreground hover:text-planalto-red"
                     >
                       <X size={18} />
                     </button>

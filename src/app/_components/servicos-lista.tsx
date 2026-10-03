@@ -40,7 +40,7 @@ export async function ServicosLista({
               "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
               !categoriaAtiva
                 ? "bg-planalto-red text-white"
-                : "bg-white/10 text-planalto-white hover:bg-white/20",
+                : "bg-surface/10 text-foreground hover:bg-surface/20",
             )}
           >
             Todas
@@ -53,7 +53,7 @@ export async function ServicosLista({
                 "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
                 categoriaAtiva === categoria
                   ? "bg-planalto-red text-white"
-                  : "bg-white/10 text-planalto-white hover:bg-white/20",
+                  : "bg-surface/10 text-foreground hover:bg-surface/20",
               )}
             >
               {CATEGORIA_SERVICO_LABEL[categoria]}
@@ -63,7 +63,7 @@ export async function ServicosLista({
       ) : null}
 
       {servicos.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-planalto-gray">
+        <p className="mt-8 text-center text-sm text-muted-foreground">
           {todosOsServicos.length === 0
             ? "Nenhum serviço divulgado ainda. Seja o primeiro!"
             : "Nenhum serviço nessa categoria ainda."}
@@ -71,7 +71,7 @@ export async function ServicosLista({
       ) : (
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {servicos.map((servico) => (
-            <div key={servico.id} className="overflow-hidden rounded-lg border border-white/10 bg-card p-4">
+            <div key={servico.id} className="overflow-hidden rounded-lg border border-surface/10 bg-card p-4">
               <div className="flex justify-center gap-2">
                 {servico.imagensUrls.map((url, index) => (
                   <div
@@ -89,11 +89,11 @@ export async function ServicosLista({
                 ))}
               </div>
 
-              <p className="mt-3 text-center font-heading font-bold text-planalto-white">
+              <p className="mt-3 text-center font-heading font-bold text-foreground">
                 {servico.titulo} — {servico.nomeContato}
               </p>
 
-              <p className="mt-2 text-center text-sm text-planalto-gray">{servico.descricao}</p>
+              <p className="mt-2 text-center text-sm text-muted-foreground">{servico.descricao}</p>
 
               {servico.valores ? (
                 <p className="mt-2 text-center text-sm text-planalto-red">{servico.valores}</p>
@@ -106,13 +106,13 @@ export async function ServicosLista({
                 ))}
               </div>
 
-              <p className="mt-3 rounded-md bg-white/10 px-3 py-2 text-center text-sm font-semibold text-white">
+              <p className="mt-3 rounded-md bg-surface/10 px-3 py-2 text-center text-sm font-semibold text-foreground">
                 Agende seu Orçamento:{" "}
                 <span className="whitespace-nowrap">
                   {servico.contato} ({servico.nomeContato})
                 </span>
                 <br />
-                <span className="font-normal text-planalto-gray">{servico.bairro}</span>
+                <span className="font-normal text-muted-foreground">{servico.bairro}</span>
               </p>
             </div>
           ))}

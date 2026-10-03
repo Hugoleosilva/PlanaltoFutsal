@@ -55,7 +55,7 @@ export function MembroCard({
 
   if (editando) {
     return (
-      <div className="rounded-lg border border-white/10 bg-card p-4">
+      <div className="rounded-lg border border-surface/10 bg-card p-4">
         <form action={editarAction} className="space-y-3">
           <input type="hidden" name="membroId" value={id} />
 
@@ -100,11 +100,11 @@ export function MembroCard({
   }
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card p-4">
+    <div className="rounded-lg border border-surface/10 bg-card p-4">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-semibold text-planalto-white">{nome}</p>
-          <p className="text-xs text-planalto-gray">{funcao}</p>
+          <p className="font-semibold text-foreground">{nome}</p>
+          <p className="text-xs text-muted-foreground">{funcao}</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export function MembroCard({
             type="button"
             onClick={() => setEditando(true)}
             aria-label="Editar membro"
-            className="text-planalto-gray transition hover:text-planalto-white"
+            className="text-muted-foreground transition hover:text-foreground"
           >
             <Pencil size={16} />
           </button>
@@ -123,7 +123,7 @@ export function MembroCard({
               type="submit"
               disabled={isDesativando}
               aria-label="Desativar membro"
-              className="text-planalto-gray transition hover:text-planalto-red disabled:opacity-50"
+              className="text-muted-foreground transition hover:text-planalto-red disabled:opacity-50"
             >
               <UserX size={16} />
             </button>
@@ -135,7 +135,7 @@ export function MembroCard({
         <ImageUpload value={foto} onUploaded={handleFotoUploaded} />
       </div>
 
-      {bio ? <p className="mt-3 text-sm text-planalto-gray">{bio}</p> : null}
+      {bio ? <p className="mt-3 text-sm text-muted-foreground">{bio}</p> : null}
 
       {desativarState.error ? (
         <p className="mt-2 text-xs text-planalto-red">{desativarState.error}</p>

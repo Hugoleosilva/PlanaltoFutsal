@@ -18,10 +18,10 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
     return (
       <div className="p-8">
         <Card>
-          <p className="text-planalto-white">
+          <p className="text-foreground">
             Seu login ainda não está vinculado a um perfil de atleta.
           </p>
-          <p className="mt-1 text-sm text-planalto-gray">
+          <p className="mt-1 text-sm text-muted-foreground">
             Fale com a diretoria para vincularem seu acesso ao seu cadastro.
           </p>
         </Card>
@@ -58,8 +58,8 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
         ) : null}
 
         <div>
-          <h1 className="font-heading text-2xl font-bold text-planalto-white">{atleta.apelido}</h1>
-          <p className="text-planalto-gray">
+          <h1 className="font-heading text-2xl font-bold text-foreground">{atleta.apelido}</h1>
+          <p className="text-muted-foreground">
             {atleta.nomeCompleto} · {atleta.idade} anos
           </p>
         </div>
@@ -79,12 +79,12 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
       />
 
       <Card>
-        <h2 className="font-heading text-lg font-bold text-planalto-white">
+        <h2 className="font-heading text-lg font-bold text-foreground">
           Campeonatos em disputa
         </h2>
 
         {campeonatosAtivos.length === 0 ? (
-          <p className="mt-3 text-sm text-planalto-gray">
+          <p className="mt-3 text-sm text-muted-foreground">
             Você ainda não está vinculado a nenhum campeonato ativo.
           </p>
         ) : (
@@ -92,11 +92,11 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
             {campeonatosAtivos.map(({ campeonato, categoria }) => (
               <li
                 key={campeonato.id}
-                className="flex items-center justify-between rounded-md border border-white/10 px-3 py-2"
+                className="flex items-center justify-between rounded-md border border-surface/10 px-3 py-2"
               >
                 <div>
-                  <p className="text-sm font-medium text-planalto-white">{campeonato.nome}</p>
-                  {categoria ? <p className="text-xs text-planalto-gray">{categoria}</p> : null}
+                  <p className="text-sm font-medium text-foreground">{campeonato.nome}</p>
+                  {categoria ? <p className="text-xs text-muted-foreground">{categoria}</p> : null}
                 </div>
                 <Badge>{campeonato.status}</Badge>
               </li>

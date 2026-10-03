@@ -21,14 +21,14 @@ export function CaronaForm({
   if (state.sucesso) {
     return (
       <Card className="flex h-full items-center justify-center text-center">
-        <p className="text-planalto-white">Carona registrada! Obrigado por ajudar a torcida. 🚗</p>
+        <p className="text-foreground">Carona registrada! Obrigado por ajudar a torcida. 🚗</p>
       </Card>
     );
   }
 
   return (
     <Card className="h-full p-5">
-      <h3 className="font-heading text-lg font-bold text-planalto-white">Oferecer carona</h3>
+      <h3 className="font-heading text-lg font-bold text-foreground">Oferecer carona</h3>
 
       <form action={formAction} className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="space-y-1 sm:col-span-2">

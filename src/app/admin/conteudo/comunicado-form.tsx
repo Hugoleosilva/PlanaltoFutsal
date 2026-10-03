@@ -36,7 +36,7 @@ export function ComunicadoForm(): React.ReactElement {
           <Textarea id="corpo" name="corpo" rows={3} required />
         </div>
 
-        <label className="flex items-center gap-2 text-sm text-planalto-gray">
+        <label className="flex items-center gap-2 text-sm text-muted-foreground">
           <input type="checkbox" name="fixado" className="accent-planalto-red" />
           Fixar no topo do mural
         </label>

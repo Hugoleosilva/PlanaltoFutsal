@@ -15,17 +15,17 @@ export default async function JogosPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Jogos</h1>
-        <p className="mt-1 text-planalto-gray">Agenda exibida no Portal Público.</p>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Jogos</h1>
+        <p className="mt-1 text-muted-foreground">Agenda exibida no Portal Público.</p>
       </div>
 
       <JogoForm campeonatos={campeonatos.map((c) => ({ id: c.id, nome: c.nome }))} />
 
       <Card>
-        <h2 className="font-heading text-lg font-bold text-planalto-white">Todos os jogos</h2>
+        <h2 className="font-heading text-lg font-bold text-foreground">Todos os jogos</h2>
 
         {jogos.length === 0 ? (
-          <p className="mt-4 text-sm text-planalto-gray">Nenhum jogo cadastrado ainda.</p>
+          <p className="mt-4 text-sm text-muted-foreground">Nenhum jogo cadastrado ainda.</p>
         ) : (
           <div className="mt-4 divide-y divide-white/10">
             {jogos.map((jogo) => (

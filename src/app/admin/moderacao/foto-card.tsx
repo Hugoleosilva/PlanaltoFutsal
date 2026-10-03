@@ -23,17 +23,17 @@ export function FotoCard({ id, url, descricao, categoria, enviadoPorNome }: Foto
   const isPending = isAprovando || isRejeitando;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-white/10 bg-card">
+    <div className="overflow-hidden rounded-lg border border-surface/10 bg-card">
       <div className="relative aspect-square w-full bg-black/40">
         <Image src={url} alt={descricao ?? ""} fill className="object-cover object-top" unoptimized />
       </div>
 
       <div className="space-y-2 p-4">
-        <p className="text-xs text-planalto-gray">
+        <p className="text-xs text-muted-foreground">
           {categoria === "ANTIGA" ? "Foto antiga" : "Foto atual"}
           {enviadoPorNome ? ` · enviada por ${enviadoPorNome}` : ""}
         </p>
-        {descricao ? <p className="text-sm text-planalto-white">{descricao}</p> : null}
+        {descricao ? <p className="text-sm text-foreground">{descricao}</p> : null}
 
         <div className="flex gap-2 pt-2">
           <form action={aprovarAction} className="flex-1">

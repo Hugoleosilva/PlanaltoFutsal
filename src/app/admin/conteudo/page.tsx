@@ -24,8 +24,8 @@ export default async function ConteudoPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Conteúdo do Site</h1>
-        <p className="mt-1 text-planalto-gray">
+        <h1 className="font-heading text-2xl font-bold text-foreground">Conteúdo do Site</h1>
+        <p className="mt-1 text-muted-foreground">
           Mural de avisos, enquete, galeria, patrocinadores e loja exibidos no Portal Público.
         </p>
       </div>

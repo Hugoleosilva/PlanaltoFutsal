@@ -17,9 +17,9 @@ export function RedefinirSenhaForm(): React.ReactElement {
 
   if (!token) {
     return (
-      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 text-center backdrop-blur-md">
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Link inválido</h1>
-        <p className="text-planalto-gray">
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+        <h1 className="font-heading text-2xl font-bold text-foreground">Link inválido</h1>
+        <p className="text-muted-foreground">
           Esse link de redefinição está incompleto. Peça um novo na tela de login.
         </p>
         <Link href="/esqueci-senha" className="inline-block text-sm text-planalto-red underline">
@@ -31,9 +31,9 @@ export function RedefinirSenhaForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 text-center backdrop-blur-md">
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Senha redefinida!</h1>
-        <p className="text-planalto-gray">Já pode entrar com a nova senha.</p>
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+        <h1 className="font-heading text-2xl font-bold text-foreground">Senha redefinida!</h1>
+        <p className="text-muted-foreground">Já pode entrar com a nova senha.</p>
         <Link href="/login" className="inline-block text-sm text-planalto-red underline">
           Ir pro login
         </Link>
@@ -44,19 +44,19 @@ export function RedefinirSenhaForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
     >
       <input type="hidden" name="token" value={token} />
 
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Nova senha</h1>
-        <p className="mt-1 text-sm text-planalto-gray">Escolha uma nova senha pra sua conta.</p>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Nova senha</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Escolha uma nova senha pra sua conta.</p>
       </div>
 
       <div className="space-y-1">
         <Label htmlFor="novaSenha">Nova senha</Label>
         <PasswordInput id="novaSenha" name="novaSenha" required minLength={8} />
-        <p className="text-xs text-planalto-gray">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
+        <p className="text-xs text-muted-foreground">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
       </div>
 
       <div className="space-y-1">

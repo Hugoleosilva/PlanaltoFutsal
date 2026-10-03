@@ -30,7 +30,7 @@ export function RegistrarResultadoForm({ jogoId }: { jogoId: string }): React.Re
         placeholder="Nós"
         className="w-16 text-center"
       />
-      <span className="text-planalto-gray">x</span>
+      <span className="text-muted-foreground">x</span>
       <Input
         name="placarAdversario"
         type="number"

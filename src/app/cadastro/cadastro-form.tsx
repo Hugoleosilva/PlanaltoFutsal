@@ -16,9 +16,9 @@ export function CadastroForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 text-center backdrop-blur-md">
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Quase lá!</h1>
-        <p className="text-planalto-gray">
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+        <h1 className="font-heading text-2xl font-bold text-foreground">Quase lá!</h1>
+        <p className="text-muted-foreground">
           Enviamos um link de confirmação para o seu e-mail. Clique nele para ativar sua conta.
         </p>
         <Link href="/inicio" className="inline-block text-sm text-planalto-red underline">
@@ -31,11 +31,11 @@ export function CadastroForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
     >
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Criar conta</h1>
-        <p className="mt-1 text-sm text-planalto-gray">
+        <h1 className="font-heading text-2xl font-bold text-foreground">Criar conta</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Torça, envie fotos, ofereça carona e acompanhe o Planalto Futsal.
         </p>
       </div>
@@ -70,7 +70,7 @@ export function CadastroForm(): React.ReactElement {
             <PasswordInput id="senha" name="senha" required minLength={8} />
           </div>
         </div>
-        <p className="text-xs text-planalto-gray">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
+        <p className="text-xs text-muted-foreground">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
       </div>
 
       {state.error ? <p className="text-sm text-planalto-red">{state.error}</p> : null}
@@ -79,13 +79,13 @@ export function CadastroForm(): React.ReactElement {
         {isPending ? "Criando conta..." : "Criar conta"}
       </Button>
 
-      <div className="flex items-center justify-between text-sm text-planalto-gray">
-        <Link href="/inicio" className="hover:text-planalto-white">
+      <div className="flex items-center justify-between text-sm text-muted-foreground">
+        <Link href="/inicio" className="hover:text-foreground">
           Voltar ao início
         </Link>
         <Link
           href="/login"
-          className="font-semibold text-planalto-white underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
+          className="font-semibold text-foreground underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
         >
           Entrar
         </Link>

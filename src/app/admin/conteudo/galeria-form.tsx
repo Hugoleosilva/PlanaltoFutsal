@@ -86,7 +86,7 @@ function DestaqueToggle({ foto }: { foto: FotoAprovadaItem }): React.ReactElemen
           aria-label={foto.destaque ? "Remover destaque" : "Marcar como destaque"}
           className={cn(
             "absolute -right-1 -top-1 rounded-full p-1 shadow",
-            foto.destaque ? "bg-planalto-red text-white" : "bg-black/70 text-planalto-gray",
+            foto.destaque ? "bg-planalto-red text-white" : "bg-black/70 text-muted-foreground",
           )}
         >
           <Star size={12} className={foto.destaque ? "fill-current" : ""} />
@@ -150,14 +150,14 @@ function EditarFotoControl({
         </form>
       ) : (
         <div className="flex-1">
-          <p className="text-sm text-planalto-white">
+          <p className="text-sm text-foreground">
             {topicos.find((t) => t.id === foto.topicoId)?.nome ?? "Sem tópico"}
           </p>
-          <p className="text-xs text-planalto-gray">{foto.descricao || "Sem descrição"}</p>
+          <p className="text-xs text-muted-foreground">{foto.descricao || "Sem descrição"}</p>
           <button
             type="button"
             onClick={() => setEditando(true)}
-            className="mt-1 text-xs font-semibold text-planalto-white underline hover:text-planalto-red"
+            className="mt-1 text-xs font-semibold text-foreground underline hover:text-planalto-red"
           >
             Editar
           </button>
@@ -216,7 +216,7 @@ export function GaleriaForm({
 
   return (
     <Collapsible titulo="Galeria de Fotos" abertoPorPadrao>
-      <p className="mb-3 text-xs text-planalto-gray">
+      <p className="mb-3 text-xs text-muted-foreground">
         Organize as fotos em tópicos (álbuns) dentro de Atuais ou Das Antigas — fica mais fácil pra
         torcida entender. Fotos publicadas por aqui já aparecem direto na galeria pública.
       </p>
@@ -224,11 +224,11 @@ export function GaleriaForm({
       <div className="space-y-4">
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-sm font-semibold text-planalto-white">Tópicos</p>
+            <p className="text-sm font-semibold text-foreground">Tópicos</p>
             <button
               type="button"
               onClick={() => setMostrarNovoTopico((prev) => !prev)}
-              className="text-xs text-planalto-gray hover:text-planalto-white"
+              className="text-xs text-muted-foreground hover:text-foreground"
             >
               {mostrarNovoTopico ? "Cancelar" : "+ Novo tópico"}
             </button>
@@ -239,7 +239,7 @@ export function GaleriaForm({
         </div>
 
         {topicos.length === 0 ? (
-          <p className="text-sm text-planalto-gray">Crie um tópico acima antes de publicar fotos.</p>
+          <p className="text-sm text-muted-foreground">Crie um tópico acima antes de publicar fotos.</p>
         ) : (
           <>
             {mostrarSucesso ? (
@@ -308,11 +308,11 @@ export function GaleriaForm({
         )}
 
         {fotosAprovadas.length > 0 ? (
-          <div className="border-t border-white/10 pt-4">
-            <p className="mb-2 text-sm font-semibold text-planalto-white">
+          <div className="border-t border-surface/10 pt-4">
+            <p className="mb-2 text-sm font-semibold text-foreground">
               Fotos em destaque ({totalDestaques}/{MAX_DESTAQUES})
             </p>
-            <p className="mb-2 text-xs text-planalto-gray">
+            <p className="mb-2 text-xs text-muted-foreground">
               Clique na estrela pra escolher as {MAX_DESTAQUES} fotos que aparecem no topo da
               galeria pública.
             </p>
@@ -325,14 +325,14 @@ export function GaleriaForm({
         ) : null}
 
         {fotosAprovadas.length > 0 ? (
-          <div className="border-t border-white/10 pt-4">
+          <div className="border-t border-surface/10 pt-4">
             <button
               type="button"
               onClick={() => setMostrarEdicao((prev) => !prev)}
-              className="flex w-full items-center justify-between text-sm font-semibold text-planalto-white"
+              className="flex w-full items-center justify-between text-sm font-semibold text-foreground"
             >
               Editar fotos publicadas ({fotosAprovadas.length})
-              <span className="text-xs font-normal text-planalto-gray">
+              <span className="text-xs font-normal text-muted-foreground">
                 {mostrarEdicao ? "Ocultar" : "Mostrar"}
               </span>
             </button>
@@ -341,7 +341,7 @@ export function GaleriaForm({
               <div className="mt-3 space-y-4">
                 {gruposDeEdicao.map((grupo) => (
                   <div key={grupo.chave}>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-planalto-gray">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                       {grupo.titulo} — {grupo.fotos.length} foto(s)
                     </p>
                     <div className="space-y-2">

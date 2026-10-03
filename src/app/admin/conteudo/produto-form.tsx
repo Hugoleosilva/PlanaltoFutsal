@@ -27,7 +27,7 @@ export function ProdutoForm(): React.ReactElement {
 
   return (
     <Collapsible titulo="Produto da loja" abertoPorPadrao>
-      <p className="mb-3 text-xs text-planalto-gray">
+      <p className="mb-3 text-xs text-muted-foreground">
         Pra roupas, use 2 fotos (frente e verso). Deixe o preço em branco pra mostrar só como
         vitrine, sem preço.
       </p>
@@ -67,19 +67,19 @@ export function ProdutoForm(): React.ReactElement {
           <Input id="descricao" name="descricao" />
         </div>
 
-        <p className="text-xs text-planalto-gray">
+        <p className="text-xs text-muted-foreground">
           Quem quiser comprar vai poder falar com um dos diretores (cadastrados em &quot;Diretoria&quot;) ou
           gerar um Pix direto na loja — não precisa mais de link de WhatsApp aqui.
         </p>
 
-        <label className="flex items-center gap-2 text-sm text-planalto-gray">
+        <label className="flex items-center gap-2 text-sm text-muted-foreground">
           <input type="checkbox" name="destaque" className="accent-planalto-red" />
           Mostrar em destaque (carrossel no topo da loja)
         </label>
 
         {state.error ? <p className="text-sm text-planalto-red">{state.error}</p> : null}
         {imagensPreenchidas.length === 0 ? (
-          <p className="text-xs text-planalto-gray">Envie ao menos uma foto antes de salvar.</p>
+          <p className="text-xs text-muted-foreground">Envie ao menos uma foto antes de salvar.</p>
         ) : null}
 
         <Button type="submit" disabled={isPending || imagensPreenchidas.length === 0}>

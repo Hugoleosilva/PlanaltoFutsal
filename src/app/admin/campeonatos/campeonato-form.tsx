@@ -14,8 +14,8 @@ export function CampeonatoForm(): React.ReactElement {
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Novo campeonato</h2>
-      <p className="mt-1 text-xs text-planalto-gray">
+      <h2 className="font-heading text-lg font-bold text-foreground">Novo campeonato</h2>
+      <p className="mt-1 text-xs text-muted-foreground">
         Só o nome é obrigatório — preencha o resto quando souber.
       </p>
 

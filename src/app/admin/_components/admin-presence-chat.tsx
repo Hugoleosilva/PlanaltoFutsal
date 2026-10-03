@@ -165,11 +165,11 @@ export function AdminPresenceChat(): React.ReactElement | null {
   return (
     <div className="fixed bottom-16 right-5 z-30 flex flex-col items-end gap-3">
       {aberto ? (
-        <div className="flex h-[28rem] w-80 flex-col overflow-hidden rounded-lg border border-white/10 bg-card shadow-2xl">
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+        <div className="flex h-[28rem] w-80 flex-col overflow-hidden rounded-lg border border-surface/10 bg-card shadow-2xl">
+          <div className="flex items-center justify-between border-b border-surface/10 px-4 py-3">
             <div>
-              <p className="font-heading text-sm font-bold text-planalto-white">Chat da Diretoria</p>
-              <p className="text-xs text-planalto-gray">
+              <p className="font-heading text-sm font-bold text-foreground">Chat da Diretoria</p>
+              <p className="text-xs text-muted-foreground">
                 {outrosOnline.length > 0
                   ? `${outrosOnline.length} outro(s) diretor(es) online`
                   : "Só você está online agora"}
@@ -178,7 +178,7 @@ export function AdminPresenceChat(): React.ReactElement | null {
             <button
               type="button"
               onClick={() => setAberto(false)}
-              className="text-planalto-gray hover:text-planalto-white"
+              className="text-muted-foreground hover:text-foreground"
               aria-label="Fechar chat"
             >
               <X size={18} />
@@ -186,11 +186,11 @@ export function AdminPresenceChat(): React.ReactElement | null {
           </div>
 
           {online.length > 0 ? (
-            <div className="flex flex-wrap gap-2 border-b border-white/10 px-4 py-2">
+            <div className="flex flex-wrap gap-2 border-b border-surface/10 px-4 py-2">
               {online.map((admin) => (
                 <span
                   key={admin.userId}
-                  className="flex items-center gap-1.5 rounded-full bg-white/5 py-1 pl-1 pr-2 text-xs text-planalto-gray"
+                  className="flex items-center gap-1.5 rounded-full bg-surface/5 py-1 pl-1 pr-2 text-xs text-muted-foreground"
                 >
                   <Avatar userId={admin.userId} nome={admin.nome} size={18} />
                   {admin.userId === meuId ? "Você" : admin.nome.split(" ")[0]}
@@ -202,7 +202,7 @@ export function AdminPresenceChat(): React.ReactElement | null {
 
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-3">
             {mensagens.length === 0 ? (
-              <p className="text-center text-xs text-planalto-gray">
+              <p className="text-center text-xs text-muted-foreground">
                 Nenhuma mensagem ainda. Diga oi para a diretoria!
               </p>
             ) : (
@@ -211,12 +211,19 @@ export function AdminPresenceChat(): React.ReactElement | null {
                 return (
                   <div key={mensagem.id} className={cn("flex items-end gap-2", minha && "flex-row-reverse")}>
                     <Avatar userId={mensagem.autorUserId} nome={mensagem.autorNome} size={26} />
-                    <div className={cn("max-w-[70%] rounded-lg px-3 py-1.5", minha ? "bg-planalto-red" : "bg-white/10")}>
+                    <div className={cn("max-w-[70%] rounded-lg px-3 py-1.5", minha ? "bg-planalto-red" : "bg-surface/10")}>
                       {!minha ? (
-                        <p className="text-[11px] font-semibold text-planalto-gray">{mensagem.autorNome}</p>
+                        <p className="text-[11px] font-semibold text-muted-foreground">{mensagem.autorNome}</p>
                       ) : null}
-                      <p className="text-sm text-white">{mensagem.texto}</p>
-                      <p className="mt-0.5 text-right text-[10px] text-white/60">{formatHora(mensagem.createdAt)}</p>
+                      <p className={cn("text-sm", minha ? "text-white" : "text-foreground")}>{mensagem.texto}</p>
+                      <p
+                        className={cn(
+                          "mt-0.5 text-right text-[10px]",
+                          minha ? "text-white/60" : "text-muted-foreground",
+                        )}
+                      >
+                        {formatHora(mensagem.createdAt)}
+                      </p>
                     </div>
                   </div>
                 );
@@ -224,13 +231,13 @@ export function AdminPresenceChat(): React.ReactElement | null {
             )}
           </div>
 
-          <form onSubmit={handleEnviar} className="flex items-center gap-2 border-t border-white/10 p-3">
+          <form onSubmit={handleEnviar} className="flex items-center gap-2 border-t border-surface/10 p-3">
             <input
               value={texto}
               onChange={(event) => setTexto(event.target.value)}
               placeholder="Escreva uma mensagem..."
               maxLength={1000}
-              className="flex-1 rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-planalto-gray focus:outline-none focus:ring-1 focus:ring-planalto-red"
+              className="flex-1 rounded-md border border-surface/10 bg-black/30 px-3 py-2 text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-planalto-red"
             />
             <button
               type="submit"

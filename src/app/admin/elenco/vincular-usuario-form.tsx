@@ -26,10 +26,10 @@ export function VincularUsuarioForm({
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">
+      <h2 className="font-heading text-lg font-bold text-foreground">
         Promover torcedor para atleta
       </h2>
-      <p className="mt-1 text-xs text-planalto-gray">
+      <p className="mt-1 text-xs text-muted-foreground">
         Para quem já tem conta no site (torcedor) e agora vai jogar pelo time. Ele passa a entrar
         como atleta a partir do próximo login.
       </p>

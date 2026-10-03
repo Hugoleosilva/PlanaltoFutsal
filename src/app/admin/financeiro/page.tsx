@@ -14,9 +14,9 @@ export default async function FinanceiroPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Financeiro</h1>
-        <p className="mt-1 text-planalto-gray">
-          Saldo Atual: <span className="font-semibold text-planalto-white">{formatBRL(saldo)}</span>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Financeiro</h1>
+        <p className="mt-1 text-muted-foreground">
+          Saldo Atual: <span className="font-semibold text-foreground">{formatBRL(saldo)}</span>
         </p>
       </div>
 

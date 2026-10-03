@@ -21,7 +21,7 @@ function EscudoAdversario({
   return adversarioEscudoUrl ? (
     <Image src={adversarioEscudoUrl} alt="" width={tamanho} height={tamanho} unoptimized />
   ) : (
-    <div className="rounded-full bg-white/10" style={{ width: tamanho, height: tamanho }} />
+    <div className="rounded-full bg-surface/10" style={{ width: tamanho, height: tamanho }} />
   );
 }
 
@@ -39,13 +39,13 @@ export function ConfrontoEscudos({
       {mandante === "PLANALTO" ? (
         <>
           <EscudoPlanalto tamanho={tamanho} />
-          <span className="text-xs text-planalto-gray">x</span>
+          <span className="text-xs text-muted-foreground">x</span>
           <EscudoAdversario adversarioEscudoUrl={adversarioEscudoUrl} tamanho={tamanho} />
         </>
       ) : (
         <>
           <EscudoAdversario adversarioEscudoUrl={adversarioEscudoUrl} tamanho={tamanho} />
-          <span className="text-xs text-planalto-gray">x</span>
+          <span className="text-xs text-muted-foreground">x</span>
           <EscudoPlanalto tamanho={tamanho} />
         </>
       )}

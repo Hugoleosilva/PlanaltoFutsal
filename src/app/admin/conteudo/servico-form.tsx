@@ -66,14 +66,14 @@ function EditarServicoControl({ servico }: { servico: ServicoAprovadoItem }): Re
           />
         ) : null}
         <div className="flex-1">
-          <p className="text-sm text-planalto-white">{servico.titulo}</p>
-          <p className="text-xs text-planalto-gray">
+          <p className="text-sm text-foreground">{servico.titulo}</p>
+          <p className="text-xs text-muted-foreground">
             {servico.nomeContato} · {servico.contato}
           </p>
           <button
             type="button"
             onClick={() => setEditando(true)}
-            className="mt-1 text-xs font-semibold text-planalto-white underline hover:text-planalto-red"
+            className="mt-1 text-xs font-semibold text-foreground underline hover:text-planalto-red"
           >
             Editar
           </button>
@@ -138,7 +138,7 @@ function EditarServicoControl({ servico }: { servico: ServicoAprovadoItem }): Re
         <Label>Formas de pagamento</Label>
         <div className="flex flex-wrap gap-4">
           {FORMAS_PAGAMENTO.map((forma) => (
-            <label key={forma.value} className="flex items-center gap-2 text-sm text-planalto-gray">
+            <label key={forma.value} className="flex items-center gap-2 text-sm text-muted-foreground">
               <input
                 type="checkbox"
                 name="formasPagamento"
@@ -206,7 +206,7 @@ export function ServicoForm({
 
   return (
     <Collapsible titulo="Serviços">
-      <p className="mb-3 text-xs text-planalto-gray">
+      <p className="mb-3 text-xs text-muted-foreground">
         Publique um serviço direto por aqui — já sai aprovado na página pública, sem passar pela
         fila de moderação.
       </p>
@@ -279,7 +279,7 @@ export function ServicoForm({
           <Label>Formas de pagamento</Label>
           <div className="flex flex-wrap gap-4">
             {FORMAS_PAGAMENTO.map((forma) => (
-              <label key={forma.value} className="flex items-center gap-2 text-sm text-planalto-gray">
+              <label key={forma.value} className="flex items-center gap-2 text-sm text-muted-foreground">
                 <input
                   type="checkbox"
                   name="formasPagamento"
@@ -310,14 +310,14 @@ export function ServicoForm({
       </form>
 
       {servicosAprovados.length > 0 ? (
-        <div className="mt-4 border-t border-white/10 pt-4">
+        <div className="mt-4 border-t border-surface/10 pt-4">
           <button
             type="button"
             onClick={() => setMostrarEdicao((prev) => !prev)}
-            className="flex w-full items-center justify-between text-sm font-semibold text-planalto-white"
+            className="flex w-full items-center justify-between text-sm font-semibold text-foreground"
           >
             Editar serviços publicados ({servicosAprovados.length})
-            <span className="text-xs font-normal text-planalto-gray">
+            <span className="text-xs font-normal text-muted-foreground">
               {mostrarEdicao ? "Ocultar" : "Mostrar"}
             </span>
           </button>

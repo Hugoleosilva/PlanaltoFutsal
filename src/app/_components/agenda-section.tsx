@@ -15,12 +15,12 @@ export async function AgendaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="agenda">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
         Agenda de Jogos
       </h2>
 
       {jogos.length === 0 ? (
-        <p className="mt-6 text-center text-sm text-planalto-gray">
+        <p className="mt-6 text-center text-sm text-muted-foreground">
           Nenhum jogo agendado no momento.
         </p>
       ) : (
@@ -29,7 +29,7 @@ export async function AgendaSection(): Promise<React.ReactElement> {
             <Card key={jogo.id} className="relative">
               <Link
                 href="/carona"
-                className="absolute right-4 top-4 flex w-16 flex-col items-center gap-1 text-center text-[10px] font-semibold leading-tight text-planalto-gray hover:text-planalto-white"
+                className="absolute right-4 top-4 flex w-16 flex-col items-center gap-1 text-center text-[10px] font-semibold leading-tight text-muted-foreground hover:text-foreground"
               >
                 <Car size={16} />
                 Pode ajudar com carona?
@@ -38,10 +38,10 @@ export async function AgendaSection(): Promise<React.ReactElement> {
               <div className="flex items-start gap-3 pr-16">
                 <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
                 <div>
-                  <p className="font-semibold text-planalto-white">
+                  <p className="font-semibold text-foreground">
                     {tituloConfronto(jogo.adversario, jogo.mandante)}
                   </p>
-                  <p className="text-sm text-planalto-gray">
+                  <p className="text-sm text-muted-foreground">
                     {jogo.local}
                     {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
                   </p>

@@ -36,7 +36,7 @@ export function PerfilForm({
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Meu perfil</h2>
+      <h2 className="font-heading text-lg font-bold text-foreground">Meu perfil</h2>
 
       <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="space-y-1">

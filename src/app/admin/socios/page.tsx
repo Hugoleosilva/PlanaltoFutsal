@@ -70,21 +70,21 @@ export default async function SociosPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">
+        <h1 className="font-heading text-2xl font-bold text-foreground">
           Sócios — Planalto Meu Amor!
         </h1>
-        <p className="mt-1 text-planalto-gray">
+        <p className="mt-1 text-muted-foreground">
           {socios.length} sócio(s). O Pix aqui não tem cobrança automática — confira o recebimento
           e marque manualmente.
         </p>
       </div>
 
       {socios.length === 0 ? (
-        <p className="text-sm text-planalto-gray">Ninguém aderiu ao Planalto Meu Amor! ainda.</p>
+        <p className="text-sm text-muted-foreground">Ninguém aderiu ao Planalto Meu Amor! ainda.</p>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-white/10 bg-card">
+        <div className="overflow-hidden rounded-lg border border-surface/10 bg-card">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-white/10 text-xs uppercase text-planalto-gray">
+            <thead className="border-b border-surface/10 text-xs uppercase text-muted-foreground">
               <tr>
                 <th className="px-4 py-3">Sócio</th>
                 <th className="px-4 py-3">Plano</th>
@@ -99,10 +99,10 @@ export default async function SociosPage(): Promise<React.ReactElement> {
                 return (
                   <tr key={socio.id}>
                     <td className="px-4 py-3">
-                      <p className="font-medium text-planalto-white">{socio.name}</p>
-                      <p className="text-xs text-planalto-gray">{socio.email}</p>
+                      <p className="font-medium text-foreground">{socio.name}</p>
+                      <p className="text-xs text-muted-foreground">{socio.email}</p>
                     </td>
-                    <td className="px-4 py-3 text-planalto-gray">
+                    <td className="px-4 py-3 text-muted-foreground">
                       {socio.socioTipoPlano === "MENSAL"
                         ? `Mensal · ${formatBRL(socio.socioValorPlano ?? 0)} · todo dia ${socio.socioDiaVencimento}`
                         : socio.socioTipoPlano === "UNICO"
@@ -115,12 +115,12 @@ export default async function SociosPage(): Promise<React.ReactElement> {
                           <Badge tone={contribuicao.isPendente ? "warning" : "success"}>
                             {contribuicao.isPendente ? "Pendente" : "Pago"}
                           </Badge>
-                          <span className="text-planalto-gray">
+                          <span className="text-muted-foreground">
                             {formatBRL(contribuicao.valor)} · venc. {formatData(contribuicao.dataVencimento)}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-planalto-gray">—</span>
+                        <span className="text-muted-foreground">—</span>
                       )}
                     </td>
                     <td className="px-4 py-3 text-right">

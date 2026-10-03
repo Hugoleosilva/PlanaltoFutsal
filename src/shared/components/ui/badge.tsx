@@ -8,7 +8,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TONE_CLASSES: Record<BadgeTone, string> = {
-  neutral: "bg-white/10 text-planalto-white",
+  neutral: "bg-surface/10 text-foreground",
   success: "bg-emerald-900/60 text-emerald-300",
   warning: "bg-amber-900/60 text-amber-300",
   danger: "bg-red-900/60 text-red-300",

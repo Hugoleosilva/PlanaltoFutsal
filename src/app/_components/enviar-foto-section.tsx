@@ -28,16 +28,16 @@ export function EnviarFotoSection({ semTitulo = false }: { semTitulo?: boolean }
     <section id="enviar-fotos" className={semTitulo ? "" : "mx-auto max-w-2xl px-6 py-16"}>
       {!semTitulo ? (
         <>
-          <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+          <h2 className="text-center font-heading text-3xl font-bold text-foreground">
             Envie suas fotos
           </h2>
-          <p className="mt-2 text-center text-planalto-gray">
+          <p className="mt-2 text-center text-muted-foreground">
             Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam
             pendentes até a diretoria aprovar.
           </p>
         </>
       ) : (
-        <p className="text-sm text-planalto-gray">
+        <p className="text-sm text-muted-foreground">
           Fotos antigas ou atuais do time e da torcida — até {MAX_FOTOS} por envio. Ficam pendentes
           até a diretoria aprovar.
         </p>
@@ -45,7 +45,7 @@ export function EnviarFotoSection({ semTitulo = false }: { semTitulo?: boolean }
 
       {state.sucesso ? (
         <Card className="mt-8 text-center">
-          <p className="text-planalto-white">Fotos enviadas! Obrigado pela contribuição 🙌</p>
+          <p className="text-foreground">Fotos enviadas! Obrigado pela contribuição 🙌</p>
         </Card>
       ) : (
         <Card className="mt-8">

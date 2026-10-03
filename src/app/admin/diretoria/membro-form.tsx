@@ -18,8 +18,8 @@ export function MembroForm(): React.ReactElement {
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Novo membro da diretoria</h2>
-      <p className="mt-1 text-xs text-planalto-gray">
+      <h2 className="font-heading text-lg font-bold text-foreground">Novo membro da diretoria</h2>
+      <p className="mt-1 text-xs text-muted-foreground">
         Aparece na página pública &quot;Diretoria&quot;, logo depois do Elenco no menu.
       </p>
 
@@ -44,7 +44,7 @@ export function MembroForm(): React.ReactElement {
         <div className="space-y-1">
           <Label htmlFor="contato-diretoria">Contato (WhatsApp, opcional)</Label>
           <TelefoneInput id="contato-diretoria" name="contato" />
-          <p className="text-xs text-planalto-gray">
+          <p className="text-xs text-muted-foreground">
             Usado na loja, pra torcida falar com a diretoria na hora de comprar.
           </p>
         </div>

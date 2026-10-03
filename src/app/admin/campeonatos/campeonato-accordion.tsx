@@ -56,15 +56,15 @@ export function CampeonatoAccordion({
   const [state, formAction, isPending] = useActionState(vincularAtletaAction, INITIAL_STATE);
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card">
+    <div className="rounded-lg border border-surface/10 bg-card">
       <button
         type="button"
         onClick={() => setExpandido((prev) => !prev)}
         className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
       >
         <div>
-          <p className="font-semibold text-planalto-white">{nome}</p>
-          <p className="text-xs text-planalto-gray">
+          <p className="font-semibold text-foreground">{nome}</p>
+          <p className="text-xs text-muted-foreground">
             {inscritos.length} atleta(s) vinculado(s)
             {taxaInscricao != null
               ? ` · inscrição ${taxaInscricao === 0 ? "grátis" : formatBRL(taxaInscricao)}`
@@ -79,22 +79,22 @@ export function CampeonatoAccordion({
           <Badge>{STATUS_LABEL[status] ?? status}</Badge>
           <ChevronDown
             size={18}
-            className={cn("text-planalto-gray transition-transform", expandido && "rotate-180")}
+            className={cn("text-muted-foreground transition-transform", expandido && "rotate-180")}
           />
         </div>
       </button>
 
       {expandido ? (
-        <div className="space-y-4 border-t border-white/10 px-5 py-4">
+        <div className="space-y-4 border-t border-surface/10 px-5 py-4">
           {inscritos.length === 0 ? (
-            <p className="text-sm text-planalto-gray">Nenhum atleta vinculado ainda.</p>
+            <p className="text-sm text-muted-foreground">Nenhum atleta vinculado ainda.</p>
           ) : (
             <ul className="space-y-1">
               {inscritos.map((inscrito) => (
-                <li key={inscrito.atletaId} className="text-sm text-planalto-white">
+                <li key={inscrito.atletaId} className="text-sm text-foreground">
                   {inscrito.apelido}
                   {inscrito.categoria ? (
-                    <span className="text-planalto-gray"> · {inscrito.categoria}</span>
+                    <span className="text-muted-foreground"> · {inscrito.categoria}</span>
                   ) : null}
                 </li>
               ))}
@@ -105,7 +105,7 @@ export function CampeonatoAccordion({
             <input type="hidden" name="campeonatoId" value={campeonatoId} />
 
             <div className="space-y-1">
-              <label className="text-xs text-planalto-gray" htmlFor={`atleta-${campeonatoId}`}>
+              <label className="text-xs text-muted-foreground" htmlFor={`atleta-${campeonatoId}`}>
                 Atleta
               </label>
               <Select id={`atleta-${campeonatoId}`} name="atletaId" required className="min-w-[180px]">
@@ -119,7 +119,7 @@ export function CampeonatoAccordion({
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs text-planalto-gray" htmlFor={`categoria-${campeonatoId}`}>
+              <label className="text-xs text-muted-foreground" htmlFor={`categoria-${campeonatoId}`}>
                 Categoria (opcional)
               </label>
               <Input id={`categoria-${campeonatoId}`} name="categoria" placeholder="Sub-20" className="w-32" />

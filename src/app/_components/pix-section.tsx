@@ -34,20 +34,20 @@ export function PixSection(): React.ReactElement {
     <Card id="apoie" className="flex h-full flex-col items-center justify-center gap-3 p-5 text-center">
       <div className="flex items-center gap-2 text-planalto-red">
         <QrCode size={22} />
-        <p className="font-heading text-lg font-bold text-planalto-white">Pix Avulso</p>
+        <p className="font-heading text-lg font-bold text-foreground">Pix Avulso</p>
       </div>
 
       {qrCodeUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={qrCodeUrl} alt="QR Code Pix" width={180} height={180} />
       ) : (
-        <div className="flex h-[180px] w-[180px] items-center justify-center text-sm text-planalto-gray">
+        <div className="flex h-[180px] w-[180px] items-center justify-center text-sm text-muted-foreground">
           Gerando QR Code...
         </div>
       )}
 
-      <p className="text-sm text-planalto-gray">
-        Chave Pix: <span className="text-planalto-white">{CHAVE_PIX}</span>
+      <p className="text-sm text-muted-foreground">
+        Chave Pix: <span className="text-foreground">{CHAVE_PIX}</span>
       </p>
 
       <Button onClick={handleCopiar} variant="secondary">

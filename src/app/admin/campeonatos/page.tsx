@@ -35,14 +35,14 @@ export default async function CampeonatosPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Campeonatos</h1>
-        <p className="mt-1 text-planalto-gray">{campeonatos.length} campeonato(s) cadastrado(s).</p>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Campeonatos</h1>
+        <p className="mt-1 text-muted-foreground">{campeonatos.length} campeonato(s) cadastrado(s).</p>
       </div>
 
       <CampeonatoForm />
 
       {campeonatosComInscritos.length === 0 ? (
-        <p className="text-sm text-planalto-gray">Nenhum campeonato cadastrado ainda.</p>
+        <p className="text-sm text-muted-foreground">Nenhum campeonato cadastrado ainda.</p>
       ) : (
         <div className="space-y-3">
           {campeonatosComInscritos.map(({ campeonato, inscritos, atletasDisponiveis }) => (

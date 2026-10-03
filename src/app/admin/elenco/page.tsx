@@ -13,8 +13,8 @@ export default async function ElencoPage(): Promise<React.ReactElement> {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-2xl font-bold text-planalto-white">Elenco</h1>
-        <p className="mt-1 text-planalto-gray">{atletas.length} atleta(s) ativo(s).</p>
+        <h1 className="font-heading text-2xl font-bold text-foreground">Elenco</h1>
+        <p className="mt-1 text-muted-foreground">{atletas.length} atleta(s) ativo(s).</p>
       </div>
 
       <AtletaForm />
@@ -24,7 +24,7 @@ export default async function ElencoPage(): Promise<React.ReactElement> {
       />
 
       {atletas.length === 0 ? (
-        <p className="text-sm text-planalto-gray">Nenhum atleta cadastrado ainda.</p>
+        <p className="text-sm text-muted-foreground">Nenhum atleta cadastrado ainda.</p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {atletas.map((atleta) => (

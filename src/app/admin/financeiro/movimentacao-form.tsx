@@ -19,21 +19,21 @@ export function MovimentacaoForm(): React.ReactElement {
   const [tipo, setTipo] = useState<"RECEITA" | "DESPESA">("RECEITA");
 
   return (
-    <div className="rounded-lg border border-white/10 bg-card">
+    <div className="rounded-lg border border-surface/10 bg-card">
       <button
         type="button"
         onClick={() => setAberto((prev) => !prev)}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >
-        <h2 className="font-heading text-lg font-bold text-planalto-white">Nova Movimentação</h2>
-        <span className="flex items-center gap-2 text-sm text-planalto-gray">
+        <h2 className="font-heading text-lg font-bold text-foreground">Nova Movimentação</h2>
+        <span className="flex items-center gap-2 text-sm text-muted-foreground">
           {aberto ? "Ocultar" : "Mostrar"}
           <ChevronDown size={18} className={cn("transition-transform", aberto && "rotate-180")} />
         </span>
       </button>
 
       {aberto ? (
-      <form action={formAction} className="grid grid-cols-1 gap-4 border-t border-white/10 px-6 py-4 sm:grid-cols-2">
+      <form action={formAction} className="grid grid-cols-1 gap-4 border-t border-surface/10 px-6 py-4 sm:grid-cols-2">
         <input type="hidden" name="comprovanteUrl" value={comprovanteUrl ?? ""} />
 
         <div className="space-y-1">

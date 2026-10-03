@@ -21,7 +21,7 @@ export function JogoForm({
 
   return (
     <Card>
-      <h2 className="font-heading text-lg font-bold text-planalto-white">Novo jogo</h2>
+      <h2 className="font-heading text-lg font-bold text-foreground">Novo jogo</h2>
 
       <form action={formAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <input type="hidden" name="adversarioEscudoUrl" value={escudoAdversario ?? ""} />
@@ -34,7 +34,7 @@ export function JogoForm({
         <div className="space-y-1">
           <Label htmlFor="dataHora">Data e hora (opcional)</Label>
           <Input id="dataHora" name="dataHora" type="datetime-local" />
-          <p className="text-xs text-planalto-gray">Deixe em branco se a data ainda não foi definida.</p>
+          <p className="text-xs text-muted-foreground">Deixe em branco se a data ainda não foi definida.</p>
         </div>
 
         <div className="space-y-1">

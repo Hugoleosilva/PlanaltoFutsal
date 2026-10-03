@@ -17,10 +17,10 @@ export async function CaronaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="carona" className="mx-auto w-full max-w-5xl px-6 py-3">
-      <h2 className="text-center font-heading text-2xl font-bold text-planalto-white">
+      <h2 className="text-center font-heading text-2xl font-bold text-foreground">
         Carona Solidária
       </h2>
-      <p className="mt-1 text-center text-sm text-planalto-gray">
+      <p className="mt-1 text-center text-sm text-muted-foreground">
         Ofereça ou encontre uma carona para o próximo jogo.
       </p>
 
@@ -38,13 +38,13 @@ export async function CaronaSection(): Promise<React.ReactElement> {
                 const jogo = jogoPorId.get(carona.jogoId);
                 return (
                   <div key={carona.id} className="rounded-md bg-black/20 p-3">
-                    <p className="font-semibold text-planalto-white">
+                    <p className="font-semibold text-foreground">
                       {jogo ? `Planalto Futsal x ${jogo.adversario}` : "Jogo"}
                     </p>
-                    <p className="text-sm text-planalto-gray">
+                    <p className="text-sm text-muted-foreground">
                       Saída: {formatDataHora(carona.horarioSaida)} · {carona.local}
                     </p>
-                    <p className="text-sm text-planalto-gray">
+                    <p className="text-sm text-muted-foreground">
                       Motorista: {carona.motoristaNome} · {carona.contato} ·{" "}
                       {carona.vagasDisponiveis} vaga(s)
                     </p>
@@ -53,7 +53,7 @@ export async function CaronaSection(): Promise<React.ReactElement> {
               })}
             </div>
           ) : (
-            <p className="m-auto text-center text-sm text-planalto-gray">
+            <p className="m-auto text-center text-sm text-muted-foreground">
               Nenhuma carona oferecida ainda.
             </p>
           )}

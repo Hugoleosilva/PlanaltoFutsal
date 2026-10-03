@@ -15,7 +15,7 @@ export function MarcarRecebidoButton({ contribuicaoId }: { contribuicaoId: strin
       <button
         type="submit"
         disabled={isPending}
-        className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-planalto-white transition hover:bg-white/20 disabled:opacity-50"
+        className="inline-flex items-center gap-1.5 rounded-md bg-surface/10 px-3 py-1.5 text-xs font-semibold text-foreground transition hover:bg-surface/20 disabled:opacity-50"
       >
         <CheckCircle2 size={14} />
         {isPending ? "Marcando..." : "Marcar como recebido"}

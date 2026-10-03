@@ -154,7 +154,7 @@ export function JogoRow({
         <ConfrontoEscudos adversarioEscudoUrl={jogo.adversarioEscudoUrl} mandante={jogo.mandante} />
 
         <div>
-          <p className="text-sm font-medium text-planalto-white">
+          <p className="text-sm font-medium text-foreground">
             {tituloConfronto(jogo.adversario, jogo.mandante)}
             {jogo.status === "REALIZADO" ? (
               <span className="ml-2 text-planalto-red">
@@ -164,7 +164,7 @@ export function JogoRow({
               </span>
             ) : null}
           </p>
-          <p className="text-xs text-planalto-gray">
+          <p className="text-xs text-muted-foreground">
             {formatDataHora(jogo.dataHora)} · {jogo.local} · {nomeCampeonato}
             {jogo.mandante === "ADVERSARIO" ? " · Fora" : ""}
           </p>
@@ -183,7 +183,7 @@ export function JogoRow({
           type="button"
           onClick={() => setEditando(true)}
           aria-label="Editar jogo"
-          className="text-planalto-gray transition hover:text-planalto-white"
+          className="text-muted-foreground transition hover:text-foreground"
         >
           <Pencil size={16} />
         </button>

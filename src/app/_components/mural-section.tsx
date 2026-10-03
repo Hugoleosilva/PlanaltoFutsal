@@ -13,7 +13,7 @@ export async function MuralSection(): Promise<React.ReactElement> {
 
   return (
     <section id="mural" className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
+      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
         Mural de Avisos
       </h2>
 
@@ -21,13 +21,13 @@ export async function MuralSection(): Promise<React.ReactElement> {
         {comunicados.map((comunicado) => (
           <Card key={comunicado.id}>
             <div className="flex items-center justify-between gap-2">
-              <p className="font-semibold text-planalto-white">{comunicado.titulo}</p>
+              <p className="font-semibold text-foreground">{comunicado.titulo}</p>
               <div className="flex items-center gap-2">
                 {comunicado.fixado ? <Badge tone="warning">Fixado</Badge> : null}
-                <span className="text-xs text-planalto-gray">{formatData(comunicado.publicadoEm)}</span>
+                <span className="text-xs text-muted-foreground">{formatData(comunicado.publicadoEm)}</span>
               </div>
             </div>
-            <p className="mt-2 text-sm text-planalto-gray">{comunicado.corpo}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{comunicado.corpo}</p>
           </Card>
         ))}
       </div>

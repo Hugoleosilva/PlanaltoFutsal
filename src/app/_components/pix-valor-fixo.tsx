@@ -35,15 +35,15 @@ export function PixValorFixo({ valor }: { valor: number }): React.ReactElement {
   }
 
   return (
-    <div className="flex flex-col items-center gap-3 rounded-lg border border-white/10 bg-black/20 p-5">
-      <p className="text-sm text-planalto-gray">
-        Pix de <span className="font-semibold text-planalto-white">{formatBRL(valor)}</span>
+    <div className="flex flex-col items-center gap-3 rounded-lg border border-surface/10 bg-black/20 p-5">
+      <p className="text-sm text-muted-foreground">
+        Pix de <span className="font-semibold text-foreground">{formatBRL(valor)}</span>
       </p>
       {qrCodeUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={qrCodeUrl} alt="QR Code Pix" width={200} height={200} />
       ) : (
-        <div className="flex h-[200px] w-[200px] items-center justify-center text-sm text-planalto-gray">
+        <div className="flex h-[200px] w-[200px] items-center justify-center text-sm text-muted-foreground">
           Gerando QR Code...
         </div>
       )}

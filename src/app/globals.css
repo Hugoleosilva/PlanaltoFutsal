@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Site é escuro sempre (sem alternância pra claro) — isso faz o Chrome/Edge
-     desenharem os seletores nativos (date/time picker, scrollbar) já no tema
-     escuro, em vez do branco padrão que não combinava com o resto da tela. */
+  /* Escuro é o tema padrão do site. */
   color-scheme: dark;
 
   --background: 0 0% 4%;
@@ -17,10 +15,27 @@
   --card: 0 0% 8%;
   --card-foreground: 0 0% 96%;
   --border: 0 0% 20%;
+  /* Tom de contraste usado em tints/hairlines translúcidos (ex.: bg-surface/10,
+     border-surface/10) — branco no escuro, preto no claro, pra sempre destacar
+     um pouco contra o fundo de base. */
+  --surface: 0 0% 100%;
   --radius: 0.75rem;
 
   --font-heading: var(--font-oswald, sans-serif);
   --font-body: var(--font-inter, sans-serif);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --background: 0 0% 97%;
+  --foreground: 0 0% 9%;
+  --muted: 0 0% 90%;
+  --muted-foreground: 0 0% 35%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --border: 0 0% 85%;
+  --surface: 0 0% 0%;
 }
 
 * {

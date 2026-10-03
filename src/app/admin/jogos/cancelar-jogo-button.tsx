@@ -16,7 +16,7 @@ export function CancelarJogoButton({ id }: { id: string }): React.ReactElement {
         type="submit"
         disabled={isPending}
         aria-label="Cancelar jogo"
-        className="text-planalto-gray transition hover:text-planalto-red disabled:opacity-50"
+        className="text-muted-foreground transition hover:text-planalto-red disabled:opacity-50"
       >
         <XCircle size={16} />
       </button>
