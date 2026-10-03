@@ -28,7 +28,7 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --background: 0 0% 98%;
+  --background: 0 0% 100%;
   --foreground: 0 0% 9%;
   --muted: 0 0% 90%;
   --muted-foreground: 0 0% 35%;
