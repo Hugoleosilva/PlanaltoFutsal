@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Atleta } from "@/core/domain/atleta/atleta.entity";
 import { User } from "@/core/domain/user/user.entity";
 import { VerificarEmailUseCase } from "@/core/use-cases/user/verificar-email.use-case";
@@ -7,12 +7,20 @@ import { FakeUserRepository } from "../../fakes/fake-user.repository";
 import { FakeAtletaRepository } from "../../fakes/fake-atleta.repository";
 import { FakeVerificacaoEmailRepository } from "../../fakes/fake-verificacao-email.repository";
 
+const LINK_LOGIN_BASE = "https://planaltofutsal.com.br/login";
+
 function setup() {
   const userRepository = new FakeUserRepository();
   const atletaRepository = new FakeAtletaRepository();
   const verificacaoRepository = new FakeVerificacaoEmailRepository();
-  const useCase = new VerificarEmailUseCase(userRepository, atletaRepository, verificacaoRepository);
-  return { userRepository, atletaRepository, verificacaoRepository, useCase };
+  const emailSender = vi.fn().mockResolvedValue(undefined);
+  const useCase = new VerificarEmailUseCase(
+    userRepository,
+    atletaRepository,
+    verificacaoRepository,
+    emailSender,
+  );
+  return { userRepository, atletaRepository, verificacaoRepository, emailSender, useCase };
 }
 
 describe("VerificarEmailUseCase", () => {
@@ -32,6 +40,7 @@ describe("VerificarEmailUseCase", () => {
 
     const { user: userVerificado, promovidoParaAtleta } = await useCase.execute({
       token: registro.token,
+      linkLoginBase: LINK_LOGIN_BASE,
     });
 
     expect(userVerificado.status).toBe("ATIVO");
@@ -68,6 +77,7 @@ describe("VerificarEmailUseCase", () => {
 
     const { user: userVerificado, promovidoParaAtleta } = await useCase.execute({
       token: registro.token,
+      linkLoginBase: LINK_LOGIN_BASE,
     });
 
     expect(promovidoParaAtleta).toBe(true);
@@ -81,7 +91,9 @@ describe("VerificarEmailUseCase", () => {
   it("rejects an unknown token", async () => {
     const { useCase } = setup();
 
-    await expect(useCase.execute({ token: "inexistente" })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      useCase.execute({ token: "inexistente", linkLoginBase: LINK_LOGIN_BASE }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it("rejects an expired token", async () => {
@@ -102,6 +114,8 @@ describe("VerificarEmailUseCase", () => {
       new Date(Date.now() - 1000),
     );
 
-    await expect(useCase.execute({ token: registro.token })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      useCase.execute({ token: registro.token, linkLoginBase: LINK_LOGIN_BASE }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

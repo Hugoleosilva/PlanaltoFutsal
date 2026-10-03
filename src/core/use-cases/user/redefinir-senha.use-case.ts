@@ -5,10 +5,13 @@ import { StrongPasswordRule, Validator } from "@/shared/validation";
 import { UseCase } from "../use-case";
 import { RedefinicaoSenhaRepository } from "../_shared/redefinicao-senha.port";
 import { PasswordHasher } from "../_shared/password-hasher.port";
+import { EmailSender } from "../_shared/email-sender.port";
+import { emailTemplateBranded } from "@/infrastructure/notifications/email-template";
 
 export interface RedefinirSenhaIn {
   token: string;
   novaSenha: string;
+  linkLoginBase: string;
 }
 
 export interface RedefinirSenhaOut {
@@ -20,9 +23,10 @@ export class RedefinirSenhaUseCase implements UseCase<RedefinirSenhaIn, Redefini
     private readonly userRepository: UserRepository,
     private readonly redefinicaoRepository: RedefinicaoSenhaRepository,
     private readonly passwordHasher: PasswordHasher,
+    private readonly emailSender: EmailSender,
   ) {}
 
-  async execute({ token, novaSenha }: RedefinirSenhaIn): Promise<RedefinirSenhaOut> {
+  async execute({ token, novaSenha, linkLoginBase }: RedefinirSenhaIn): Promise<RedefinirSenhaOut> {
     const registro = await this.redefinicaoRepository.findByToken(token);
     if (!registro) {
       throw new AppError("Link de redefinição inválido.", "TOKEN_INVALIDO", 400);
@@ -45,6 +49,23 @@ export class RedefinirSenhaUseCase implements UseCase<RedefinirSenhaIn, Redefini
     const userSalvo = await this.userRepository.update(userAtualizado);
 
     await this.redefinicaoRepository.delete(registro.id);
+
+    const origin = new URL(linkLoginBase).origin;
+
+    await this.emailSender({
+      to: userSalvo.email,
+      subject: "Senha alterada — Planalto Futsal",
+      html: emailTemplateBranded({
+        origin,
+        titulo: `Senha alterada.`,
+        paragrafos: [
+          "Agora seu acesso está garantido e você já pode acompanhar o Planalto Futsal sem perder nenhum lance! Se não foi você, pode ignorar esse e-mail!",
+          "Dica de craque: guarde bem a sua senha para não ser pego de contra-ataque, combinado?",
+        ],
+        linkBotao: linkLoginBase,
+        textoBotao: "Fazer Login",
+      }),
+    });
 
     return { user: userSalvo };
   }

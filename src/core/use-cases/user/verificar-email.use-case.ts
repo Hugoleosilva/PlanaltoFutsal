@@ -4,9 +4,12 @@ import { AtletaRepository } from "@/core/domain/atleta/atleta.repository";
 import { AppError } from "@/infrastructure/errors";
 import { UseCase } from "../use-case";
 import { VerificacaoEmailRepository } from "../_shared/verificacao-email.port";
+import { EmailSender } from "../_shared/email-sender.port";
+import { emailTemplateBranded } from "@/infrastructure/notifications/email-template";
 
 export interface VerificarEmailIn {
   token: string;
+  linkLoginBase: string;
 }
 
 export interface VerificarEmailOut {
@@ -19,9 +22,10 @@ export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, Verifica
     private readonly userRepository: UserRepository,
     private readonly atletaRepository: AtletaRepository,
     private readonly verificacaoRepository: VerificacaoEmailRepository,
+    private readonly emailSender: EmailSender,
   ) {}
 
-  async execute({ token }: VerificarEmailIn): Promise<VerificarEmailOut> {
+  async execute({ token, linkLoginBase }: VerificarEmailIn): Promise<VerificarEmailOut> {
     const registro = await this.verificacaoRepository.findByToken(token);
     if (!registro) {
       throw new AppError("Link de verificação inválido.", "TOKEN_INVALIDO", 400);
@@ -55,6 +59,22 @@ export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, Verifica
 
     const userSalvo = await this.userRepository.update(userConfirmado);
     await this.verificacaoRepository.delete(registro.id);
+
+    const origin = new URL(linkLoginBase).origin;
+
+    await this.emailSender({
+      to: userSalvo.email,
+      subject: "Cadastro confirmado — Planalto Futsal",
+      html: emailTemplateBranded({
+        origin,
+        titulo: `Bem-vindo, ${userSalvo.name}!`,
+        paragrafos: [
+          "Seu cadastro no Planalto Futsal foi concluído com sucesso! Agora você joga junto com a gente e fica por dentro de todos os lances, tabelas e bastidores!",
+        ],
+        linkBotao: linkLoginBase,
+        textoBotao: "Fazer Login",
+      }),
+    });
 
     return { user: userSalvo, promovidoParaAtleta };
   }

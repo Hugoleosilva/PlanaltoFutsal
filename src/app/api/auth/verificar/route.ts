@@ -3,6 +3,7 @@ import { VerificarEmailUseCase } from "@/core/use-cases/user/verificar-email.use
 import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 import { MongoAtletaRepository } from "@/infrastructure/database/repositories/atleta.repository.mongo";
 import { MongoVerificacaoEmailRepository } from "@/infrastructure/database/repositories/verificacao-email.repository.mongo";
+import { getEmailSender } from "@/infrastructure/notifications/get-email-sender";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const token = request.nextUrl.searchParams.get("token");
@@ -17,9 +18,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       new MongoUserRepository(),
       new MongoAtletaRepository(),
       new MongoVerificacaoEmailRepository(),
+      getEmailSender(),
     );
 
-    await useCase.execute({ token });
+    await useCase.execute({ token, linkLoginBase: `${origin}/login` });
 
     return NextResponse.redirect(new URL("/login?verificacao=ok", origin));
   } catch {

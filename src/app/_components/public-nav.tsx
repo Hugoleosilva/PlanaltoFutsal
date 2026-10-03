@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -40,6 +41,11 @@ function montarDashboards(user: { role: string; atletaId: string | null }): Dash
 export function PublicNav(): React.ReactElement {
   const { data: session, status } = useSession();
   const pathname = usePathname();
+  const linkAtivoRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    linkAtivoRef.current?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-planalto-black/90 backdrop-blur">
@@ -58,18 +64,22 @@ export function PublicNav(): React.ReactElement {
         </Link>
 
         <nav className="flex shrink-0 gap-4 text-sm text-planalto-gray">
-          {LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "whitespace-nowrap hover:text-planalto-white",
-                pathname === link.href && "font-semibold text-planalto-white",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {LINKS.map((link) => {
+            const ativo = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                ref={ativo ? linkAtivoRef : undefined}
+                href={link.href}
+                className={cn(
+                  "whitespace-nowrap hover:text-planalto-white",
+                  ativo && "font-semibold text-planalto-white",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">

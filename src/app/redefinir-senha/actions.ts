@@ -1,9 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { RedefinirSenhaUseCase } from "@/core/use-cases/user/redefinir-senha.use-case";
 import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 import { MongoRedefinicaoSenhaRepository } from "@/infrastructure/database/repositories/redefinicao-senha.repository.mongo";
 import { hashPassword } from "@/infrastructure/security/password-hasher";
+import { getEmailSender } from "@/infrastructure/notifications/get-email-sender";
 import { toActionError } from "@/infrastructure/errors";
 
 export interface ActionState {
@@ -28,11 +30,17 @@ export async function redefinirSenhaAction(
       new MongoUserRepository(),
       new MongoRedefinicaoSenhaRepository(),
       hashPassword,
+      getEmailSender(),
     );
+
+    const headersList = await headers();
+    const host = headersList.get("host") ?? "localhost:3001";
+    const protocol = host.startsWith("localhost") ? "http" : "https";
 
     await useCase.execute({
       token: typeof token === "string" ? token : "",
       novaSenha: typeof novaSenha === "string" ? novaSenha : "",
+      linkLoginBase: `${protocol}://${host}/login`,
     });
 
     return { error: null, sucesso: true };

@@ -83,7 +83,10 @@ export function CadastroForm(): React.ReactElement {
         <Link href="/inicio" className="hover:text-planalto-white">
           Voltar ao início
         </Link>
-        <Link href="/login" className="text-planalto-red underline">
+        <Link
+          href="/login"
+          className="font-semibold text-planalto-white underline decoration-planalto-red decoration-2 underline-offset-4 transition hover:text-planalto-red"
+        >
           Entrar
         </Link>
       </div>

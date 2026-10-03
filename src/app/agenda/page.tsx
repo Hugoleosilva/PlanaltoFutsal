@@ -18,7 +18,7 @@ export default async function AgendaPage({ searchParams }: AgendaPageProps): Pro
           <AgendaSection />
 
           <details className="group mt-10 text-center" open={Boolean(params.mes || params.ano)}>
-            <summary className="cursor-pointer list-none text-sm font-semibold text-planalto-red underline [&::-webkit-details-marker]:hidden">
+            <summary className="cursor-pointer list-none text-sm font-semibold text-planalto-white underline decoration-planalto-red decoration-2 underline-offset-4 [&::-webkit-details-marker]:hidden">
               Ver resultados anteriores
             </summary>
             <div className="mt-6 text-left">
