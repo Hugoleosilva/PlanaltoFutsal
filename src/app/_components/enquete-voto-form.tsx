@@ -46,7 +46,7 @@ export function EnqueteVotoForm({
   const totalVotos = opcoes.reduce((total, opcao) => total + opcao.votos, 0);
 
   if (jaVotou) {
-    return <p className="text-sm text-foreground">Você já votou nesta enquete. Valeu! 🙌</p>;
+    return <p className="text-sm text-planalto-white">Você já votou nesta enquete. Valeu! 🙌</p>;
   }
 
   return (
@@ -61,7 +61,7 @@ export function EnqueteVotoForm({
             <button
               type="submit"
               disabled={isPending}
-              className="relative w-full overflow-hidden rounded-md border border-surface/10 px-3 py-2 text-left text-sm text-foreground transition hover:border-planalto-red disabled:opacity-60"
+              className="relative w-full overflow-hidden rounded-md border border-white/10 px-3 py-2 text-left text-sm text-planalto-white transition hover:border-planalto-red disabled:opacity-60"
             >
               <span
                 className="absolute inset-y-0 left-0 bg-planalto-red/20"
@@ -69,7 +69,7 @@ export function EnqueteVotoForm({
               />
               <span className="relative flex justify-between">
                 <span>{opcao.texto}</span>
-                <span className="text-muted-foreground">{percentual}%</span>
+                <span className="text-planalto-gray">{percentual}%</span>
               </span>
             </button>
           </form>

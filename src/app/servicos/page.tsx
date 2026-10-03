@@ -17,11 +17,11 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
     <QuadraBackdrop>
       <PublicNav />
       <main className="mx-auto max-w-5xl flex-1 px-6 py-12">
-        <h1 className="text-center font-heading text-3xl font-bold text-foreground">
+        <h1 className="text-center font-heading text-3xl font-bold text-planalto-white">
           Rede de Apoio
         </h1>
-        <p className="mx-auto mt-2 max-w-xl text-center text-muted-foreground">
-          Trabalhos e serviços divulgados por gente da nossa torcida e do nosso elenco.
+        <p className="mx-auto mt-2 max-w-xl text-center text-planalto-gray">
+          Divulgue os Trabalhos e Serviços feitos por gente da nossa Comunidade.
         </p>
 
         <div className="mt-10">
@@ -35,7 +35,7 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
             <Card className="text-center">
               <p className="text-foreground">Quer divulgar seu trabalho aqui?</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Só quem tem conta no site pode publicar. É rápido e grátis.
+                Crie uma conta no site e publique seu trabalho. É rápido e grátis.
               </p>
               <div className="mt-4 flex justify-center gap-3">
                 <Link

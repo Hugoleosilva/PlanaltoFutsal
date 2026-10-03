@@ -15,12 +15,12 @@ export async function AgendaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="agenda">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Agenda de Jogos
       </h2>
 
       {jogos.length === 0 ? (
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-planalto-gray">
           Nenhum jogo agendado no momento.
         </p>
       ) : (

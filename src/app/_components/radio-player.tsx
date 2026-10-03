@@ -9,7 +9,7 @@ export function RadioPlayer(): React.ReactElement {
 
   return (
     <div>
-      <div className="flex items-center gap-2 text-foreground">
+      <div className="flex items-center gap-2 text-planalto-white">
         <Radio size={18} />
         <h3 className="font-heading font-bold">Web Rádio</h3>
       </div>
@@ -33,7 +33,7 @@ export function RadioPlayer(): React.ReactElement {
         <button
           type="button"
           onClick={alternarPlayPause}
-          className="flex w-full items-center justify-center gap-2 rounded-md bg-surface/10 py-2 text-sm font-semibold text-foreground hover:bg-surface/20"
+          className="flex w-full items-center justify-center gap-2 rounded-md bg-white/10 py-2 text-sm font-semibold text-planalto-white hover:bg-white/20"
         >
           {tocando ? <Pause size={16} /> : <Play size={16} />}
           {tocando ? "Pausar" : "Tocar"}

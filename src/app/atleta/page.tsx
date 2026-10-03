@@ -58,8 +58,8 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
         ) : null}
 
         <div>
-          <h1 className="font-heading text-2xl font-bold text-foreground">{atleta.apelido}</h1>
-          <p className="text-muted-foreground">
+          <h1 className="font-heading text-2xl font-bold text-planalto-white">{atleta.apelido}</h1>
+          <p className="text-planalto-gray">
             {atleta.nomeCompleto} · {atleta.idade} anos
           </p>
         </div>

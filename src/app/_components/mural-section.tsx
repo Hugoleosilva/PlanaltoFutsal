@@ -13,7 +13,7 @@ export async function MuralSection(): Promise<React.ReactElement> {
 
   return (
     <section id="mural" className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Mural de Avisos
       </h2>
 

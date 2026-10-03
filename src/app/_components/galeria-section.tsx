@@ -31,17 +31,17 @@ export async function GaleriaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="galeria" className="mx-auto max-w-5xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Galeria de Fotos
       </h2>
       {fotosItem.length > 0 ? (
-        <p className="mt-1 text-center text-xs text-muted-foreground">
+        <p className="mt-1 text-center text-xs text-planalto-gray">
           Clique numa categoria pra ver os tópicos, e numa foto pra abrir com a descrição.
         </p>
       ) : null}
 
       {fotosItem.length === 0 ? (
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-planalto-gray">
           Em breve, fotos do time e da torcida por aqui.
         </p>
       ) : (

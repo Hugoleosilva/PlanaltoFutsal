@@ -17,10 +17,10 @@ export async function CaronaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="carona" className="mx-auto w-full max-w-5xl px-6 py-3">
-      <h2 className="text-center font-heading text-2xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-2xl font-bold text-planalto-white">
         Carona Solidária
       </h2>
-      <p className="mt-1 text-center text-sm text-muted-foreground">
+      <p className="mt-1 text-center text-sm text-planalto-gray">
         Ofereça ou encontre uma carona para o próximo jogo.
       </p>
 

@@ -6,14 +6,14 @@ export async function DiretoriaSection(): Promise<React.ReactElement> {
 
   return (
     <section className="mx-auto max-w-5xl px-6 pb-6 pt-0">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">Diretoria</h2>
-      <p className="mx-auto mt-2 text-center text-muted-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">Diretoria</h2>
+      <p className="mx-auto mt-2 text-center text-planalto-gray">
         Saiba quem toca o Planalto Futsal fora das quatro linhas — conheça um pouco de quem faz esse
         Projeto acontecer.
       </p>
 
       {membros.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-muted-foreground">
+        <p className="mt-8 text-center text-sm text-planalto-gray">
           Em breve, os responsáveis pelo clube por aqui.
         </p>
       ) : (

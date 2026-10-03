@@ -8,7 +8,7 @@ export async function EngajamentoSection(): Promise<React.ReactElement> {
 
   return (
     <section id="engajamento" className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Bem-vindos à casa do Planalto Futsal! Solta o som, fica à vontade e vem acompanhar o nosso time.
       </h2>
 
@@ -18,14 +18,14 @@ export async function EngajamentoSection(): Promise<React.ReactElement> {
         </Card>
 
         <Card className="bg-black/40 backdrop-blur">
-          <h3 className="font-heading font-bold text-foreground">Enquete</h3>
+          <h3 className="font-heading font-bold text-planalto-white">Enquete</h3>
           {enquete ? (
             <div className="mt-3 space-y-3">
-              <p className="text-sm text-foreground">{enquete.pergunta}</p>
+              <p className="text-sm text-planalto-white">{enquete.pergunta}</p>
               <EnqueteVotoForm enqueteId={enquete.id} opcoes={[...enquete.opcoes]} />
             </div>
           ) : (
-            <p className="mt-2 text-sm text-muted-foreground">Nenhuma enquete ativa agora.</p>
+            <p className="mt-2 text-sm text-planalto-gray">Nenhuma enquete ativa agora.</p>
           )}
         </Card>
       </div>

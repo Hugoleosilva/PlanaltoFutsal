@@ -57,7 +57,7 @@ export async function ResultadosSection({
 
   return (
     <section id="resultados">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
+      <h2 className="text-center font-heading text-3xl font-bold text-planalto-white">
         Resultados Anteriores
       </h2>
 
@@ -72,7 +72,7 @@ export async function ResultadosSection({
                 "shrink-0 rounded-md px-4 py-2 text-center text-sm font-semibold",
                 ativo
                   ? "bg-planalto-red text-white"
-                  : "bg-surface/5 text-muted-foreground hover:bg-surface/10",
+                  : "bg-white/5 text-planalto-gray hover:bg-white/10",
               )}
             >
               <span className="block text-xs opacity-80">{anoAba}</span>
@@ -83,7 +83,7 @@ export async function ResultadosSection({
       </div>
 
       {resultados.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-muted-foreground">
+        <p className="mt-8 text-center text-sm text-planalto-gray">
           Nenhum resultado para esse período.
         </p>
       ) : (
