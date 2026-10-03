@@ -40,7 +40,7 @@ export async function ServicosLista({
               "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
               !categoriaAtiva
                 ? "bg-planalto-red text-white"
-                : "bg-white/10 text-planalto-white hover:bg-white/20",
+                : "bg-surface/10 text-foreground hover:bg-surface/20",
             )}
           >
             Todas
@@ -53,7 +53,7 @@ export async function ServicosLista({
                 "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
                 categoriaAtiva === categoria
                   ? "bg-planalto-red text-white"
-                  : "bg-white/10 text-planalto-white hover:bg-white/20",
+                  : "bg-surface/10 text-foreground hover:bg-surface/20",
               )}
             >
               {CATEGORIA_SERVICO_LABEL[categoria]}
@@ -63,7 +63,7 @@ export async function ServicosLista({
       ) : null}
 
       {servicos.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-planalto-gray">
+        <p className="mt-8 text-center text-sm text-muted-foreground">
           {todosOsServicos.length === 0
             ? "Nenhum serviço divulgado ainda. Seja o primeiro!"
             : "Nenhum serviço nessa categoria ainda."}

@@ -17,10 +17,10 @@ export default async function ServicosPage({ searchParams }: ServicosPageProps):
     <QuadraBackdrop>
       <PublicNav />
       <main className="mx-auto max-w-5xl flex-1 px-6 py-12">
-        <h1 className="text-center font-heading text-3xl font-bold text-planalto-white">
+        <h1 className="text-center font-heading text-3xl font-bold text-foreground">
           Rede de Apoio
         </h1>
-        <p className="mx-auto mt-2 max-w-xl text-center text-planalto-gray">
+        <p className="mx-auto mt-2 max-w-xl text-center text-muted-foreground">
           Divulgue os Trabalhos e Serviços feitos por gente da nossa Comunidade.
         </p>
 
