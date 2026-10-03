@@ -16,7 +16,7 @@ export function CadastroForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-8 text-center backdrop-blur-md">
+      <div className="space-y-3 rounded-lg border border-white/10 bg-black/30 p-6 text-center backdrop-blur-md">
         <h1 className="font-heading text-2xl font-bold text-planalto-white">Quase lá!</h1>
         <p className="text-planalto-gray">
           Enviamos um link de confirmação para o seu e-mail. Clique nele para ativar sua conta.
@@ -40,24 +40,36 @@ export function CadastroForm(): React.ReactElement {
         </p>
       </div>
 
-      <div className="space-y-1">
-        <Label htmlFor="nomeCompleto">Nome completo</Label>
-        <Input id="nomeCompleto" name="nomeCompleto" required maxLength={150} />
+      <div className="flex items-center gap-3">
+        <Label htmlFor="nomeCompleto" className="w-24 shrink-0">
+          Nome
+        </Label>
+        <Input id="nomeCompleto" name="nomeCompleto" required maxLength={150} className="flex-1" />
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Label htmlFor="email" className="w-24 shrink-0">
+          E-mail
+        </Label>
+        <Input id="email" name="email" type="email" required className="flex-1" />
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Label htmlFor="whatsapp" className="w-24 shrink-0">
+          WhatsApp
+        </Label>
+        <TelefoneInput id="whatsapp" name="whatsapp" className="flex-1" />
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="email">E-mail</Label>
-        <Input id="email" name="email" type="email" required />
-      </div>
-
-      <div className="space-y-1">
-        <Label htmlFor="whatsapp">WhatsApp (opcional)</Label>
-        <TelefoneInput id="whatsapp" name="whatsapp" />
-      </div>
-
-      <div className="space-y-1">
-        <Label htmlFor="senha">Senha</Label>
-        <PasswordInput id="senha" name="senha" required minLength={8} />
+        <div className="flex items-center gap-3">
+          <Label htmlFor="senha" className="w-24 shrink-0">
+            Senha
+          </Label>
+          <div className="flex-1">
+            <PasswordInput id="senha" name="senha" required minLength={8} />
+          </div>
+        </div>
         <p className="text-xs text-planalto-gray">Mínimo 8 caracteres, com maiúscula, minúscula e número.</p>
       </div>
 

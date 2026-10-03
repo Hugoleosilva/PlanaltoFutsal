@@ -7,6 +7,7 @@ import { UseCase } from "../use-case";
 import { EmailSender } from "../_shared/email-sender.port";
 import { VerificacaoEmailRepository } from "../_shared/verificacao-email.port";
 import { PasswordHasher } from "../_shared/password-hasher.port";
+import { emailTemplateBranded } from "@/infrastructure/notifications/email-template";
 
 const TOKEN_VALIDADE_HORAS = 24;
 
@@ -56,11 +57,21 @@ export class RegistrarUsuarioUseCase implements UseCase<RegistrarUsuarioIn, Regi
     await this.verificacaoRepository.create(userCriado.id, token, expiraEm);
 
     const link = `${input.linkVerificacaoBase}?token=${token}`;
+    const origin = new URL(input.linkVerificacaoBase).origin;
 
     await this.emailSender({
       to: userCriado.email,
       subject: "Confirme seu e-mail — Planalto Futsal",
-      html: `<p>Olá, ${userCriado.name}!</p><p>Confirme seu cadastro no Planalto Futsal clicando no link abaixo (válido por ${TOKEN_VALIDADE_HORAS}h):</p><p><a href="${link}">${link}</a></p>`,
+      html: emailTemplateBranded({
+        origin,
+        titulo: `Olá, ${userCriado.name}!`,
+        paragrafos: [
+          `Falta só confirmar seu e-mail pra ativar sua conta no Planalto Futsal. Clique no botão abaixo (o link vale por ${TOKEN_VALIDADE_HORAS}h):`,
+        ],
+        linkBotao: link,
+        textoBotao: "Confirmar e-mail",
+        avisoRodape: "Se você não se cadastrou no Planalto Futsal, pode ignorar este e-mail.",
+      }),
     });
 
     return { user: userCriado };

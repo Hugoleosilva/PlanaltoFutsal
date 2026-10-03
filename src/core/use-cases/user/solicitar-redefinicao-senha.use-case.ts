@@ -3,6 +3,7 @@ import { UserRepository } from "@/core/domain/user/user.repository";
 import { UseCase } from "../use-case";
 import { EmailSender } from "../_shared/email-sender.port";
 import { RedefinicaoSenhaRepository } from "../_shared/redefinicao-senha.port";
+import { emailTemplateBranded } from "@/infrastructure/notifications/email-template";
 
 const TOKEN_VALIDADE_HORAS = 1;
 
@@ -39,11 +40,21 @@ export class SolicitarRedefinicaoSenhaUseCase
     await this.redefinicaoRepository.create(user.id, token, expiraEm);
 
     const link = `${input.linkRedefinicaoBase}?token=${token}`;
+    const origin = new URL(input.linkRedefinicaoBase).origin;
 
     await this.emailSender({
       to: user.email,
       subject: "Redefinir senha — Planalto Futsal",
-      html: `<p>Olá, ${user.name}!</p><p>Pediram a redefinição da sua senha no Planalto Futsal. Clique no link abaixo pra escolher uma nova (válido por ${TOKEN_VALIDADE_HORAS}h):</p><p><a href="${link}">${link}</a></p><p>Se não foi você, pode ignorar este e-mail.</p>`,
+      html: emailTemplateBranded({
+        origin,
+        titulo: `Olá, ${user.name}!`,
+        paragrafos: [
+          `Pediram a redefinição da sua senha no Planalto Futsal. Clique no botão abaixo pra escolher uma nova (o link vale por ${TOKEN_VALIDADE_HORAS}h):`,
+        ],
+        linkBotao: link,
+        textoBotao: "Redefinir senha",
+        avisoRodape: "Se não foi você quem pediu, pode ignorar este e-mail — sua senha continua a mesma.",
+      }),
     });
   }
 }

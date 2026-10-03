@@ -61,30 +61,39 @@ export function LoginForm(): React.ReactElement {
         </p>
       ) : null}
 
-      <div className="space-y-1">
-        <Label htmlFor="email">E-mail</Label>
+      <div className="flex items-center gap-3">
+        <Label htmlFor="email" className="w-16 shrink-0">
+          E-mail
+        </Label>
         <Input
           id="email"
           type="email"
           required
+          className="flex-1"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
       </div>
 
       <div className="space-y-1">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="password">Senha</Label>
+        <div className="flex items-center gap-3">
+          <Label htmlFor="password" className="w-16 shrink-0">
+            Senha
+          </Label>
+          <div className="flex-1">
+            <PasswordInput
+              id="password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+        </div>
+        <div className="text-right">
           <Link href="/esqueci-senha" className="text-xs text-planalto-gray hover:text-planalto-white">
             Esqueceu a senha?
           </Link>
         </div>
-        <PasswordInput
-          id="password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
       </div>
 
       {error ? <p className="text-sm text-planalto-red">{error}</p> : null}

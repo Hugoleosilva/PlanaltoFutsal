@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { LogOut } from "lucide-react";
+import { Home, LogOut } from "lucide-react";
 
 export function AtletaTopbar(): React.ReactElement {
   return (
@@ -20,14 +21,23 @@ export function AtletaTopbar(): React.ReactElement {
         </span>
       </div>
 
-      <button
-        type="button"
-        onClick={() => signOut({ callbackUrl: "/inicio" })}
-        className="flex items-center gap-2 text-sm text-planalto-gray transition hover:text-planalto-white"
-      >
-        <LogOut size={16} />
-        Sair
-      </button>
+      <div className="flex items-center gap-4">
+        <Link
+          href="/inicio"
+          className="flex items-center gap-2 text-sm text-planalto-gray transition hover:text-planalto-white"
+        >
+          <Home size={16} />
+          Início
+        </Link>
+        <button
+          type="button"
+          onClick={() => signOut({ callbackUrl: "/inicio" })}
+          className="flex items-center gap-2 text-sm text-planalto-gray transition hover:text-planalto-white"
+        >
+          <LogOut size={16} />
+          Sair
+        </button>
+      </div>
     </header>
   );
 }

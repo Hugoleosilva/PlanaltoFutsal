@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/infrastructure/security/auth";
+import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { AtletaTopbar } from "./_components/atleta-topbar";
 
 export default async function AtletaLayout({
@@ -14,9 +15,9 @@ export default async function AtletaLayout({
   }
 
   return (
-    <div className="min-h-screen bg-planalto-black">
+    <QuadraBackdrop>
       <AtletaTopbar />
       {children}
-    </div>
+    </QuadraBackdrop>
   );
 }
