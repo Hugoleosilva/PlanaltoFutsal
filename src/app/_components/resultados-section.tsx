@@ -57,9 +57,9 @@ export async function ResultadosSection({
 
   return (
     <section id="resultados">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
-        Resultados Anteriores
-      </h2>
+      <div className="mx-auto w-fit max-w-xl rounded-lg bg-card px-6 py-4 text-center">
+        <h2 className="font-heading text-3xl font-bold text-foreground">Resultados Anteriores</h2>
+      </div>
 
       <div className="mt-6 flex justify-center gap-2 overflow-x-auto pb-2">
         {abas.map(({ ano: anoAba, mes: mesAba }) => {
@@ -72,7 +72,7 @@ export async function ResultadosSection({
                 "shrink-0 rounded-md px-4 py-2 text-center text-sm font-semibold",
                 ativo
                   ? "bg-planalto-red text-white"
-                  : "bg-surface/5 text-muted-foreground hover:bg-surface/10",
+                  : "bg-card text-muted-foreground hover:bg-surface/10",
               )}
             >
               <span className="block text-xs opacity-80">{anoAba}</span>

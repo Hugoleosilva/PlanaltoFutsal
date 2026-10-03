@@ -121,14 +121,16 @@ export async function ElencoSection({
 
   return (
     <section id="elenco" className="mx-auto max-w-5xl px-6 py-3">
-      <h2 className="text-center font-heading text-2xl font-bold text-foreground">Nosso Elenco</h2>
+      <div className="mx-auto w-fit max-w-xl rounded-lg bg-card px-6 py-3 text-center">
+        <h2 className="font-heading text-2xl font-bold text-foreground">Nosso Elenco</h2>
+      </div>
 
       {campeonatosAtivos.length > 0 ? (
         <div className="mt-3 flex flex-wrap justify-center gap-2">
           {campeonatoSelecionado ? (
             <Link
               href="/elenco"
-              className="inline-flex items-center rounded-full bg-surface/10 px-2.5 py-0.5 text-xs font-medium text-foreground transition hover:bg-surface/20"
+              className="inline-flex items-center rounded-full bg-card px-2.5 py-0.5 text-xs font-medium text-foreground transition hover:bg-surface/20"
             >
               Todos os atletas
             </Link>
@@ -143,7 +145,7 @@ export async function ElencoSection({
                   "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition",
                   ativo
                     ? "bg-planalto-red text-white"
-                    : "bg-surface/10 text-foreground hover:bg-surface/20",
+                    : "bg-card text-foreground hover:bg-surface/20",
                 )}
               >
                 {campeonato.nome}

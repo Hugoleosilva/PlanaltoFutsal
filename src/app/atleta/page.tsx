@@ -57,7 +57,7 @@ export default async function AtletaDashboardPage(): Promise<React.ReactElement>
           />
         ) : null}
 
-        <div>
+        <div className="rounded-lg bg-card px-4 py-2">
           <h1 className="font-heading text-2xl font-bold text-foreground">{atleta.apelido}</h1>
           <p className="text-muted-foreground">
             {atleta.nomeCompleto} · {atleta.idade} anos

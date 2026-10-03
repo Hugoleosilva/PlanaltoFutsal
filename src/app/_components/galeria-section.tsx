@@ -31,14 +31,14 @@ export async function GaleriaSection(): Promise<React.ReactElement> {
 
   return (
     <section id="galeria" className="mx-auto max-w-5xl px-6 py-16">
-      <h2 className="text-center font-heading text-3xl font-bold text-foreground">
-        Galeria de Fotos
-      </h2>
-      {fotosItem.length > 0 ? (
-        <p className="mt-1 text-center text-xs text-muted-foreground">
-          Clique numa categoria Atuais ou Das Antigas para ver as fotos.
-        </p>
-      ) : null}
+      <div className="mx-auto w-fit max-w-xl rounded-lg bg-card px-6 py-4 text-center">
+        <h2 className="font-heading text-3xl font-bold text-foreground">Galeria de Fotos</h2>
+        {fotosItem.length > 0 ? (
+          <p className="mt-1 text-xs text-muted-foreground">
+            Clique numa categoria Atuais ou Das Antigas para ver as fotos.
+          </p>
+        ) : null}
+      </div>
 
       {fotosItem.length === 0 ? (
         <p className="mt-6 text-center text-sm text-muted-foreground">

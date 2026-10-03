@@ -40,7 +40,7 @@ export async function ServicosLista({
               "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
               !categoriaAtiva
                 ? "bg-planalto-red text-white"
-                : "bg-surface/10 text-foreground hover:bg-surface/20",
+                : "bg-card text-foreground hover:bg-surface/20",
             )}
           >
             Todas
@@ -53,7 +53,7 @@ export async function ServicosLista({
                 "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition",
                 categoriaAtiva === categoria
                   ? "bg-planalto-red text-white"
-                  : "bg-surface/10 text-foreground hover:bg-surface/20",
+                  : "bg-card text-foreground hover:bg-surface/20",
               )}
             >
               {CATEGORIA_SERVICO_LABEL[categoria]}

@@ -1,7 +1,9 @@
 export function HistoriaSection(): React.ReactElement {
   return (
     <section id="historia" className="mx-auto max-w-3xl px-6 py-16 text-center">
-      <h2 className="font-heading text-3xl font-bold text-foreground">Seguiremos Fazendo a Nossa História!</h2>
+      <div className="mx-auto w-fit max-w-xl rounded-lg bg-card px-6 py-4">
+        <h2 className="font-heading text-3xl font-bold text-foreground">Seguiremos Fazendo a Nossa História!</h2>
+      </div>
 
       <div className="mt-6 rounded-lg border border-surface/10 bg-card p-6 text-justify">
         <p className="text-muted-foreground mb-4">
