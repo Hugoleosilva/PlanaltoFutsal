@@ -32,7 +32,7 @@ export function MembroDiretoriaCard({
         {nome}
       </p>
 
-      <p className="mt-1.5 text-xs text-planalto-gray">{funcao}</p>
+      <p className="mt-1.5 min-h-[2rem] text-xs text-planalto-gray">{funcao}</p>
 
       {bio ? (
         <div
