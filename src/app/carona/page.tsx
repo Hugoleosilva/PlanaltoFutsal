@@ -2,6 +2,8 @@ import { PublicNav } from "../_components/public-nav";
 import { QuadraBackdrop } from "../_components/quadra-backdrop";
 import { CaronaSection } from "../_components/carona-section";
 
+export const dynamic = "force-dynamic";
+
 export default function CaronaPage(): React.ReactElement {
   return (
     <QuadraBackdrop semRolagem>

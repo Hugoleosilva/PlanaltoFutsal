@@ -16,7 +16,7 @@ export function CadastroForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-card p-6 text-center backdrop-blur-md">
         <h1 className="font-heading text-2xl font-bold text-foreground">Quase lá!</h1>
         <p className="text-muted-foreground">
           Enviamos um link de confirmação para o seu e-mail. Clique nele para ativar sua conta.
@@ -31,7 +31,7 @@ export function CadastroForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-card p-6 backdrop-blur-md"
     >
       <div>
         <h1 className="font-heading text-2xl font-bold text-foreground">Criar conta</h1>

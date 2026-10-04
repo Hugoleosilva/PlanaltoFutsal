@@ -4,6 +4,8 @@ import { GaleriaSection } from "../_components/galeria-section";
 import { EnviarFotoSection } from "../_components/enviar-foto-section";
 import { Collapsible } from "@/shared/components/ui/collapsible";
 
+export const dynamic = "force-dynamic";
+
 export default function GaleriaPage(): React.ReactElement {
   return (
     <QuadraBackdrop>

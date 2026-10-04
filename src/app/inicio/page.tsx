@@ -5,6 +5,8 @@ import { MuralSection } from "../_components/mural-section";
 import { EngajamentoSection } from "../_components/engajamento-section";
 // import { PatrocinadoresSection } from "../_components/patrocinadores-section";
 
+export const dynamic = "force-dynamic";
+
 export default function InicioPage(): React.ReactElement {
   return (
     <>

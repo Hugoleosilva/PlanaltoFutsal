@@ -45,7 +45,7 @@ export function LoginForm(): React.ReactElement {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-card p-6 backdrop-blur-md"
     >
       <h1 className="font-heading text-2xl font-bold text-foreground">Entrar</h1>
 

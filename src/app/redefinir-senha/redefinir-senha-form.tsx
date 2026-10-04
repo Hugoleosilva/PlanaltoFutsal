@@ -17,7 +17,7 @@ export function RedefinirSenhaForm(): React.ReactElement {
 
   if (!token) {
     return (
-      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-card p-6 text-center backdrop-blur-md">
         <h1 className="font-heading text-2xl font-bold text-foreground">Link inválido</h1>
         <p className="text-muted-foreground">
           Esse link de redefinição está incompleto. Peça um novo na tela de login.
@@ -31,7 +31,7 @@ export function RedefinirSenhaForm(): React.ReactElement {
 
   if (state.sucesso) {
     return (
-      <div className="space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 text-center backdrop-blur-md">
+      <div className="space-y-3 rounded-lg border border-surface/10 bg-card p-6 text-center backdrop-blur-md">
         <h1 className="font-heading text-2xl font-bold text-foreground">Senha redefinida!</h1>
         <p className="text-muted-foreground">Já pode entrar com a nova senha.</p>
         <Link href="/login" className="inline-block text-sm text-planalto-red underline">
@@ -44,7 +44,7 @@ export function RedefinirSenhaForm(): React.ReactElement {
   return (
     <form
       action={formAction}
-      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-black/30 p-6 backdrop-blur-md"
+      className="mx-auto w-full max-w-sm space-y-3 rounded-lg border border-surface/10 bg-card p-6 backdrop-blur-md"
     >
       <input type="hidden" name="token" value={token} />
 

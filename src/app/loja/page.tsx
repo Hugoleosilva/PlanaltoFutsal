@@ -3,6 +3,8 @@ import { HeroFaixa } from "../_components/hero-faixa";
 import { LojaSection } from "../_components/loja-section";
 import { PublicFooter } from "../_components/public-footer";
 
+export const dynamic = "force-dynamic";
+
 export default function LojaPage(): React.ReactElement {
   return (
     <>
