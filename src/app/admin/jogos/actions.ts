@@ -75,7 +75,7 @@ export async function editarJogoAction(
       adversario: typeof adversario === "string" ? adversario : "",
       adversarioEscudoUrl:
         typeof adversarioEscudoUrl === "string" && adversarioEscudoUrl ? adversarioEscudoUrl : null,
-      dataHora: typeof dataHora === "string" && dataHora ? new Date(dataHora) : null,
+      dataHora: typeof dataHora === "string" && dataHora ? new Date(`${dataHora}:00-03:00`) : null,
       local: typeof local === "string" ? local : "",
       campeonatoId: typeof campeonatoId === "string" && campeonatoId ? campeonatoId : null,
       mandante: mandante === "ADVERSARIO" ? "ADVERSARIO" : "PLANALTO",
