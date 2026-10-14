@@ -28,11 +28,11 @@ export function MembroDiretoriaCard({
         ) : null}
       </div>
 
-      <p className="mx-auto mt-2 inline-block rounded-md bg-surface/10 px-2.5 py-1 text-sm font-bold text-foreground">
+      <p className="mt-2 w-full rounded-md bg-card px-2.5 py-1 text-sm font-bold text-foreground">
         {nome}
       </p>
 
-      <p className="mx-auto mt-1.5 inline-block min-h-[2rem] rounded-md bg-card px-2 py-0.5 text-xs text-muted-foreground">
+      <p className="mt-1.5 flex min-h-[2.5rem] w-full items-center justify-center rounded-md bg-card px-2 py-0.5 text-xs text-muted-foreground">
         {funcao}
       </p>
 

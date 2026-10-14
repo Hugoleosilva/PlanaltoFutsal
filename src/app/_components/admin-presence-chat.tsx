@@ -13,6 +13,23 @@ import {
 
 const HEARTBEAT_MS = 20_000;
 const POLL_MENSAGENS_MS = 5_000;
+const CHAVE_ULTIMA_VISTA = "planalto-futsal:diretoria-chat:ultima-vista-em";
+
+function lerUltimaVista(): string | null {
+  try {
+    return localStorage.getItem(CHAVE_ULTIMA_VISTA);
+  } catch {
+    return null;
+  }
+}
+
+function salvarUltimaVista(iso: string): void {
+  try {
+    localStorage.setItem(CHAVE_ULTIMA_VISTA, iso);
+  } catch {
+    // localStorage indisponível (modo privado etc.) — segue sem lembrar.
+  }
+}
 
 const CORES_AVATAR = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#9085e9", "#e66767"];
 
@@ -52,9 +69,18 @@ export function AdminPresenceChat(): React.ReactElement | null {
   const [enviando, setEnviando] = useState(false);
   const [naoLidas, setNaoLidas] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const ultimaContagemVista = useRef(0);
+  const ultimaVistaRef = useRef<string | null>(null);
+  const ultimaVistaCarregada = useRef(false);
   const tituloOriginal = useRef<string | null>(null);
   const flashIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  function marcarComoVisto(lista: MensagemChatView[]): void {
+    const ultimaMensagem = lista[lista.length - 1];
+    const iso = ultimaMensagem ? ultimaMensagem.createdAt : new Date().toISOString();
+    ultimaVistaRef.current = iso;
+    salvarUltimaVista(iso);
+    setNaoLidas(0);
+  }
 
   useEffect(() => {
     let cancelado = false;
@@ -78,12 +104,27 @@ export function AdminPresenceChat(): React.ReactElement | null {
     let cancelado = false;
 
     async function carregar(): Promise<void> {
+      if (!ultimaVistaCarregada.current) {
+        ultimaVistaRef.current = lerUltimaVista();
+        ultimaVistaCarregada.current = true;
+      }
+
       const resultado = await listarMensagensAction();
       if (cancelado || resultado.error) return;
       setMensagens(resultado.mensagens);
-      if (!aberto) {
-        setNaoLidas(Math.max(0, resultado.mensagens.length - ultimaContagemVista.current));
+
+      if (aberto) return;
+
+      // Primeira vez nesse navegador (sem marca salva) — nao assusta
+      // mostrando o historico inteiro como "nao lido", so passa a contar
+      // mensagens novas a partir de agora.
+      if (ultimaVistaRef.current === null) {
+        marcarComoVisto(resultado.mensagens);
+        return;
       }
+
+      const ultimaVista = ultimaVistaRef.current;
+      setNaoLidas(resultado.mensagens.filter((mensagem) => mensagem.createdAt > ultimaVista).length);
     }
 
     carregar();
@@ -96,10 +137,10 @@ export function AdminPresenceChat(): React.ReactElement | null {
 
   useEffect(() => {
     if (aberto) {
-      ultimaContagemVista.current = mensagens.length;
-      setNaoLidas(0);
+      marcarComoVisto(mensagens);
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- so precisa reagir a aberto/length mudando, nao ao conteudo
   }, [aberto, mensagens.length]);
 
   function pararFlashTitulo(): void {
@@ -154,7 +195,6 @@ export function AdminPresenceChat(): React.ReactElement | null {
       const atualizado = await listarMensagensAction();
       if (!atualizado.error) {
         setMensagens(atualizado.mensagens);
-        ultimaContagemVista.current = atualizado.mensagens.length;
       }
     }
     setEnviando(false);
