@@ -31,4 +31,9 @@ export class MongoVerificacaoEmailRepository implements VerificacaoEmailReposito
     await connectToDatabase();
     await VerificacaoEmailModel.findByIdAndDelete(id);
   }
+
+  async deleteByUserId(userId: string): Promise<void> {
+    await connectToDatabase();
+    await VerificacaoEmailModel.deleteMany({ userId });
+  }
 }

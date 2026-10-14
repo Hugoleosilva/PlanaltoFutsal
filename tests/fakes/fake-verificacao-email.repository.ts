@@ -20,4 +20,10 @@ export class FakeVerificacaoEmailRepository implements VerificacaoEmailRepositor
   async delete(id: string): Promise<void> {
     this.tokens.delete(id);
   }
+
+  async deleteByUserId(userId: string): Promise<void> {
+    for (const [id, registro] of this.tokens) {
+      if (registro.userId === userId) this.tokens.delete(id);
+    }
+  }
 }

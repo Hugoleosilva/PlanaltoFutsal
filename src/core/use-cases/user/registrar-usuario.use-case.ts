@@ -33,7 +33,7 @@ export class RegistrarUsuarioUseCase implements UseCase<RegistrarUsuarioIn, Regi
 
   async execute(input: RegistrarUsuarioIn): Promise<RegistrarUsuarioOut> {
     const emailExistente = await this.userRepository.findByEmail(input.email);
-    if (emailExistente) {
+    if (emailExistente && emailExistente.status !== "PENDENTE_VERIFICACAO") {
       throw new AppError("Já existe uma conta com este e-mail.", "EMAIL_EM_USO", 409);
     }
 
@@ -41,16 +41,30 @@ export class RegistrarUsuarioUseCase implements UseCase<RegistrarUsuarioIn, Regi
 
     const passwordHash = await this.passwordHasher(input.senha);
 
-    const user = User.create({
-      name: input.nomeCompleto,
-      email: input.email,
-      whatsapp: input.whatsapp,
-      passwordHash,
-      role: "USER",
-      status: "PENDENTE_VERIFICACAO",
-    });
+    // Se já existe uma conta pendente de verificação com esse e-mail (ex:
+    // o e-mail de confirmação falhou em enviar da primeira vez), reaproveita
+    // o cadastro e manda um novo e-mail, em vez de travar com "já existe uma
+    // conta" sem nenhuma forma de desbloquear.
+    const userCriado = emailExistente
+      ? await this.userRepository.update(
+          emailExistente.clone({
+            name: input.nomeCompleto,
+            whatsapp: input.whatsapp,
+            passwordHash,
+          }),
+        )
+      : await this.userRepository.create(
+          User.create({
+            name: input.nomeCompleto,
+            email: input.email,
+            whatsapp: input.whatsapp,
+            passwordHash,
+            role: "USER",
+            status: "PENDENTE_VERIFICACAO",
+          }),
+        );
 
-    const userCriado = await this.userRepository.create(user);
+    await this.verificacaoRepository.deleteByUserId(userCriado.id);
 
     const token = randomBytes(32).toString("hex");
     const expiraEm = new Date(Date.now() + TOKEN_VALIDADE_HORAS * 60 * 60 * 1000);

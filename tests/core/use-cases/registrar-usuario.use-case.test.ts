@@ -32,7 +32,7 @@ describe("RegistrarUsuarioUseCase", () => {
     expect(emailSender.mock.calls[0]?.[0].to).toBe("cicrano@example.com");
   });
 
-  it("rejects a duplicate e-mail", async () => {
+  it("rejects a duplicate e-mail when the account is already active", async () => {
     const userRepository = new FakeUserRepository();
     const verificacaoRepository = new FakeVerificacaoEmailRepository();
     const emailSender = vi.fn().mockResolvedValue(undefined);
@@ -43,12 +43,13 @@ describe("RegistrarUsuarioUseCase", () => {
       emailSender,
     );
 
-    await useCase.execute({
+    const { user } = await useCase.execute({
       nomeCompleto: "Cicrano",
       email: "cicrano@example.com",
       senha: "SenhaForte123",
       linkVerificacaoBase: "https://planaltofutsal.com.br/api/auth/verificar",
     });
+    await userRepository.update(user.confirmarEmail());
 
     await expect(
       useCase.execute({
@@ -58,6 +59,37 @@ describe("RegistrarUsuarioUseCase", () => {
         linkVerificacaoBase: "https://planaltofutsal.com.br/api/auth/verificar",
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("resends the verification e-mail instead of blocking when the account is still pending (ex: first e-mail failed to send)", async () => {
+    const userRepository = new FakeUserRepository();
+    const verificacaoRepository = new FakeVerificacaoEmailRepository();
+    const emailSender = vi.fn().mockResolvedValue(undefined);
+    const useCase = new RegistrarUsuarioUseCase(
+      userRepository,
+      verificacaoRepository,
+      fakeHasher,
+      emailSender,
+    );
+
+    const { user: primeiroCadastro } = await useCase.execute({
+      nomeCompleto: "Cicrano",
+      email: "cicrano@example.com",
+      senha: "SenhaForte123",
+      linkVerificacaoBase: "https://planaltofutsal.com.br/api/auth/verificar",
+    });
+
+    const { user: segundoCadastro } = await useCase.execute({
+      nomeCompleto: "Cicrano Torcedor",
+      email: "cicrano@example.com",
+      senha: "OutraSenhaForte123",
+      linkVerificacaoBase: "https://planaltofutsal.com.br/api/auth/verificar",
+    });
+
+    expect(segundoCadastro.id).toBe(primeiroCadastro.id);
+    expect(segundoCadastro.name).toBe("Cicrano Torcedor");
+    expect(segundoCadastro.status).toBe("PENDENTE_VERIFICACAO");
+    expect(emailSender).toHaveBeenCalledTimes(2);
   });
 
   it("rejects a weak password", async () => {
