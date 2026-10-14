@@ -38,6 +38,12 @@ export class MongoMembroDiretoriaRepository implements MembroDiretoriaRepository
     return docs.map(toEntity);
   }
 
+  async findAllSemAcesso(): Promise<MembroDiretoria[]> {
+    await connectToDatabase();
+    const docs = await MembroDiretoriaModel.find({ status: "ATIVO", userId: null }).sort({ nome: 1 });
+    return docs.map(toEntity);
+  }
+
   async findByContatoNaoVinculado(email?: string, whatsapp?: string): Promise<MembroDiretoria | null> {
     if (!email && !whatsapp) return null;
 

@@ -5,7 +5,9 @@ import { auth } from "@/infrastructure/security/auth";
 import { CadastrarMembroDiretoriaUseCase } from "@/core/use-cases/diretoria/cadastrar-membro-diretoria.use-case";
 import { EditarMembroDiretoriaUseCase } from "@/core/use-cases/diretoria/editar-membro-diretoria.use-case";
 import { DesativarMembroDiretoriaUseCase } from "@/core/use-cases/diretoria/desativar-membro-diretoria.use-case";
+import { PromoverUsuarioParaDiretorUseCase } from "@/core/use-cases/diretoria/promover-usuario-diretor.use-case";
 import { MongoMembroDiretoriaRepository } from "@/infrastructure/database/repositories/membro-diretoria.repository.mongo";
+import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 import { UnauthorizedError, toActionError } from "@/infrastructure/errors";
 
 export interface ActionState {
@@ -106,6 +108,36 @@ export async function atualizarFotoMembroDiretoriaAction(
 
     revalidatePath("/admin/diretoria");
     revalidatePath("/diretoria");
+
+    return { error: null };
+  } catch (error) {
+    return { error: toActionError(error).message };
+  }
+}
+
+export async function promoverUsuarioDiretorAction(
+  _prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const session = await auth();
+    if (!session?.user) throw new UnauthorizedError();
+
+    const useCase = new PromoverUsuarioParaDiretorUseCase(
+      new MongoUserRepository(),
+      new MongoMembroDiretoriaRepository(),
+    );
+
+    const termoBusca = formData.get("termoBusca");
+    const membroId = formData.get("membroId");
+
+    await useCase.execute({
+      actor: { id: session.user.id, role: session.user.role },
+      termoBusca: typeof termoBusca === "string" ? termoBusca : "",
+      membroId: typeof membroId === "string" ? membroId : "",
+    });
+
+    revalidatePath("/admin/diretoria");
 
     return { error: null };
   } catch (error) {

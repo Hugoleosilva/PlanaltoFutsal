@@ -12,6 +12,12 @@ export class FakeMembroDiretoriaRepository implements MembroDiretoriaRepository 
     return [...this.membros.values()].filter((membro) => membro.status === "ATIVO");
   }
 
+  async findAllSemAcesso(): Promise<MembroDiretoria[]> {
+    return [...this.membros.values()].filter(
+      (membro) => membro.status === "ATIVO" && !membro.userId,
+    );
+  }
+
   async findByContatoNaoVinculado(email?: string, whatsapp?: string): Promise<MembroDiretoria | null> {
     if (!email && !whatsapp) return null;
 

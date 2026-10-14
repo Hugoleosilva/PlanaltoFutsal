@@ -1,9 +1,14 @@
 import { MongoMembroDiretoriaRepository } from "@/infrastructure/database/repositories/membro-diretoria.repository.mongo";
 import { MembroForm } from "./membro-form";
 import { MembroCard } from "./membro-card";
+import { VincularUsuarioDiretoriaForm } from "./vincular-usuario-form";
 
 export default async function DiretoriaAdminPage(): Promise<React.ReactElement> {
-  const membros = await new MongoMembroDiretoriaRepository().findAllAtivos();
+  const membroDiretoriaRepository = new MongoMembroDiretoriaRepository();
+  const [membros, membrosSemAcesso] = await Promise.all([
+    membroDiretoriaRepository.findAllAtivos(),
+    membroDiretoriaRepository.findAllSemAcesso(),
+  ]);
 
   return (
     <div className="space-y-8">
@@ -13,6 +18,10 @@ export default async function DiretoriaAdminPage(): Promise<React.ReactElement> 
       </div>
 
       <MembroForm />
+
+      <VincularUsuarioDiretoriaForm
+        membrosSemAcesso={membrosSemAcesso.map((membro) => ({ id: membro.id, nome: membro.nome }))}
+      />
 
       {membros.length === 0 ? (
         <p className="text-sm text-muted-foreground">Nenhum membro cadastrado ainda.</p>
