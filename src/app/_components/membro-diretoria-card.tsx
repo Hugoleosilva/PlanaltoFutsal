@@ -28,12 +28,12 @@ export function MembroDiretoriaCard({
         ) : null}
       </div>
 
-      <p className="mt-2 w-full rounded-md bg-card px-2.5 py-1 text-sm font-bold text-foreground">
-        {nome}
+      <p className="mt-2 flex h-9 w-full items-center justify-center rounded-md bg-card px-2.5 py-1 text-sm font-bold text-foreground">
+        <span className="line-clamp-1">{nome}</span>
       </p>
 
-      <p className="mt-1.5 flex min-h-[2.5rem] w-full items-center justify-center rounded-md bg-card px-2 py-0.5 text-xs text-muted-foreground">
-        {funcao}
+      <p className="mt-1.5 flex h-11 w-full items-center justify-center rounded-md bg-card px-2 py-0.5 text-xs text-muted-foreground">
+        <span className="line-clamp-2">{funcao}</span>
       </p>
 
       {bio ? (

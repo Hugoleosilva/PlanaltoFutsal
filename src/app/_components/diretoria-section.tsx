@@ -6,7 +6,7 @@ export async function DiretoriaSection(): Promise<React.ReactElement> {
 
   return (
     <section className="mx-auto max-w-5xl px-6 pb-6 pt-0">
-      <div className="mx-auto w-fit max-w-xl rounded-lg bg-card px-6 py-4 text-center">
+      <div className="w-full rounded-lg bg-card px-6 py-4 text-center">
         <h2 className="font-heading text-3xl font-bold text-foreground">Diretoria</h2>
         <p className="mt-2 text-muted-foreground">
           Saiba quem toca o Planalto Futsal fora das quatro linhas — conheça um pouco de quem faz esse
