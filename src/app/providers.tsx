@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import { RadioPlayerProvider } from "./_components/radio-player-context";
 import { RadioMiniBar } from "./_components/radio-mini-bar";
+import { AdminPresenceChat } from "./_components/admin-presence-chat";
 
 export function Providers({ children }: { children: React.ReactNode }): React.ReactElement {
   return (
@@ -13,6 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }): React.Re
           {children}
           <div className="h-14" aria-hidden="true" />
           <RadioMiniBar />
+          <AdminPresenceChat />
         </RadioPlayerProvider>
       </SessionProvider>
     </ThemeProvider>

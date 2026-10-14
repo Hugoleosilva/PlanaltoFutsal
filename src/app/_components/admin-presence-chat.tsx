@@ -162,6 +162,11 @@ export function AdminPresenceChat(): React.ReactElement | null {
 
   const outrosOnline = online.filter((admin) => admin.userId !== meuId);
 
+  // So existe diretoria (ADMIN) pra conversar aqui — sem sessao de ADMIN,
+  // heartbeatAction nunca devolve meuId e o widget fica invisivel pra
+  // qualquer outro tipo de usuario (torcedor, atleta, visitante).
+  if (meuId === null) return null;
+
   return (
     <div className="fixed bottom-16 right-5 z-30 flex flex-col items-end gap-3">
       {aberto ? (
