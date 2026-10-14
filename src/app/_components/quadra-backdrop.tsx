@@ -35,7 +35,7 @@ export function QuadraBackdrop({
           unoptimized
           priority
         />
-        <div className={cn("absolute inset-0", claro ? "bg-white/40" : "bg-black/70")} />
+        {!claro ? <div className="absolute inset-0 bg-black/70" /> : null}
       </div>
       {children}
     </div>
