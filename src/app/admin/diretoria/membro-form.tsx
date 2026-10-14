@@ -49,6 +49,15 @@ export function MembroForm(): React.ReactElement {
           </p>
         </div>
 
+        <div className="space-y-1">
+          <Label htmlFor="contatoEmail-diretoria">E-mail (opcional)</Label>
+          <Input id="contatoEmail-diretoria" name="contatoEmail" type="email" />
+          <p className="text-xs text-muted-foreground">
+            Se bater com o e-mail ou WhatsApp do cadastro dele no site, vira diretor (acesso ADMIN)
+            automaticamente ao confirmar a conta.
+          </p>
+        </div>
+
         <div className="sm:col-span-2">
           <ImageUpload label="Foto" value={fotoUrl} onUploaded={setFotoUrl} />
         </div>

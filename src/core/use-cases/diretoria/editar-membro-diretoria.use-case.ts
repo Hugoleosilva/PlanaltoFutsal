@@ -13,6 +13,7 @@ export interface EditarMembroDiretoriaIn {
   bio?: string;
   ordem?: number;
   contato?: string;
+  contatoEmail?: string;
 }
 
 export interface EditarMembroDiretoriaOut {
@@ -37,6 +38,7 @@ export class EditarMembroDiretoriaUseCase
       bio: input.bio ?? membro.bio,
       ordem: input.ordem ?? membro.ordem,
       contato: input.contato ?? membro.contato,
+      contatoEmail: input.contatoEmail ?? membro.contatoEmail,
     });
 
     const salvo = await this.membroRepository.update(editado);

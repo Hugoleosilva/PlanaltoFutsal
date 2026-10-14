@@ -25,6 +25,7 @@ interface MembroCardProps {
   bio: string;
   ordem: number;
   contato?: string;
+  contatoEmail?: string;
 }
 
 export function MembroCard({
@@ -35,6 +36,7 @@ export function MembroCard({
   bio,
   ordem,
   contato,
+  contatoEmail,
 }: MembroCardProps): React.ReactElement {
   const [foto, setFoto] = useState(fotoUrl);
   const [editando, setEditando] = useState(false);
@@ -77,6 +79,11 @@ export function MembroCard({
           <div className="space-y-1">
             <Label htmlFor={`contato-${id}`}>Contato (WhatsApp)</Label>
             <TelefoneInput id={`contato-${id}`} name="contato" defaultValue={contato} />
+          </div>
+
+          <div className="space-y-1">
+            <Label htmlFor={`contatoEmail-${id}`}>E-mail</Label>
+            <Input id={`contatoEmail-${id}`} name="contatoEmail" type="email" defaultValue={contatoEmail} />
           </div>
 
           <div className="space-y-1">

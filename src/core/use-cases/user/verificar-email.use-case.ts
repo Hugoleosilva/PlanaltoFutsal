@@ -1,6 +1,7 @@
 import { User } from "@/core/domain/user/user.entity";
 import { UserRepository } from "@/core/domain/user/user.repository";
 import { AtletaRepository } from "@/core/domain/atleta/atleta.repository";
+import { MembroDiretoriaRepository } from "@/core/domain/diretoria/membro-diretoria.repository";
 import { AppError } from "@/infrastructure/errors";
 import { UseCase } from "../use-case";
 import { VerificacaoEmailRepository } from "../_shared/verificacao-email.port";
@@ -15,12 +16,14 @@ export interface VerificarEmailIn {
 export interface VerificarEmailOut {
   user: User;
   promovidoParaAtleta: boolean;
+  promovidoParaDiretor: boolean;
 }
 
 export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, VerificarEmailOut> {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly atletaRepository: AtletaRepository,
+    private readonly membroDiretoriaRepository: MembroDiretoriaRepository,
     private readonly verificacaoRepository: VerificacaoEmailRepository,
     private readonly emailSender: EmailSender,
   ) {}
@@ -43,6 +46,20 @@ export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, Verifica
 
     let userConfirmado = user.confirmarEmail();
 
+    const membroCorrespondente = await this.membroDiretoriaRepository.findByContatoNaoVinculado(
+      userConfirmado.email,
+      userConfirmado.whatsapp,
+    );
+
+    let promovidoParaDiretor = false;
+
+    if (membroCorrespondente) {
+      userConfirmado = userConfirmado.promoverParaDiretor();
+      const membroVinculado = membroCorrespondente.clone({ userId: userConfirmado.id });
+      await this.membroDiretoriaRepository.update(membroVinculado);
+      promovidoParaDiretor = true;
+    }
+
     const atletaCorrespondente = await this.atletaRepository.findByContatoNaoVinculado(
       userConfirmado.email,
       userConfirmado.whatsapp,
@@ -51,7 +68,12 @@ export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, Verifica
     let promovidoParaAtleta = false;
 
     if (atletaCorrespondente) {
-      userConfirmado = userConfirmado.promoverParaAtleta(atletaCorrespondente.id);
+      // Se já virou diretor (ADMIN) acima, só vincula o atletaId sem mexer
+      // no role — senão promoverParaAtleta rebaixaria ADMIN pra ATLETA.
+      userConfirmado =
+        userConfirmado.role === "ADMIN"
+          ? userConfirmado.vincularAtleta(atletaCorrespondente.id)
+          : userConfirmado.promoverParaAtleta(atletaCorrespondente.id);
       const atletaVinculado = atletaCorrespondente.clone({ userId: userConfirmado.id });
       await this.atletaRepository.update(atletaVinculado);
       promovidoParaAtleta = true;
@@ -76,6 +98,6 @@ export class VerificarEmailUseCase implements UseCase<VerificarEmailIn, Verifica
       }),
     });
 
-    return { user: userSalvo, promovidoParaAtleta };
+    return { user: userSalvo, promovidoParaAtleta, promovidoParaDiretor };
   }
 }

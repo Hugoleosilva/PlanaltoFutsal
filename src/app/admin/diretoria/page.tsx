@@ -28,6 +28,7 @@ export default async function DiretoriaAdminPage(): Promise<React.ReactElement> 
               bio={membro.bio ?? ""}
               ordem={membro.ordem}
               contato={membro.contato}
+              contatoEmail={membro.contatoEmail}
             />
           ))}
         </div>

@@ -11,6 +11,7 @@ export interface CadastrarMembroDiretoriaIn {
   bio?: string;
   ordem?: number;
   contato?: string;
+  contatoEmail?: string;
 }
 
 export interface CadastrarMembroDiretoriaOut {
@@ -32,6 +33,7 @@ export class CadastrarMembroDiretoriaUseCase
       bio: input.bio,
       ordem: input.ordem ?? 0,
       contato: input.contato,
+      contatoEmail: input.contatoEmail,
       status: "ATIVO",
     });
 

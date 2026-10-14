@@ -15,6 +15,8 @@ function toEntity(doc: MembroDiretoriaDocument): MembroDiretoria {
     bio: doc.bio,
     ordem: doc.ordem,
     contato: doc.contato,
+    contatoEmail: doc.contatoEmail,
+    userId: doc.userId ? doc.userId.toString() : null,
     status: doc.status,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
@@ -36,6 +38,19 @@ export class MongoMembroDiretoriaRepository implements MembroDiretoriaRepository
     return docs.map(toEntity);
   }
 
+  async findByContatoNaoVinculado(email?: string, whatsapp?: string): Promise<MembroDiretoria | null> {
+    if (!email && !whatsapp) return null;
+
+    await connectToDatabase();
+
+    const condicoesContato = [];
+    if (email) condicoesContato.push({ contatoEmail: email.toLowerCase() });
+    if (whatsapp) condicoesContato.push({ contato: whatsapp });
+
+    const doc = await MembroDiretoriaModel.findOne({ userId: null, $or: condicoesContato });
+    return doc ? toEntity(doc) : null;
+  }
+
   async create(membro: MembroDiretoria): Promise<MembroDiretoria> {
     await connectToDatabase();
     const created = await MembroDiretoriaModel.create({
@@ -45,6 +60,8 @@ export class MongoMembroDiretoriaRepository implements MembroDiretoriaRepository
       bio: membro.bio,
       ordem: membro.ordem,
       contato: membro.contato,
+      contatoEmail: membro.contatoEmail,
+      userId: membro.userId ?? null,
       status: membro.status,
     });
     return toEntity(created);
@@ -61,6 +78,8 @@ export class MongoMembroDiretoriaRepository implements MembroDiretoriaRepository
         bio: membro.bio,
         ordem: membro.ordem,
         contato: membro.contato,
+        contatoEmail: membro.contatoEmail,
+        userId: membro.userId ?? null,
         status: membro.status,
       },
       { new: true },

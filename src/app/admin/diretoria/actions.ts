@@ -28,6 +28,7 @@ export async function cadastrarMembroDiretoriaAction(
     const bio = formData.get("bio");
     const ordem = formData.get("ordem");
     const contato = formData.get("contato");
+    const contatoEmail = formData.get("contatoEmail");
 
     await useCase.execute({
       actor: { id: session.user.id, role: session.user.role },
@@ -37,6 +38,7 @@ export async function cadastrarMembroDiretoriaAction(
       bio: typeof bio === "string" && bio ? bio : undefined,
       ordem: typeof ordem === "string" && ordem ? Number(ordem) : undefined,
       contato: typeof contato === "string" && contato ? contato : undefined,
+      contatoEmail: typeof contatoEmail === "string" && contatoEmail ? contatoEmail : undefined,
     });
 
     revalidatePath("/admin/diretoria");
@@ -64,6 +66,7 @@ export async function editarMembroDiretoriaAction(
     const bio = formData.get("bio");
     const ordem = formData.get("ordem");
     const contato = formData.get("contato");
+    const contatoEmail = formData.get("contatoEmail");
 
     await useCase.execute({
       actor: { id: session.user.id, role: session.user.role },
@@ -73,6 +76,7 @@ export async function editarMembroDiretoriaAction(
       bio: typeof bio === "string" ? bio : undefined,
       ordem: typeof ordem === "string" && ordem ? Number(ordem) : undefined,
       contato: typeof contato === "string" ? contato : undefined,
+      contatoEmail: typeof contatoEmail === "string" ? contatoEmail : undefined,
     });
 
     revalidatePath("/admin/diretoria");

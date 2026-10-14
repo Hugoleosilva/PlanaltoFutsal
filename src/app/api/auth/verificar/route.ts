@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { VerificarEmailUseCase } from "@/core/use-cases/user/verificar-email.use-case";
 import { MongoUserRepository } from "@/infrastructure/database/repositories/user.repository.mongo";
 import { MongoAtletaRepository } from "@/infrastructure/database/repositories/atleta.repository.mongo";
+import { MongoMembroDiretoriaRepository } from "@/infrastructure/database/repositories/membro-diretoria.repository.mongo";
 import { MongoVerificacaoEmailRepository } from "@/infrastructure/database/repositories/verificacao-email.repository.mongo";
 import { getEmailSender } from "@/infrastructure/notifications/get-email-sender";
 
@@ -17,6 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const useCase = new VerificarEmailUseCase(
       new MongoUserRepository(),
       new MongoAtletaRepository(),
+      new MongoMembroDiretoriaRepository(),
       new MongoVerificacaoEmailRepository(),
       getEmailSender(),
     );

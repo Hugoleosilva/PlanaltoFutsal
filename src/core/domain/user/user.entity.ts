@@ -132,6 +132,15 @@ export class User extends Entity<UserState> {
   }
 
   /**
+   * Dá acesso de diretoria (ADMIN) quando o e-mail/WhatsApp confirmado bate
+   * com o contato de um membro da diretoria ainda sem conta vinculada — ver
+   * VerificarEmailUseCase.
+   */
+  promoverParaDiretor(): User {
+    return this.clone({ role: "ADMIN" });
+  }
+
+  /**
    * Vincula um atleta sem mexer no role — usado quando quem está sendo
    * vinculado já é ADMIN (ex: diretor que também joga). Promover esse
    * usuário normalmente rebaixaria o role dele pra ATLETA, derrubando o
