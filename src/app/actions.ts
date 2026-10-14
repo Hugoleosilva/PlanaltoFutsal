@@ -72,7 +72,10 @@ export async function oferecerCaronaAction(
       jogoId: typeof jogoId === "string" ? jogoId : "",
       motoristaNome: typeof motoristaNome === "string" ? motoristaNome : "",
       contato: typeof contato === "string" ? contato : "",
-      horarioSaida: typeof horarioSaida === "string" && horarioSaida ? new Date(horarioSaida) : new Date(),
+      horarioSaida:
+        typeof horarioSaida === "string" && horarioSaida
+          ? new Date(`${horarioSaida}:00-03:00`)
+          : new Date(),
       local: typeof local === "string" ? local : "",
       vagasDisponiveis: Number(vagasDisponiveis) || 1,
     });

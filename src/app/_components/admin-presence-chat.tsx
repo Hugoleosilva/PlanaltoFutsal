@@ -263,11 +263,6 @@ export function AdminPresenceChat(): React.ReactElement | null {
         aria-label="Abrir chat da diretoria"
       >
         {aberto ? <X size={22} /> : <MessageCircle size={22} />}
-        {!aberto && outrosOnline.length > 0 ? (
-          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-bold text-white">
-            {outrosOnline.length}
-          </span>
-        ) : null}
         {!aberto && naoLidas > 0 ? (
           <span className="absolute -bottom-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-planalto-red">
             {naoLidas > 9 ? "9+" : naoLidas}
